@@ -21,6 +21,8 @@ The later force record has a lift-spectrum candidate around 1.45 Hz (St ≈ 0.14
 
 Native Curle and FW-H are **compared, not added**. Their signs, time conventions and traction content differ in the inspected implementation; the comparison preserves those differences rather than fitting agreement. Surface-only FW-H does not compute the omitted volume quadrupoles.
 
+**Reading the native files:** the FW-H object's inherited force/moment files are unused zero diagnostics; Curle's inherited load files lag by one timestep. The website uses the separate, correctly timestamped `forces.csv`. Both methods produced nonzero acoustic pressure. See [output diagnosis, accuracy limits and sample viewing](docs/OUTPUTS_AND_LIMITS.md). The vorticity figure now displays the full circular domain, not a rectangular crop.
+
 ## Use and reproduce
 
 ```sh
@@ -29,7 +31,7 @@ uv sync --locked --extra dev
 python3 -m http.server 8513 --directory site
 ```
 
-Python tests require Python 3.12, and browser tests additionally require an installed Chromium browser and Node with built-in WebSocket support. Native OpenFOAM is not launched by the tests or the website.
+Python tests require Python 3.12, and browser tests additionally require an installed Chromium browser and Node with built-in WebSocket support. Sample-converter tests additionally need ParaView (`/usr/bin/pvpython` in the tested Linux setup) and Poppler's `pdfimages`/`pdftotext`. Native OpenFOAM is not launched by the tests or the website.
 
 See [reproduction instructions](docs/REPRODUCE.md), [acoustic definitions](docs/CYLINDER_ACOUSTICS.md), and [site model documentation](docs/CYLINDER_SITE.md).
 
