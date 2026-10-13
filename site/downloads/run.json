@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "status": "completed_demo",
+  "scope": "single-phase finite closed 3D circular-cylinder WALE LES demonstration, not research validation",
+  "evidence_kind": "native_execution",
+  "medium": {
+    "name": "water demonstration assumption",
+    "density_kg_m3": 1000.0,
+    "kinematic_viscosity_m2_s": 1e-06,
+    "sound_speed_m_s": 1500.0,
+    "reference_pressure_Pa": 1e-06,
+    "velocity_m_s": 0.2
+  },
+  "geometry": {
+    "diameter_m": 0.02,
+    "span_m": 0.06,
+    "centre_m": [
+      0,
+      0,
+      0
+    ],
+    "axis": "z",
+    "axes": {
+      "x": "streamwise",
+      "y": "crossflow/lift",
+      "z": "span"
+    },
+    "domain_bounds_m": [
+      [
+        -0.24,
+        -0.24,
+        -0.08
+      ],
+      [
+        0.24,
+        0.24,
+        0.08
+      ]
+    ],
+    "finite_closed": true,
+    "outer_domain_shape": "circular_cylinder",
+    "outer_radius_m": 0.24,
+    "outer_radius_over_D": 12.0,
+    "outer_boundary": "circular xy boundary centered on body axis; remote z planes beyond finite caps",
+    "native_mesh_audit": {
+      "outer_radius_max_error_m": 5.648229106647307e-11,
+      "outer_patch_points": 3904,
+      "outer_patch_faces": 3840,
+      "midspan_azimuth_intervals": 64,
+      "azimuth_spacing_min_rad": 0.07836964412312497,
+      "azimuth_spacing_max_rad": 0.12056868334709181,
+      "realized_angular_min_over_max": 0.6499999995646903,
+      "first_radial_edge_interval_m": 0.0009702692999999998,
+      "minimum_cell_determinant": 0.001211908325,
+      "maximum_nonorthogonality_deg": 31.45837702,
+      "maximum_skewness": 0.5851596365
+    },
+    "native_mesh_views": {
+      "section_z_m": 0.0,
+      "section_faces": 2048,
+      "section_edges": 4160,
+      "wall_faces": 3584,
+      "farfield_faces": 3840,
+      "xy_bounds_m": [
+        [
+          -0.24,
+          -0.24
+        ],
+        [
+          0.24,
+          0.24
+        ]
+      ],
+      "provenance": "actual constant/polyMesh points/faces/boundary; 3D cutaway omits front farfield for visibility",
+      "native_mesh_sha256": {
+        "points": "2d067189c8f05548503fcdd9857175e5fab4a2f5d24949ac6bdfbc772fc8bab0",
+        "faces": "d7321cec74c00e69439b920b31db39f3aee0cbaefa47bbfdba99a606688ccf40",
+        "boundary": "8d2352730a2da15ac350e32e4765005da80b59b6b39b84ed163a93cba56ac013"
+      }
+    }
+  },
+  "inflow": {
+    "mean_velocity_m_s": [
+      0.2,
+      0,
+      0
+    ],
+    "reynolds_number": 4000.0,
+    "boundary": "uniform freestream target; freestreamVelocity/freestreamPressure orientation-blended open curved farfield",
+    "startup_velocity_m_s": [
+      0.2,
+      0.002,
+      0.001
+    ],
+    "startup_perturbation": "uniform initial +1% crossflow and +0.5% spanwise offsets, removed at inlet; finite tips break spanwise invariance",
+    "synthetic_inlet_turbulence": false
+  },
+  "cell_count": 138240,
+  "mesh_type": "22-block all-hexahedral circular O-grid; real disc fluid cores beyond tips; moderate +/-x angular multi-grading",
+  "solver": {
+    "name": "pimpleFoam",
+    "openfoam": "v2206",
+    "les_model": "WALE",
+    "delta": "cubeRootVol",
+    "ranks": 4,
+    "threads_per_rank": 1,
+    "pressure": "kinematic m2/s2",
+    "maxCo_target": 0.7,
+    "observed_max_Co": 0.7368380593,
+    "advection": "linearUpwind grad(U)",
+    "time_scheme": "backward",
+    "mesh_adequacy_validated": false
+  },
+  "sampling": {
+    "adaptive": true,
+    "acoustics": "writeControl timeStep, writeInterval=1, probeFrequency=1",
+    "forces": "every solver step",
+    "dt_min_s": 0.0009494325999999664,
+    "dt_max_s": 0.0011000264499999995,
+    "wall_pressure": "every 20 solver steps",
+    "flow": "every 0.5s from main restart at 0.1s plus pilot at 0.1s; actual snapshot times in CSV",
+    "native_fft": false
+  },
+  "time_coverage": {
+    "start_s": 0.0,
+    "end_s": 5.999717956,
+    "requested_end_s": 6.0,
+    "convective_time_D_over_U_s": 0.09999999999999999,
+    "convective_times_D_over_U": 59.99717956,
+    "startup_plot_interval_s": [
+      0,
+      1
+    ],
+    "later_demonstration_interval_s": [
+      2,
+      5.999717956
+    ],
+    "statistically_developed": false,
+    "end_rule": "OpenFOAM Time::run stops at current time >= endTime - 0.5*deltaT; actual last timestamp retained"
+  },
+  "observers": [
+    {
+      "name": "cross_plus",
+      "position_m": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "name": "cross_minus",
+      "position_m": [
+        0.0,
+        -1.0,
+        0.0
+      ]
+    },
+    {
+      "name": "downstream",
+      "position_m": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "oblique",
+      "position_m": [
+        0.6,
+        0.8,
+        0.0
+      ]
+    },
+    {
+      "name": "cross_double",
+      "position_m": [
+        0.0,
+        2.0,
+        0.0
+      ]
+    }
+  ],
+  "acoustic_conventions": {
+    "mean_flow_m_s": [
+      0,
+      0,
+      0
+    ],
+    "propagation": "free space homogeneous; small-Mach convection neglected",
+    "methods": [
+      "libacoustics_curle",
+      "libacoustics_fwh"
+    ],
+    "curle": "native forceEff (total pressure+viscous force ON body); current CFD time, no retarded-time shift; includes 1/r2 near term and 1/(c0*r) derivative term",
+    "fwh": "native Farassat1A on complete rigid wall; pressure-only loading, body-out normals; facewise retarded arrival on solver receiver clock; no viscous/exterior quadrupole volume terms",
+    "pressure": "native observer outputs already Pa, no extra rho conversion",
+    "force": "N, fluid traction ON body; total, pressure and viscous exported separately",
+    "time_csv": "absolute CFD clock; pilot raw times +0; main acousticData raw relative times +0.1s",
+    "restart_s": 0.1,
+    "restart_history": "native acoustic derivatives/history restart at 0.1s; both original segments retained",
+    "suggested_warmup_exclusions_s": [
+      [
+        0,
+        0.01
+      ],
+      [
+        0.1,
+        0.11
+      ]
+    ],
+    "finite_tail": "receiver evaluations stop with solver; last emitted source segment has not fully arrived, no fabricated tail",
+    "range": "1m and 2m are not radiation-far-field at low shedding frequencies in water; near terms retained",
+    "mpi_equivalence": "not established for this case; actual 4-rank demo coupling, not exact MPI validation",
+    "native_pFluct_label": "raw native expression, not mean-subtracted; steady near-field offsets preserved",
+    "propagation_delays_s": {
+      "cross_plus": {
+        "min": 0.0006600163655929825,
+        "max": 0.000673598067082105
+      },
+      "cross_minus": {
+        "min": 0.0006600163655929825,
+        "max": 0.000673598067082105
+      },
+      "downstream": {
+        "min": 0.0006600105165051006,
+        "max": 0.0006736038557843242
+      },
+      "oblique": {
+        "min": 0.0006600083609073051,
+        "max": 0.0006736059102767515
+      },
+      "cross_double": {
+        "min": 0.001326682874129941,
+        "max": 0.0013401250602030782
+      }
+    }
+  },
+  "tables": {
+    "force_samples": 5734,
+    "observer_rows": 57340,
+    "force_start_s": 0.001123595506,
+    "force_end_s": 5.999717956,
+    "observer_start_s": 0.001123595506,
+    "observer_end_s": 5.999717956,
+    "dt_min_s": 0.0009494325999999664,
+    "dt_max_s": 0.0011000264499999995
+  },
+  "wall": {
+    "snapshots": 286,
+    "faces_per_snapshot": 3584,
+    "max_mapping_error_m": 5.049759620117981e-12,
+    "start_s": 0.02168925658,
+    "end_s": 5.98493955,
+    "sample_cadence": "every 20 solver steps; adaptive times retained",
+    "pressure_unit": "Pa; native kinematic pressure multiplied by rho=1000 exactly once",
+    "normal": "outward from rigid body into fluid; negative of native boundary Sf",
+    "geometry_audit": {
+      "closed": true,
+      "faces": 3584,
+      "unique_edges": 7168,
+      "cap_minus_faces": 640,
+      "cap_plus_faces": 640,
+      "area_m2": 0.004395631665235678,
+      "area_vector_sum_m2": [
+        9.529120656610879e-21,
+        3.049318610115481e-20,
+        -3.8190598009328267e-19
+      ],
+      "minimum_body_out_dot_position": 4.677343590372719e-09
+    },
+    "native_pressure_force_reconciliation": {
+      "force_samples": 5734,
+      "observer_channels": 10,
+      "observer_rows": 57340,
+      "max_observer_force_clock_error_s": 5.000000413701855e-10,
+      "wall_snapshots": 286,
+      "wall_faces": 3584,
+      "max_wall_force_clock_error_s": 0.0,
+      "pressure_force_max_component_error_N": 7.628446485608009e-13,
+      "pressure_force_relative_vector_L2": 1.827045317931554e-11,
+      "mesh_audit": {
+        "outer_radius_max_error_m": 5.648229106647307e-11,
+        "outer_patch_points": 3904,
+        "outer_patch_faces": 3840,
+        "midspan_azimuth_intervals": 64,
+        "azimuth_spacing_min_rad": 0.07836964412312497,
+        "azimuth_spacing_max_rad": 0.12056868334709181,
+        "realized_angular_min_over_max": 0.6499999995646903,
+        "first_radial_edge_interval_m": 0.0009702692999999998,
+        "minimum_cell_determinant": 0.001211908325,
+        "maximum_nonorthogonality_deg": 31.45837702,
+        "maximum_skewness": 0.5851596365
+      },
+      "mesh_attempts": [
+        {
+          "label": "circular_checkMesh_candidate1",
+          "log": "results/cylinder/native/006_circular_checkMesh_candidate1.log",
+          "exit_code": 0,
+          "accepted": false,
+          "minimum_cell_determinant": 0.0007784669819,
+          "failed_checks": 1
+        },
+        {
+          "label": "circular_checkMesh_candidate2",
+          "log": "results/cylinder/native/008_circular_checkMesh_candidate2.log",
+          "exit_code": 0,
+          "accepted": false,
+          "minimum_cell_determinant": 0.0009985697259,
+          "failed_checks": 1
+        },
+        {
+          "label": "circular_checkMesh_candidate3",
+          "log": "results/cylinder/native/010_circular_checkMesh_candidate3.log",
+          "exit_code": 0,
+          "accepted": true,
+          "minimum_cell_determinant": 0.001211908325,
+          "failed_checks": 0
+        }
+      ],
+      "geometry_audit": {
+        "closed": true,
+        "faces": 3584,
+        "unique_edges": 7168,
+        "cap_minus_faces": 640,
+        "cap_plus_faces": 640,
+        "area_m2": 0.004395631665235678,
+        "area_vector_sum_m2": [
+          9.529120656610879e-21,
+          3.049318610115481e-20,
+          -3.8190598009328267e-19
+        ],
+        "minimum_body_out_dot_position": 4.677343590372719e-09
+      },
+      "three_dimensional_evidence": {
+        "time_s": 5.6,
+        "max_abs_Uz_midspan_m_s": 0.07797564093,
+        "max_abs_Uz_tipplane_m_s": 0.07478776018,
+        "same_xy_points": 2112,
+        "span_plane_velocity_vector_rms_difference_m_s": 0.0936628108050271
+      },
+      "solver_steps": 5734,
+      "solver_final_time_s": 5.999717956,
+      "force_solver_max_time_error_s": 0.0,
+      "propagation_delays_s": {
+        "cross_plus": {
+          "min": 0.0006600163655929825,
+          "max": 0.000673598067082105
+        },
+        "cross_minus": {
+          "min": 0.0006600163655929825,
+          "max": 0.000673598067082105
+        },
+        "downstream": {
+          "min": 0.0006600105165051006,
+          "max": 0.0006736038557843242
+        },
+        "oblique": {
+          "min": 0.0006600083609073051,
+          "max": 0.0006736059102767515
+        },
+        "cross_double": {
+          "min": 0.001326682874129941,
+          "max": 0.0013401250602030782
+        }
+      }
+    }
+  },
+  "flow": {
+    "rows": 60876,
+    "snapshots": 12,
+    "last_snapshot_s": 5.6,
+    "latest_max_abs_spanwise_velocity_m_s": 0.07797564093,
+    "latest_max_abs_spanwise_vorticity_s_inv": 483.880444,
+    "colour_scale": "symmetric logarithmic, linear within +/-1 per second; no clipping",
+    "origin": "OpenFOAM native cuttingPlane cellPoint interpolation of U and vorticity",
+    "chart": "piecewise linear triangulation of native plane points; rigid midspan disk masked",
+    "three_dimensional_evidence": {
+      "time_s": 5.6,
+      "max_abs_Uz_midspan_m_s": 0.07797564093,
+      "max_abs_Uz_tipplane_m_s": 0.07478776018,
+      "same_xy_points": 2112,
+      "span_plane_velocity_vector_rms_difference_m_s": 0.0936628108050271
+    },
+    "late_lift_peaks": {
+      "start_s": 2.000528194,
+      "end_s": 5.999717956,
+      "samples": 3786,
+      "lift_peak_prominence_N": 0.0002,
+      "positive_lift_peak_times_s": [
+        2.503966597,
+        3.220161124,
+        3.931503874,
+        4.767252477
+      ],
+      "interpretation": "Detected lift maxima at stated prominence; not a stationarity or converged shedding-frequency claim"
+    }
+  },
+  "verification": {
+    "mesh_ok": true,
+    "below_cell_ceiling": true,
+    "all_solver_end_markers": true,
+    "commands_successful": true,
+    "samples_match_solver_steps": true,
+    "both_native_methods_all_observers": true,
+    "reached_requested_time": true,
+    "within_budget": true,
+    "finite_closed_capped_surface": true,
+    "native_observer_channels_finite_and_time_ordered": true,
+    "all_wall_snapshots_reconcile_to_native_pressure_force": true,
+    "solver_log_times_match_exports": true,
+    "outer_domain_vertices_on_requested_circle": true
+  },
+  "native_budget": {
+    "limit_wall_seconds": 1800.0,
+    "used_wall_seconds": 1711.7285358211957,
+    "remaining_wall_seconds": 88.27146417880431,
+    "maximum_mpi_ranks": 4,
+    "OMP_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "accounting": "all native commands including failures, process termination and checks; pure Python exports/tests not native runtime",
+    "ledger_path": "results/cylinder/native/commands.json",
+    "prior_rectangular_wall_seconds": 849.8999272871297,
+    "circular_wall_seconds": 861.828608534066
+  },
+  "force_convention": "on_body",
+  "force_content": "total_traction",
+  "clock": {
+    "forces_offset_s": 0,
+    "libacoustics_curle": {
+      "offset_s": 0,
+      "kind": "source_unretarded"
+    },
+    "libacoustics_fwh": {
+      "offset_s": 0,
+      "kind": "observer"
+    }
+  },
+  "boundary_conditions": {
+    "farfield_U": "freestreamVelocity",
+    "farfield_p": "freestreamPressure",
+    "freestream_velocity_m_s": [
+      0.2,
+      0,
+      0
+    ],
+    "freestream_kinematic_pressure_m2_s2": 0,
+    "cylinder_U": "noSlip",
+    "cylinder_p": "zeroGradient",
+    "spanEnds": "symmetry at z=+/-0.08m"
+  },
+  "mesh_grading": {
+    "radial_expansion_ratio": 24,
+    "angular_centre_to_sector_edge_ratio": 0.65,
+    "circumferential_cells": 64,
+    "radial_cells": 32,
+    "span_cells": [
+      12,
+      36,
+      12
+    ],
+    "limitation": "modest angular concentration, not an independently refined long wake strip or an exact copy of reference mesh density"
+  },
+  "unsupported_claims": [
+    "mesh/time convergence",
+    "resolved turbulent LES adequacy",
+    "statistical stationarity",
+    "experimental acoustic validation",
+    "exact serial/MPI acoustic equivalence",
+    "complete Lighthill volume quadrupoles",
+    "far-field-only radiation at 1m"
+  ],
+  "provenance": {
+    "source_manifest_sha256": "6ea5c4f7f46f5bb185db53fdd9c8bcb78e84e4dc4aaee6067f28a5b06320ddb4",
+    "verified_native_pins": 403,
+    "public_manifest_scope": "Public summary, not a byte-identical copy of the full local manifest. Local paths and full raw-case identity list omitted."
+  }
+}

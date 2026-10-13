@@ -1,0 +1,5 @@
+# Preserve native CSV exports and upstream source bytes exactly.
+site/downloads/*.csv -text
+third_party/libAcoustics-v2212/upstream/** -text
+*.png binary
+*.gz binary
