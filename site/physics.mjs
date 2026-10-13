@@ -21,7 +21,8 @@ export function fieldPressure({family = 'dipole', f, r, theta, t, near = false, 
   const {kr, delay} = propagation(r, f);
   const phase = TAU * f * (t - delay);
   const reactive = near && family === 'dipole' ? Math.cos(phase) / kr : 0;
-  return directivity(family, theta, orientation) * (Math.sin(phase) + reactive) / r;
+  // A radiating sine comes from a force proportional to -cos(phase).
+  return directivity(family, theta, orientation) * (Math.sin(phase) - reactive) / r;
 }
 export function loadingSignal(f,t) {
   positive(f,'f');

@@ -1,32 +1,39 @@
-# Reproduce the circular-cylinder demonstration
+# Reproduce the refined 10 s demonstration
 
-## Reproduce the published acoustic analysis without CFD
+## Analysis replay — no CFD
 
-The website has no external JavaScript dependencies and performs no solver launches. From a checkout with Python 3.12 and uv:
+From a checkout with the **refined** public downloads, Python 3.12 and uv:
 
 ```sh
-UV_CACHE_DIR="$PWD/.uv-cache" uv sync --locked --extra dev
+uv sync --locked --extra dev
 OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/analyze_cylinder.py \
   --run site/downloads/run.json \
   --forces site/downloads/forces.csv \
   --observers site/downloads/observers.csv \
   --output results/reproduced \
-  --start-time-s 2 --resample-dt-s 0.0009 --nperseg 1536
+  --start-time-s 2 --end-time-s 10 --nperseg 3200
 ```
 
-This uses the actual circular-domain records, not an analytical fixture. `run.json` is an explicit public subset of the local manifest, with its original SHA256 recorded in `provenance`; it is not claimed byte-identical to the full local manifest. Its canonical conventions and physical data are unchanged. CSV clocks are already absolute: do not add the 0.1 s restart offset again.
+Use a fresh output directory. Do not substitute the historical 6 s download bundle. The refined CSVs retain native uniform **0.000625 s** spacing: **no `--resample-dt-s` and no +0.1 s offset**. The fresh run started at zero without restarting libAcoustics. The 2–10 s window is a developing-flow selection, not a stationarity claim. Periodic Hann segments of 3,200 samples, 50% overlap and segment-mean removal give seven overlapping segments and 0.5 Hz bins; overlapping segments are not independent realizations.
 
-The 2–6 s interval is a later **developing-flow** window, not an assertion of statistical stationarity. The uniform 0.0009 s grid uses declared linear interpolation and is finer than the minimum recorded interval. Welch uses 1,536-sample periodic Hann windows, 50% overlap and segment-mean removal. Four overlapping segments give coarse frequency resolution; phase/coherence gates are descriptive, not significance tests.
+The public `run.json` is a sanitized **schema-1 analysis view**, not the original schema-2 execution manifest. Its provenance must retain the original native SHA256 `6340ad86ade01d00752b884419b0e207d678e0253aaa4ab13ef9ff597a38bb2f`. The force/observer CSV bytes are unchanged. Metadata/input identities and therefore the reproduced manifest hash differ from the local original; compare physical chart arrays, statistics and aligned CSV values separately. The original execution record must never be rewritten to make public paths match.
 
-The browser displays original local extrema for long time histories and a 0–20 Hz frequency window. These are presentation choices only: statistics use the full analysis record. `analysis-full.json.gz` contains full-band, full-resolution plot arrays; `aligned_pressures.csv.gz` contains the signed comparison samples.
+The analysis emits full-resolution `results.json`, a hash manifest and downloadable CSVs. Public display traces may retain extrema or limit the visible frequency band; neither changes the complete analysis arrays. The native computation completed, but scientific analysis status remains `partial` and the primary lift peak is unresolved.
 
-## Native inputs and dependency build
+## Tests and viewing
 
-The executed runtime was **OpenCFD OpenFOAM v2206**, double precision, 32-bit labels, GCC, four MPI ranks, `OMP_NUM_THREADS=OPENBLAS_NUM_THREADS=1`. A compatible OpenFOAM installation, MPI and FFTW3 development headers/libraries must already exist. Python installation does not provide those dependencies.
+```sh
+OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest tests -q -rs
+python3 -m http.server 8513 --bind 127.0.0.1 --directory site
+```
 
-Source your installed OpenFOAM `etc/bashrc` before native work. The public native wrapper reads `WM_PROJECT_DIR`; it contains no author-specific installation path. This environment locator and quoting guard are portability-only adaptations to the originally executed helper; numerical settings, native source and exported data are unchanged. The circular generator uses the common cylinder helper; its unused rectangular generator remains an implementation dependency/test reference, not a second public result set.
+Browser tests need Chromium/Chrome and Node with built-in WebSocket support. ParaView's `pvpython` and Poppler's `pdfimages`/`pdftotext` are additional converter/figure prerequisites. Synthetic numerical, geometry, binary-field and pipeline fixtures do not require OpenFOAM binaries. Optional frozen historical analysis/report tests skip on archive absence; the native refined-mesh integration additionally requires `FLOWACOUSTICS_VERIFY_REFINED_MESH=1` and its original hash-bound archive. Those skipped checks are not native verification of a fresh clone. Never copy private-path manifests or fabricate native records just to remove skips.
 
-The libAcoustics numerical source is unchanged from commit `b9cd1d62ad8c5b445240a506a945231d12454b73`. Build a separate copy, keeping the pinned upstream export intact:
+## Native dependencies
+
+The executed runtime was **OpenCFD OpenFOAM v2206**, double precision, 32-bit labels, GCC, eight MPI ranks, one thread per rank. Source your installed OpenFOAM `etc/bashrc`; `scripts/cylinder_native.py` locates it through `WM_PROJECT_DIR`, not an author-specific path. MPI and FFTW3 development libraries are separate dependencies, not supplied by Python.
+
+libAcoustics numerical source is unchanged from commit `b9cd1d62ad8c5b445240a506a945231d12454b73`. Build a separate copy:
 
 ```sh
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
@@ -37,34 +44,31 @@ cp -R third_party/libAcoustics-v2212/upstream/Sources .build/acoustics/libAcoust
 export LD_LIBRARY_PATH="$FOAM_USER_LIBBIN:$LD_LIBRARY_PATH"
 ```
 
-The existing `Make/options` uses `FFTW_ARCH_PATH`, supplied by the OpenFOAM environment. Configure that installation for its actual FFTW location if necessary; no numerical-source patch was used in the executed build. The helper's library path corresponds to the executed `linux64GccDPInt32Opt` build. Other OpenFOAM variants/platforms need explicit compatibility work rather than an assumption of equivalence.
+The supplied `Make/options` expects `FFTW_ARCH_PATH` from the installation. Helpers retain the tested `linux64GccDPInt32Opt` layout; other variants need explicit compatibility checks. Portability guards and fixture adaptations do not imply that another runtime is numerically equivalent.
 
-## Mesh and solver sequence
+## Native rerun — separate resource authorization required
 
-The accepted `system/blockMeshDict` is shipped. It creates a circle of radius 0.24 m, a D=0.02 m / span=0.06 m body, and genuine fluid beyond both tips. The free-stream target is 0.2 m/s in water with ν=1e-6 m²/s. The curved boundary uses `freestreamVelocity`/`freestreamPressure`; remote span planes use symmetry. Initial weak cross-flow/spanwise offsets are a startup perturbation, not synthetic inlet turbulence.
+The accepted dictionaries are in `cfd/cylinder_circular_60s/`. Despite the preserved name, `controlDict` starts at zero and ends at **10 s**, using **0.000625 s**, no adaptive stepping and eight-way decomposition. This is **not** the old pilot/continuation workflow. The generator's default timestep is not the executed setting: if generating another case, explicitly pass `end=10, dt=0.000625, ranks=8` and compare every dictionary to the shipped inputs.
 
-The public `system/controlDict` initially equals `controlDict.pilot`, ending at 0.1 s. The continuation dictionary is preserved as `controlDict.main`, starting at 0.1 s and targeting 6 s. A reproduction must run the pilot first:
+The following is a manual sequence, **not performed by opening the site or running analysis tests**. Obtain new compute/storage permission and use a fresh case with no previous outputs. Save logs and check every stage before proceeding:
 
 ```sh
-case=cfd/cylinder_circular
-blockMesh -case "$case"
-checkMesh -case "$case" -allTopology -allGeometry
-# Inspect the log: require 'Mesh OK.', not merely exit code zero.
-decomposePar -case "$case"
-mpirun -np 4 pimpleFoam -case "$case" -parallel
-mkdir -p results/reproduction-pilot
-cp "$case/acousticData/curle-time.dat" results/reproduction-pilot/
-cp "$case/acousticData/fwh-time.dat" results/reproduction-pilot/
-cp "$case/system/controlDict.main" "$case/system/controlDict"
-mpirun -np 4 pimpleFoam -case "$case" -parallel
+case=cfd/cylinder_circular_60s
+blockMesh -case "$case" > log.blockMesh 2>&1
+checkMesh -case "$case" -allTopology -allGeometry > log.checkMesh 2>&1
+# STOP and inspect log.checkMesh: require 459264 cells, 'Mesh OK.', and no failed checks.
+# Confirm eight ranks, fixed deltaT=0.000625, endTime=10 and available disk/RAM.
+decomposePar -case "$case" > log.decomposePar 2>&1
+mpirun --bind-to core -np 8 pimpleFoam -case "$case" -parallel > log.pimpleFoam 2>&1
+# STOP unless exit status, End marker, all 16000 times, finiteness and Courant gates pass.
+reconstructPar -case "$case" -noZero > log.reconstructPar 2>&1
+# Verify p/U/nut/vorticity/yPlus at 2,4,6,8,10; retain processor directories.
 ```
 
-Native acoustic callbacks restart their histories and output files at continuation. Preserve pilot outputs before restarting. During export, pilot clocks have offset zero and the main raw acoustic clock receives +0.1 s exactly once. Never extend the missing acoustic tail with zeros. The helper functions in `scripts/cylinder_native.py` export native forces, acoustic records, closed-wall geometry and pressure, and actual sampled flow. `scripts/cylinder_circular.py` supplies the accepted circular mesher, native mesh views and export verification.
+`checkMesh` exit zero alone is insufficient. Do not continue a failed or short solve, silently relax quality gates or increase the cell ceiling/ranks/duration. Binary fields are **uncompressed**: this v2206 build disables binary compression. New native runs need their own hash-bound configuration, mesh/runtime identities, logs and export verification; bitwise equality across parallel installations is not promised.
 
-The original campaign used 1,711.7285358211957 s of a cumulative 1,800 s native wall allowance, including the earlier rectangular iteration and two rejected circular mesh candidates. Those failed checks were retained locally, not relabelled passes. A fresh reproduction is a new computation with its own recorded resources and outcomes; no claim is made that it will take identical wall time or return bitwise-identical parallel results.
+`scripts/cylinder_longrun.py` is the recorded guarded orchestration code, **not a one-command fresh-checkout launcher**. Its CLI requires a locally prepared `results/cylinder/native_circular_60s/prepared.json`, including current essential-input identities, native mesh-check log and accepted pilot Courant evidence. That machine-bound preflight record is intentionally not shipped. Do not invent it or reuse the old machine's identity pins.
 
-## Interpretation boundary
+## Signature and raw-data reproduction boundary
 
-The fixed closed body's moving-surface thickness term is zero. Native FW-H here evaluates retarded pressure loading, not external quadrupole volumes or viscous acoustic loading. Native Curle uses instantaneous total force on the body; the independent compact calculation uses retarded force on the fluid. No fitted gain, delay or sign correction is used to conceal these implementation differences.
-
-The mesh is modest and quality-checked, not demonstrated to resolve all LES scales. No convergence, stationarity, exact serial/MPI equivalence or experimental acoustic validation is claimed. The website is an educational explanation supported by an actual 3D execution.
+The [nine-signature producer](SIGNATURE_ANALYSIS.md), native mesh renderer and raw-sample converter require original hash-bound mesh/raw records beyond the public compact CSVs. Public downloads support main acoustic replay; they are not a substitute for the full execution archive. Large fields and converted raw trees stay local. See [outputs and limitations](OUTPUTS_AND_LIMITS.md).

@@ -1,0 +1,268 @@
+{
+  "figure_id": "I08_near_radiating",
+  "title": "Compact reactive / radiating terms and range diagnostic",
+  "caption": "Offline pressure-loading compact model; a/r = 0.0316, candidate kr = 0.0021 at 1 m.\nNear + far cross covariance need not vanish; centre-delay FW-H alignment is approximate.",
+  "evidence_label": "NATIVE COMPLETED SHORT RECORD",
+  "native_run_sha256": "6340ad86ade01d00752b884419b0e207d678e0253aaa4ab13ef9ff597a38bb2f",
+  "equations": [
+    "F_fluid=-F_pressure_on_body; tau=t-r/c; p_near=n.F_fluid(tau)/(4*pi*r²); p_far=n.dF_fluid/dt(tau)/(4*pi*c*r); derivative on native timestamps before interpolation",
+    "range ratio = std(p_2m)/std(p_1m) on common supported emission times"
+  ],
+  "limitations": [
+    "Short single realization; stationarity not established; no formal confidence interval.",
+    "Unvalidated loading-analogy predictions; no measured sensor or detection-range claim.",
+    "Native Curle and FW-H are alternatives, not additive contributions.",
+    "No mesh/time convergence or full volume-quadrupole acoustic validation."
+  ],
+  "window": {
+    "actual_samples_s": [
+      2.0,
+      10.0
+    ],
+    "requested_s": [
+      2.0,
+      10.0
+    ],
+    "exclusions_s": [
+      [
+        0,
+        0.01
+      ]
+    ],
+    "native_selected_samples": 12801,
+    "resample_rule": "linear interpolation; downsampling rejected",
+    "resampled": false,
+    "samples": 12801
+  },
+  "estimator": {
+    "bin_spacing_Hz": 0.5,
+    "dt_s": 0.000625,
+    "hop_s": 1.0,
+    "noverlap": 1600,
+    "nperseg": 3200,
+    "resampled": false,
+    "native_to_uniform": false,
+    "retarded_interpolation": false,
+    "local_spectral": false,
+    "sample_count": 12801,
+    "segment_detrend": "constant",
+    "segment_duration_s": 2.0,
+    "segments": 7,
+    "unused_tail_samples": 1,
+    "window": "hann",
+    "cadence": {
+      "dt_s": 0.000625,
+      "nominal_dt_s": 0.000625,
+      "observed_mean_dt_s": 0.000625,
+      "observed_min_dt_s": 0.0006249999999994316,
+      "observed_max_dt_s": 0.0006250000000012079,
+      "max_interval_jitter_s": 1.2079096403661005e-15,
+      "max_lattice_residual_s": 8.881784197001252e-16,
+      "validation_tolerance_s": 6.25071054273576e-10,
+      "sample_support_s": [
+        2.0,
+        10.0
+      ],
+      "sample_count": 12801,
+      "clock_replaced": false
+    },
+    "frequency_bin_contract": {
+      "frequency_origin_Hz": 0.0,
+      "bin_count": 1601,
+      "bin_spacing_Hz": 0.5,
+      "edge_snap_eps_multiplier": 32,
+      "edge_snap_max_bins": 1e-09,
+      "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+      "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+      "interior_rule": "half_open_right_owns_boundary",
+      "final_upper_edge_inclusive": true
+    }
+  },
+  "units": [
+    {
+      "xlabel": "Observer time [s]",
+      "ylabel": "Offline AC pressure [Pa]"
+    },
+    {
+      "xlabel": "Observer time [s]",
+      "ylabel": "Offline AC pressure [Pa]"
+    },
+    {
+      "xlabel": "Frequency [Hz]",
+      "ylabel": "Offline PSD [Pa²/Hz]"
+    },
+    {
+      "xlabel": "",
+      "ylabel": "AC RMS(2 m) / AC RMS(1 m) [–]"
+    }
+  ],
+  "numeric_tables": [
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I08_near_radiating/near_spectrum.csv",
+      "rows": 1601,
+      "sha256": "b21bcab14ac23f1165180b67fdaae050743ecee7d0e3bce45f15f6d1eff722f3",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": true,
+        "native_to_uniform": false,
+        "retarded_interpolation": true,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 1.83856800373323e-09,
+        "weighted_power": 1.8385680037332288e-09,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I08_near_radiating/far_spectrum.csv",
+      "rows": 1601,
+      "sha256": "d7d576c5efe84e7f8ae6f62c7655dc27dda3bbe61d921f06aac5ed6ae6eee7a1",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": true,
+        "native_to_uniform": false,
+        "retarded_interpolation": true,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 3.111698046298763e-14,
+        "weighted_power": 3.111698046298762e-14,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    },
+    {
+      "columns": [
+        "observer_time_s",
+        "emission_time_s",
+        "near_Pa",
+        "far_Pa",
+        "total_Pa"
+      ],
+      "path": "I08_near_radiating/compact_terms.csv",
+      "rows": 12801,
+      "sha256": "28b6ca4569c105f5e4605e48a7abcdf9ab9ae370eb2fead34fa37adf081a2e28"
+    },
+    {
+      "columns": [
+        "method",
+        "ratio_2m_over_1m",
+        "matched_samples",
+        "emission_start_s",
+        "emission_end_s",
+        "alignment"
+      ],
+      "path": "I08_near_radiating/range_ratios.csv",
+      "rows": 3,
+      "sha256": "663ecd9a0b770dbfd84e44021cf78fcc8cfcb381f4f90642d415078a870b851e"
+    }
+  ],
+  "outputs": {
+    "pdf": {
+      "path": "I08_near_radiating/figure.pdf",
+      "sha256": "d52cd18b242fc04958a4a36b14e894ad8d4869239e0c760ff6ad2b5454a04ef1"
+    },
+    "png": {
+      "path": "I08_near_radiating/figure.png",
+      "sha256": "c3e86723c54561b6fd601d7572bda4338dc181c56d07dd6296fd664e0222d1cf",
+      "width": 1728,
+      "height": 1184
+    },
+    "svg": {
+      "path": "I08_near_radiating/figure.svg",
+      "sha256": "eedf1df7241dbc980175c7d997eafe57a1a6a9375dea5f5646f6963d5bb93cfc"
+    }
+  }
+}

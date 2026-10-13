@@ -200,7 +200,16 @@ def test_triangle_solid_intersection_not_centroid_mask_and_tip_is_fluid():
     assert audit["z_m"] == pytest.approx(0.035)
 
 
-def test_circular_snapshot_saves_full_equal_scale_planes_without_tip_mask(tmp_path):
+@pytest.mark.parametrize(
+    "case_name,time_text,options",
+    [
+        ("cylinder_circular", "5.6", {}),
+        ("cylinder_circular_60s", "10", {"case_name": "cylinder_circular_60s", "time_text": "10"}),
+    ],
+)
+def test_circular_snapshot_saves_full_equal_scale_planes_without_tip_mask(
+    tmp_path, case_name, time_text, options
+):
     mod = module()
     cfd = tmp_path / "cfd"
     theta = np.linspace(0, 2 * np.pi, 40, endpoint=False)
@@ -211,12 +220,12 @@ def test_circular_snapshot_saves_full_equal_scale_planes_without_tip_mask(tmp_pa
             xy = np.vstack([xy, [0, 0]])
         rows = [" ".join(map(str, [x, y, z, 0, 0, 100 * x - 20 * y])) for x, y in xy]
         raw(
-            cfd / f"cylinder_circular/postProcessing/flowSlice/5.6/vorticity_{plane}.raw",
+            cfd / f"{case_name}/postProcessing/flowSlice/{time_text}/vorticity_{plane}.raw",
             "vorticity",
             rows=rows,
         )
     output = tmp_path / "allowed/figures"
-    report = mod.plot_circular_snapshot(cfd, output, allowed_root=tmp_path / "allowed")
+    report = mod.plot_circular_snapshot(cfd, output, allowed_root=tmp_path / "allowed", **options)
     assert (output / "flow_vorticity_circular.png").stat().st_size > 10000
     assert (output / "flow_vorticity_circular.pdf").read_bytes().startswith(b"%PDF")
     import subprocess
@@ -235,7 +244,8 @@ def test_circular_snapshot_saves_full_equal_scale_planes_without_tip_mask(tmp_pa
         check=True,
     ).stdout
     assert "scale limits" in text, "Symmetric colour limits are not the asymmetric sample extrema"
-    assert report["time_s"] == 5.6
+    assert report["time_s"] == float(time_text)
+    assert all(plane["source"].startswith(case_name + "/") for plane in report["planes"])
     assert report["layout"]["header_title_gap_pt"] >= 4
     assert report["vorticity_component"] == "vorticity_z"
     assert len(report["planes"]) == 2
@@ -248,6 +258,16 @@ def test_circular_snapshot_saves_full_equal_scale_planes_without_tip_mask(tmp_pa
     assert not report["planes"][0]["origin_supported"]
     with pytest.raises(ValueError, match="Output"):
         mod.plot_circular_snapshot(tmp_path / "MISSING", output, allowed_root=tmp_path / "allowed")
+
+
+@pytest.mark.parametrize("case_name", ["../escape", "/escape", "..", "a/b"])
+def test_circular_snapshot_rejects_unsafe_case_name_before_source_read(tmp_path, case_name):
+    allowed = tmp_path / "allowed"
+    with pytest.raises(ValueError, match="case name"):
+        module().plot_circular_snapshot(
+            tmp_path / "absent-cfd", allowed / "figures", allowed_root=allowed, case_name=case_name
+        )
+    assert not allowed.exists()
 
 
 def test_pinned_identity_gate_rejects_missing_malformed_and_changed_data(tmp_path):

@@ -1,4 +1,5 @@
 """Presentation-only reduction; full numerical analysis remains a separate download."""
+
 from __future__ import annotations
 
 import copy
@@ -9,7 +10,15 @@ def make_display_dataset(source, *, max_time_points=800, max_frequency_hz=20):
     if max_time_points < 4:
         raise ValueError("At least four time points required")
     data = copy.deepcopy(source)
+    estimator = data.get("metadata", {}).get("spectral_estimator")
+    if isinstance(estimator, dict):
+        estimator["scope"] = "force_spectrum_only"
     for chart in data["charts"]:
+        if (
+            chart.get("id") == "force_psd"
+            and data.get("metadata", {}).get("shedding", {}).get("status") == "unresolved"
+        ):
+            chart["title"] = "Force spectra - lift candidate unresolved"
         if chart["origin"] == "computed" and chart["x_label"] == "Frequency (Hz)":
             for trace in chart["traces"]:
                 selected = [i for i, f in enumerate(trace["x"]) if 0 <= f <= max_frequency_hz]

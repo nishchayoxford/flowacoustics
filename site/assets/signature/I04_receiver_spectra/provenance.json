@@ -1,0 +1,621 @@
+{
+  "figure_id": "I04_receiver_spectra",
+  "title": "Native receiver spectral signature · r = 1 m",
+  "caption": "Same sample window and estimator at all four sites; full Nyquist arrays retained in CSV.\n0–20 Hz is a display/integration choice, not demonstrated CFD acoustic bandwidth.",
+  "evidence_label": "NATIVE COMPLETED SHORT RECORD",
+  "native_run_sha256": "6340ad86ade01d00752b884419b0e207d678e0253aaa4ab13ef9ff597a38bb2f",
+  "equations": [
+    "Sxx[k] = mean_j(g[k]|DFT(w*(x_j-mean(x_j)))|²/(fs*sum(w²))); periodic Hann; one-sided endpoints g=1, interior g=2; no zero padding",
+    "PSD level=10log10(Spp/((1e-6 Pa)²/Hz)); zero density omitted, no display floor"
+  ],
+  "limitations": [
+    "Short single realization; stationarity not established; no formal confidence interval.",
+    "Unvalidated loading-analogy predictions; no measured sensor or detection-range claim.",
+    "Native Curle and FW-H are alternatives, not additive contributions.",
+    "No mesh/time convergence or full volume-quadrupole acoustic validation."
+  ],
+  "window": {
+    "actual_samples_s": [
+      2.0,
+      10.0
+    ],
+    "requested_s": [
+      2.0,
+      10.0
+    ],
+    "exclusions_s": [
+      [
+        0,
+        0.01
+      ]
+    ],
+    "native_selected_samples": 12801,
+    "resample_rule": "linear interpolation; downsampling rejected",
+    "resampled": false,
+    "samples": 12801
+  },
+  "estimator": {
+    "bin_spacing_Hz": 0.5,
+    "dt_s": 0.000625,
+    "hop_s": 1.0,
+    "noverlap": 1600,
+    "nperseg": 3200,
+    "resampled": false,
+    "native_to_uniform": false,
+    "retarded_interpolation": false,
+    "local_spectral": false,
+    "sample_count": 12801,
+    "segment_detrend": "constant",
+    "segment_duration_s": 2.0,
+    "segments": 7,
+    "unused_tail_samples": 1,
+    "window": "hann",
+    "cadence": {
+      "dt_s": 0.000625,
+      "nominal_dt_s": 0.000625,
+      "observed_mean_dt_s": 0.000625,
+      "observed_min_dt_s": 0.0006249999999994316,
+      "observed_max_dt_s": 0.0006250000000012079,
+      "max_interval_jitter_s": 1.2079096403661005e-15,
+      "max_lattice_residual_s": 8.881784197001252e-16,
+      "validation_tolerance_s": 6.25071054273576e-10,
+      "sample_support_s": [
+        2.0,
+        10.0
+      ],
+      "sample_count": 12801,
+      "clock_replaced": false
+    },
+    "frequency_bin_contract": {
+      "frequency_origin_Hz": 0.0,
+      "bin_count": 1601,
+      "bin_spacing_Hz": 0.5,
+      "edge_snap_eps_multiplier": 32,
+      "edge_snap_max_bins": 1e-09,
+      "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+      "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+      "interior_rule": "half_open_right_owns_boundary",
+      "final_upper_edge_inclusive": true
+    }
+  },
+  "units": [
+    {
+      "xlabel": "Frequency [Hz]",
+      "ylabel": "PSD level [dB re (1 µPa)²/Hz]"
+    },
+    {
+      "xlabel": "Frequency [Hz]",
+      "ylabel": "PSD level [dB re (1 µPa)²/Hz]"
+    },
+    {
+      "xlabel": "Frequency [Hz]",
+      "ylabel": "PSD level [dB re (1 µPa)²/Hz]"
+    },
+    {
+      "xlabel": "Frequency [Hz]",
+      "ylabel": "PSD level [dB re (1 µPa)²/Hz]"
+    }
+  ],
+  "numeric_tables": [
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I04_receiver_spectra/cross_plus_libacoustics_curle.csv",
+      "rows": 1601,
+      "sha256": "f67a039edc6ac708bd0ac1be10cfeb7821c480fa3b054441b1ed62b0c4a6feea",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": false,
+        "native_to_uniform": false,
+        "retarded_interpolation": false,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 1.9115653881276992e-09,
+        "weighted_power": 1.9115653881276976e-09,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I04_receiver_spectra/cross_plus_libacoustics_fwh.csv",
+      "rows": 1601,
+      "sha256": "e2d4ed4af15a095b83ec66a2ff58184bcf89b6f9d9d149ebf2cc7fc44916c7c5",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": false,
+        "native_to_uniform": false,
+        "retarded_interpolation": false,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 1.8415903641091103e-09,
+        "weighted_power": 1.8415903641091088e-09,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I04_receiver_spectra/cross_minus_libacoustics_curle.csv",
+      "rows": 1601,
+      "sha256": "f84b83d6bef06bb6787e1c826789278911dbc7038279e3f70c2b2b012e247bf8",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": false,
+        "native_to_uniform": false,
+        "retarded_interpolation": false,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 1.9115653881277013e-09,
+        "weighted_power": 1.9115653881276996e-09,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I04_receiver_spectra/cross_minus_libacoustics_fwh.csv",
+      "rows": 1601,
+      "sha256": "1afeabca17961d97952679aa183c8865e65b2563057e4bd8290b673c9828a49b",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": false,
+        "native_to_uniform": false,
+        "retarded_interpolation": false,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 1.8324169514334629e-09,
+        "weighted_power": 1.832416951433462e-09,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I04_receiver_spectra/downstream_libacoustics_curle.csv",
+      "rows": 1601,
+      "sha256": "82c815f0756d268d87fb545e4f5a60c430321543e111ce5e6518697d24b263c4",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": false,
+        "native_to_uniform": false,
+        "retarded_interpolation": false,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 2.920129329721222e-10,
+        "weighted_power": 2.920129329721221e-10,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I04_receiver_spectra/downstream_libacoustics_fwh.csv",
+      "rows": 1601,
+      "sha256": "80b6a36509586da9eb0d1db1d4557271620b1790ba0c994265d5f7e8caf19108",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": false,
+        "native_to_uniform": false,
+        "retarded_interpolation": false,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 2.783516536882096e-10,
+        "weighted_power": 2.7835165368820943e-10,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I04_receiver_spectra/oblique_libacoustics_curle.csv",
+      "rows": 1601,
+      "sha256": "f719128a0a2c1249f9702b54b68c5ebe56640822fb8ab8e2086a5235201cf15e",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": false,
+        "native_to_uniform": false,
+        "retarded_interpolation": false,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 1.3386787314269367e-09,
+        "weighted_power": 1.3386787314269359e-09,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "PSD_Pa2_Hz"
+      ],
+      "path": "I04_receiver_spectra/oblique_libacoustics_fwh.csv",
+      "rows": 1601,
+      "sha256": "ea5d929ebe06b40113e1af03ca964e60c36a0b1a30eacee9ba68fd528accd912",
+      "full_frequency_support_Hz": [
+        0,
+        800.0
+      ],
+      "sample_window_s": [
+        2.0,
+        10.0
+      ],
+      "estimator": {
+        "bin_spacing_Hz": 0.5,
+        "dt_s": 0.000625,
+        "hop_s": 1.0,
+        "noverlap": 1600,
+        "nperseg": 3200,
+        "resampled": false,
+        "native_to_uniform": false,
+        "retarded_interpolation": false,
+        "local_spectral": false,
+        "sample_count": 12801,
+        "segment_detrend": "constant",
+        "segment_duration_s": 2.0,
+        "segments": 7,
+        "unused_tail_samples": 1,
+        "window": "hann",
+        "integrated_power": 1.2842077474836427e-09,
+        "weighted_power": 1.2842077474836415e-09,
+        "cadence": {
+          "dt_s": 0.000625,
+          "nominal_dt_s": 0.000625,
+          "observed_mean_dt_s": 0.000625,
+          "observed_min_dt_s": 0.0006249999999994316,
+          "observed_max_dt_s": 0.0006250000000012079,
+          "max_interval_jitter_s": 1.2079096403661005e-15,
+          "max_lattice_residual_s": 8.881784197001252e-16,
+          "validation_tolerance_s": 6.25071054273576e-10,
+          "sample_support_s": [
+            2.0,
+            10.0
+          ],
+          "sample_count": 12801,
+          "clock_replaced": false
+        },
+        "frequency_bin_contract": {
+          "frequency_origin_Hz": 0.0,
+          "bin_count": 1601,
+          "bin_spacing_Hz": 0.5,
+          "edge_snap_eps_multiplier": 32,
+          "edge_snap_max_bins": 1e-09,
+          "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+          "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+          "interior_rule": "half_open_right_owns_boundary",
+          "final_upper_edge_inclusive": true
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "pdf": {
+      "path": "I04_receiver_spectra/figure.pdf",
+      "sha256": "012d4540248d4def3700cd5996ecd798b795d0907cab455ac24588b5b0efab30"
+    },
+    "png": {
+      "path": "I04_receiver_spectra/figure.png",
+      "sha256": "680dc827221a13c7c9c29978a5e8152b2ee1076cf31bfb25ecf65a3b4c4bda15",
+      "width": 1728,
+      "height": 1184
+    },
+    "svg": {
+      "path": "I04_receiver_spectra/figure.svg",
+      "sha256": "b60e510a70cd3b7cfeaacd17b420a53928ac8786b2dd09c8d823eeba94440970"
+    }
+  }
+}

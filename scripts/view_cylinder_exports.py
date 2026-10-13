@@ -158,17 +158,21 @@ def preflight_output(output, allowed_root, source=None):
     return output
 
 
-def convert_tree(cfd, output, *, allowed_root):
-    """Stage the complete new bundle; failed runs never publish partial output."""
+def convert_tree(cfd, output, *, allowed_root, case_names=None):
+    """Stage a new bundle, optionally limited to named cases' postProcessing.
+
+    Omitting case_names preserves historical whole-tree discovery.
+    """
     import shutil
     import tempfile
 
     output = preflight_output(output, allowed_root, cfd)
+    sources = _sample_sources(Path(cfd), case_names)
     cfd = Path(cfd).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix=".stage-", dir=output.parent))
     try:
-        manifest = _convert_into(cfd, stage)
+        manifest = _convert_into(cfd, stage, case_names=case_names, sources=sources)
         if output.exists():
             raise ValueError("Output destination appeared during conversion")
         stage.rename(output)
@@ -178,8 +182,40 @@ def convert_tree(cfd, output, *, allowed_root):
             shutil.rmtree(stage)
 
 
-def _convert_into(cfd, output):
-    sources = sorted(cfd.rglob("*.raw"))
+def _sample_sources(cfd, case_names=None):
+    """Validate explicit source scope before staging; never follow scoped links."""
+    if case_names is None:
+        return sorted(cfd.resolve().rglob("*.raw"))
+    if (
+        not isinstance(case_names, (list, tuple))
+        or not case_names
+        or any(
+            not isinstance(name, str) or not re.fullmatch(r"[A-Za-z0-9_][A-Za-z0-9_.-]*", name)
+            for name in case_names
+        )
+        or len(set(case_names)) != len(case_names)
+    ):
+        raise ValueError("Expected unique, nonempty single-directory case names")
+    if ".." in cfd.parts or any(p.is_symlink() for p in (cfd, *cfd.parents)):
+        raise ValueError("Unsafe scoped source root")
+    cfd = cfd.resolve()
+    sources = []
+    for name in case_names:
+        root = cfd / name / "postProcessing"
+        if not root.is_dir() or any(p.is_symlink() for p in (root, *root.parents)):
+            raise ValueError(f"Missing or linked selected postProcessing root: {name}")
+        paths = sorted(root.rglob("*"))
+        if any(p.is_symlink() for p in paths):
+            raise ValueError(f"Linked source inside selected postProcessing: {name}")
+        selected = [p for p in paths if p.is_file() and p.suffix == ".raw"]
+        if not selected:
+            raise ValueError(f"No .raw exports for selected case: {name}")
+        sources.extend(selected)
+    return sorted(sources)
+
+
+def _convert_into(cfd, output, case_names=None, sources=None):
+    sources = _sample_sources(cfd, case_names) if sources is None else sources
     if not sources:
         raise ValueError("No .raw exports discovered")
     records, series = [], defaultdict(list)
@@ -257,6 +293,8 @@ def _convert_into(cfd, output):
         collections=collections,
         output_sha256=outputs,
     )
+    if case_names is not None:
+        manifest["selected_case_names"] = list(case_names)
     (output / "manifest.json").write_text(
         json.dumps(manifest, sort_keys=True, separators=(",", ":")) + "\n"
     )
@@ -272,10 +310,13 @@ def verify_exports(cfd, output, *, paraview=True):
     import vtk
     from vtk.util.numpy_support import vtk_to_numpy
 
-    cfd, output = Path(cfd), Path(output)
+    cfd, output = Path(cfd).resolve(), Path(output)
     manifest = json.loads((output / "manifest.json").read_text())
     records = manifest["sources"]
-    discovered = {p.relative_to(cfd).as_posix() for p in cfd.rglob("*.raw")}
+    discovered = {
+        p.relative_to(cfd).as_posix()
+        for p in _sample_sources(cfd, manifest.get("selected_case_names"))
+    }
     if len(records) != len(discovered) or {r["path"] for r in records} != discovered:
         raise ValueError("Source inventory mismatch")
     for name, expected in manifest["output_sha256"].items():
@@ -448,7 +489,9 @@ def circular_triangulation(points, outer_radius=0.24, body_radius=0.01, half_spa
     return tri, audit
 
 
-def plot_circular_snapshot(cfd, output, *, allowed_root, time_text="5.6"):
+def plot_circular_snapshot(
+    cfd, output, *, allowed_root, time_text="5.6", case_name="cylinder_circular"
+):
     """Plot one shared-time pair over the full circular domain, in a new folder."""
     import shutil
     import tempfile
@@ -462,15 +505,12 @@ def plot_circular_snapshot(cfd, output, *, allowed_root, time_text="5.6"):
     output = preflight_output(output, allowed_root, cfd)
     if not re.fullmatch(r"[0-9]+(?:\.[0-9]+)?", time_text):
         raise ValueError("Unsafe/non-numeric snapshot time")
+    if not re.fullmatch(r"[A-Za-z0-9_][A-Za-z0-9_.-]*", case_name):
+        raise ValueError("Unsafe case name: expected a single CFD subdirectory name")
     cfd = Path(cfd)
     selected = []
     for plane, expected_z in [("midspan", 0), ("tipplane", 0.035)]:
-        source = (
-            cfd
-            / "cylinder_circular/postProcessing/flowSlice"
-            / time_text
-            / f"vorticity_{plane}.raw"
-        )
+        source = cfd / case_name / "postProcessing/flowSlice" / time_text / f"vorticity_{plane}.raw"
         sample = load_raw(source)
         if sample.field != "vorticity" or not np.allclose(
             sample.values[:, 2], expected_z, atol=1e-9, rtol=0

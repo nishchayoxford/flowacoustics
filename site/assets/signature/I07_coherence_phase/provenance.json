@@ -1,0 +1,142 @@
+{
+  "figure_id": "I07_coherence_phase",
+  "title": "Loading / pressure coherence and phase",
+  "caption": "Force on fluid; raw Curle remains opposite-sign/unretarded. FW-H uses pressure-only force.\nNative Curle: descriptive; Native FW-H: descriptive",
+  "evidence_label": "NATIVE COMPLETED SHORT RECORD",
+  "native_run_sha256": "6340ad86ade01d00752b884419b0e207d678e0253aaa4ab13ef9ff597a38bb2f",
+  "equations": [
+    "S_Fp=conj(FFT(F_fluid))*FFT(p); MSC=|S_Fp|²/(S_FF*S_pp); phase=arg(S_Fp)",
+    "H=(r^-2+i*omega/(c*r))*exp(-i*omega*r/c)/(4*pi); reference phase=atan(kr)-kr"
+  ],
+  "limitations": [
+    "Short single realization; stationarity not established; no formal confidence interval.",
+    "Unvalidated loading-analogy predictions; no measured sensor or detection-range claim.",
+    "Native Curle and FW-H are alternatives, not additive contributions.",
+    "No mesh/time convergence or full volume-quadrupole acoustic validation."
+  ],
+  "window": {
+    "actual_samples_s": [
+      2.0,
+      10.0
+    ],
+    "requested_s": [
+      2.0,
+      10.0
+    ],
+    "exclusions_s": [
+      [
+        0,
+        0.01
+      ]
+    ],
+    "native_selected_samples": 12801,
+    "resample_rule": "linear interpolation; downsampling rejected",
+    "resampled": false,
+    "samples": 12801
+  },
+  "estimator": {
+    "bin_spacing_Hz": 0.5,
+    "dt_s": 0.000625,
+    "hop_s": 1.0,
+    "noverlap": 1600,
+    "nperseg": 3200,
+    "resampled": false,
+    "native_to_uniform": false,
+    "retarded_interpolation": false,
+    "local_spectral": false,
+    "sample_count": 12801,
+    "segment_detrend": "constant",
+    "segment_duration_s": 2.0,
+    "segments": 7,
+    "unused_tail_samples": 1,
+    "window": "hann",
+    "cadence": {
+      "dt_s": 0.000625,
+      "nominal_dt_s": 0.000625,
+      "observed_mean_dt_s": 0.000625,
+      "observed_min_dt_s": 0.0006249999999994316,
+      "observed_max_dt_s": 0.0006250000000012079,
+      "max_interval_jitter_s": 1.2079096403661005e-15,
+      "max_lattice_residual_s": 8.881784197001252e-16,
+      "validation_tolerance_s": 6.25071054273576e-10,
+      "sample_support_s": [
+        2.0,
+        10.0
+      ],
+      "sample_count": 12801,
+      "clock_replaced": false
+    },
+    "frequency_bin_contract": {
+      "frequency_origin_Hz": 0.0,
+      "bin_count": 1601,
+      "bin_spacing_Hz": 0.5,
+      "edge_snap_eps_multiplier": 32,
+      "edge_snap_max_bins": 1e-09,
+      "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+      "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+      "interior_rule": "half_open_right_owns_boundary",
+      "final_upper_edge_inclusive": true
+    }
+  },
+  "units": [
+    {
+      "xlabel": "Frequency [Hz]",
+      "ylabel": "Magnitude-squared coherence [–]"
+    },
+    {
+      "xlabel": "Frequency [Hz]",
+      "ylabel": "Signed phase [rad]"
+    }
+  ],
+  "numeric_tables": [
+    {
+      "columns": [
+        "frequency_Hz",
+        "MSC",
+        "phase_rad",
+        "phase_valid",
+        "display_phase_rad"
+      ],
+      "path": "I07_coherence_phase/libacoustics_curle.csv",
+      "rows": 1601,
+      "sha256": "1e2e064973711d0044dbb25439199cb2f3b7e529b857bce34bc81605e719fec9"
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "MSC",
+        "phase_rad",
+        "phase_valid",
+        "display_phase_rad"
+      ],
+      "path": "I07_coherence_phase/libacoustics_fwh.csv",
+      "rows": 1601,
+      "sha256": "fdeb8407367ed350c76ad2c538026dffd991e36ecae7c9c3b30009c75d6d95d7"
+    },
+    {
+      "columns": [
+        "frequency_Hz",
+        "phase_rad"
+      ],
+      "path": "I07_coherence_phase/analytical_reference.csv",
+      "rows": 1601,
+      "sha256": "d5197b0cf59753f61ed60e1cdfbde1a80d32ddd705359bb92d6349481ceb0785"
+    }
+  ],
+  "outputs": {
+    "pdf": {
+      "path": "I07_coherence_phase/figure.pdf",
+      "sha256": "049dc81541d17c210f1f48e598df1a82898e78b7ee7d228e33bbdfd8d5d379dd"
+    },
+    "png": {
+      "path": "I07_coherence_phase/figure.png",
+      "sha256": "146d6c71b0b247850dcac9d1250080e529d7948ea99277356a0e9aa754e4b89a",
+      "width": 1728,
+      "height": 1184
+    },
+    "svg": {
+      "path": "I07_coherence_phase/figure.svg",
+      "sha256": "89fc3b96da1ab9939067eeaa61d773b009791404ea580f50c6d6c8f413f65357"
+    }
+  }
+}

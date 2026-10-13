@@ -1,45 +1,41 @@
-# Reading the cylinder outputs
+# Reading the outputs and their limits
 
-## Accuracy
+## Current and historical evidence
 
-The accepted 138,240-cell WALE calculation is a real three-dimensional demonstration, not a validated LES or noise benchmark. It ran to 5.999717956 s. Mesh quality, solver convergence and software tests do not establish mesh/time/domain independence, near-wall resolution, statistical development or experimental accuracy. The native Curle derivative also retains a fixed-step formula despite adaptive timesteps; that implementation error has not been quantified.
+The current case is a **459,264-cell**, eight-rank, fixed-step WALE demonstration ending at **10 s exactly**. Its preserved directory name is `cylinder_circular_60s`; it does not contain a 60 s calculation. It has 16,000 force rows and 160,000 native pressure values, with full fields reconstructed at 2, 4, 6, 8 and 10 s. Original large volume fields, mesh connectivity and raw/converted sample archives are not shipped here.
 
-## Both acoustic calculations executed
+The 138,240-cell case in `cfd/cylinder_circular/` is **historical**, ending at 5.999717956 s with four ranks and adaptive stepping. Its restart offsets, counts and approximately 1.45 Hz coarse-bin candidate must not be transferred to the new data.
 
-OpenFOAM **pimpleFoam v2206** loaded **libAcoustics.so** and executed CurleAnalogy and FfowcsWilliamsHawkings/Farassat1A on the closed cylinder surface. The public `site/downloads/observers.csv` contains 57,340 pressure values: 5,734 times, five observers and two methods. Curle has 28,670 nonzero values; FW-H has 28,658, with twelve startup/restart buffer zeros. Native raw pressures and the CSV agree exactly after restoring the continuation clock by +0.1 s. That shift is already included in the public CSV.
+## What the short record establishes
 
-### Why are FW-H forces and moments zero?
+The native solve, reconstruction and table exports completed. That is not proof of mesh/time/domain independence, resolved LES adequacy, near-wall resolution, stationarity or experimental acoustic accuracy. The 2–10 s primary lift spectrum peaks in its lowest positive bin (0.5 Hz), so the shedding peak is **unresolved**, not a measured stable tone or prescribed Strouhal value. Main analysis status remains `partial`.
 
-`AcousticAnalogy` inherits OpenFOAM `forces`. In the executed v2206 implementation, `forces::execute()` calculates loads while `forces::write()` only writes accumulators. FW-H overrides `execute()` with a no-op. Its acoustic `correct()` independently samples surface pressure and calculates observer pressure, without updating the inherited force accumulators. Thus the auxiliary FW-H `force.dat` and `moment.dat` remain zero. They are not evidence of zero physical force or zero acoustic pressure.
+Native Curle uses a fixed-step derivative stencil. The old adaptive-step mismatch is avoided by the current fixed cadence; matching the stencil's assumption **does not prove time convergence** or make startup derivatives reliable. Receiver support and derivative startup exclusions still matter. Never synthesize a missing received tail.
 
-Curle's inherited force/moment files are also misleading: the base writer runs before its current force update, so they lag by exactly one solver timestep. Its pressure calculation happens after that update. **Use the independent OpenFOAM `forces` object or the public `forces.csv`, not either acoustic object's auxiliary load files.** The website uses the correct independent export. Original native records and library code have not been silently rewritten.
+## Auxiliary force files are not the acoustic pressure
 
-Source references in the included upstream tree:
-- `AcousticAnalogy/AcousticAnalogy.H:23–26`: forces inheritance.
-- `AcousticAnalogy/AcousticAnalogy.C:234–283`: inherited force writer before acoustic correction/output.
-- `FfowcsWilliamsHawkings/FfowcsWilliamsHawkings.C:276–380`: no-op execute and independent surface calculation.
-- `CurleAnalogy/CurleAnalogy.C:143–164`: current force and acoustic calculation.
+In the inspected v2206/libAcoustics coupling, the FW-H object's inherited force/moment accumulators are unused and remain zero: its acoustic calculation samples pressure separately. Curle's inherited load files lag the independent load by one solver step because the writer precedes its load update. Neither is the authoritative force history. Use the independent OpenFOAM `forces` object, exported as **`forces.csv`**, and use `observers.csv` for actual acoustic pressures. Native startup buffer zeros are not measurements of silence.
 
-Paths above are relative to `third_party/libAcoustics-v2212/upstream/Sources/lib/analogies/`. The directory label is not the solver version.
+Upstream references, relative to `third_party/libAcoustics-v2212/upstream/Sources/lib/analogies/`: `AcousticAnalogy/AcousticAnalogy.H` (forces inheritance), `AcousticAnalogy/AcousticAnalogy.C` (writer order), `CurleAnalogy/CurleAnalogy.C` (load update), and `FfowcsWilliamsHawkings/FfowcsWilliamsHawkings.C` (independent acoustic correction).
 
-## Which source lessons belong to this CFD?
+## Physical boundaries
 
-- **Monopole:** the fixed rigid impermeable cylinder has zero moving-surface thickness source. The pulsating-sphere illustration is an independent analytical example.
-- **Dipole/loading:** actual CFD traction drives Curle, and actual wall pressure drives the executed FW-H surface-loading calculation. Their force signs, viscous content and propagation clocks differ; compare them, never add them.
-- **Quadrupole:** no exterior turbulent volume integral was evaluated. The ideal four-lobe plot is not a CFD quadrupole decomposition, and an omitted term is not demonstrated to be zero.
+- The fixed impermeable closed body has no moving-surface thickness source. Analytical monopoles remain separate lessons.
+- Native Curle uses on-body **total** traction at unretarded source time; native FW-H uses retarded **pressure-only** loading with outward normals. Do not fit away the sign/clock/content differences and never add the two predictions.
+- The main independent compact model uses total exported force; the signature report's offline model uses pressure force only, converted to force on fluid by sign reversal.
+- No exterior turbulent-volume quadrupole integral is evaluated. Illustrative quadrupole plots do not establish that the omitted contribution is zero.
+- Wall pressure is hydrodynamic pressure, not automatically radiated sound. At low water frequencies even a receiver far from the body geometrically can be in the acoustic near field.
 
-The 13 interactive figures and four analytical reference charts are separate from the 35 computed charts.
+## Sample viewing and figure formats
 
-## Circular vorticity display
+OpenFOAM `.raw` sampled files are coordinate/value text, not images or full CFD meshes. `scripts/view_cylinder_exports.py` supports CSV/VTP conversion and PVD time collections. VTPs represent sample points; they do not invent volume connectivity. Kinematic wall pressure stays in m²/s² unless explicitly converted to Pa using density once. Reconstructed native volumes require a separate OpenFOAM reader.
 
-The website now shows the full 0.24 m-radius circular domain, with equal geometric scales, at the same recorded time of 5.6 s. Midspan is z=0; the second plane is z=0.035 m, beyond the cap, so it has no solid disk. Values are native spanwise vorticity, displayed as explicitly sample-based linear contours. Solid-intersecting triangles are masked before interpolation; unsampled support remains blank. PNG and vector PDF are available on the page. This display correction did not rerun CFD or change pressure/force histories.
+The converter's archive-building route needs its original case tree and identity manifests and intentionally cannot run from this lightweight checkout alone. For independent trees use its explicit generic conversion API with a selected case name; inspect the API and CLI help before selecting a case.
 
-## Raw sample conversion
+The completed production archive contains **580 sampled raw files**, converted to **580 CSVs, 580 VTPs and five chronological PVD collections**, covering 4,447,080 rows. Every CSV, VTP and collection timestep was read back with the installed readers; coordinate/component values match the original raw-text binary64 parse exactly. A separate regeneration reproduced all 1,170 bundle files byte-for-byte. The large converted archive stays local, rather than being embedded in this lightweight repository. Its four flow collections cover 0.5–10 s; wall pressure covers 0.02–10 s.
 
-OpenFOAM `.raw` files here are ASCII coordinate/value tables, not images. `scripts/view_cylinder_exports.py` provides lossless CSV/VTP conversion and PVD time-series collections. CSVs retain units in their headers. VTPs are sample-point datasets, not native volume meshes; wall face-centre pressure is explicitly retained as sampled data. Kinematic wall pressure remains m²/s², not Pa.
+The actual reconstructed volumes were read in ParaView at all five retained times: 459,264 cells / 473,514 points internally and 8,064 cylinder-wall faces / 8,066 points. All five fields are finite. This reader exposes float32 arrays, so compatibility is not a claim of bitwise binary64 field equality. At 10 s, wall yPlus spans approximately 1.015–16.091; this does not establish wall-resolved LES adequacy. Internal zero yPlus is not a wall statistic.
 
-The complete local archive contains 715 raw exports (334 circular and 381 historical rectangular), converted to 715 CSVs, 715 VTPs and 10 PVDs. Every value and all 715 PVD time entries were checked using installed ParaView/VTK with zero numerical difference. The large original/converted archive is not bundled into this public repository.
+In ParaView, open a converted vorticity PVD, Apply, use Points/Point Gaussian and choose vorticity component Z; view down Z and use the time controls. Do not apply unmasked Delaunay across the cylinder. Flow contours are sample-based display interpolation with solid/support masks, not invented native connectivity.
 
-The converter's `build` command is archive-specific: it requires the complete original local case tree and its 403-pin run manifest, which are not the public summary JSON. It will intentionally reject this lightweight public checkout alone. Its generic `convert_tree(cfd, output, allowed_root=...)` API supports independently supplied raw sample trees. Tests use synthetic isolated files. Converter tests additionally require ParaView (`/usr/bin/pvpython` on the tested Linux setup) and Poppler's `pdfimages`/`pdftotext`.
-
-In ParaView open a converted `vorticity_midspan.pvd`, click Apply, choose Points/Point Gaussian, color by vorticity component Z, and view down Z. Use time controls to inspect the saved sequence; do not apply unmasked Delaunay across the body.
+The signature gallery supplies PNG, SVG, PDF, CSV and sanitized JSON. **I05's spectrogram PDF is mixed vector/raster**: four QuadMesh layers (fields/colorbars) at 160 dpi; text/axes remain vector. The other eight signature PDFs are vector. Rasterization changes rendering, not scientific arrays.

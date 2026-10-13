@@ -1,46 +1,40 @@
-# FlowAcoustics — a cylinder acoustic field guide
+# FlowAcoustics — cylinder acoustics
 
-**[Open the interactive demonstration](https://nishchayoxford.github.io/flowacoustics/)**
+**[Interactive field guide](https://nishchayoxford.github.io/flowacoustics/)** · [Reproduce](docs/REPRODUCE.md) · [Methods](docs/CYLINDER_ACOUSTICS.md)
 
-A working educational demonstration of **3D cylinder WALE LES, Curle and FW-H**, using OpenFOAM v2206 and the unmodified OpenFOAM-related libAcoustics library. This is a demonstration, not an experimentally validated noise-prediction model.
+An educational demonstration of a finite, closed 3D cylinder in water: WALE LES, native Curle and surface FW-H, and independent acoustic analysis. OpenCFD OpenFOAM **v2206** loads unmodified libAcoustics. This is not an experimentally validated noise-prediction model.
 
-## What is here
+## Current calculation
 
-- A finite closed cylinder in a **circular outer domain**, with fluid beyond both genuine end caps.
-- **138,240 hexahedral cells**; native topology/geometry checks passed.
-- A completed four-rank solve ending at **5.999717956 s**: 5,734 force samples and 57,340 native acoustic observer rows.
-- Actual midspan/3D mesh views and native velocity/vorticity sampling.
-- **13 interactive analytical figures**, plus **35 computed charts and four additional analytical reference charts**.
-- Recorded force and pressure CSVs, full-resolution analysis, explicit units, clocks, source conventions and limitations.
+- Circular outer domain; **459,264 hexahedral cells**, below the strict 500,000-cell ceiling.
+- A fresh **0–10 s** calculation on **eight MPI ranks**, with fixed **Δt = 0.000625 s** and no restart/spliced clock.
+- **16,000 force records** and **160,000 native pressure values**: five observers, two alternative methods.
+- Full fields reconstructed and read back in ParaView at **2, 4, 6, 8 and 10 s**; large fields remain local, not in this repository.
+- All **580 sampled raw exports** have verified CSV/VTP conversions and five time collections; the website shows the actual full-circle flow at 10 s.
+- Main analysis: **35 computed charts and four analytical reference charts**. The separate nine-figure signature workflow supplies spectra, variability, coupling and directivity; analytical lessons are not CFD evidence.
 
-The lessons cover monopoles, dipoles and illustrative quadrupoles; loading versus thickness; retardation; near/radiating terms; source coherence; spectra and spectrograms; directivity; and pressure/SPL units. Analytical controls never modify the precomputed CFD.
+The primary **2–10 s** lift spectrum is largest at the first positive Welch bin, **0.5 Hz**. Its shedding peak is unresolved: no precise shedding frequency or new fixed Strouhal number is claimed. The analysis remains `partial` even though the native solve and reconstruction completed. A longer record, mesh/time/domain sensitivity and experimental comparison are still needed.
 
-## Main physical lesson
+**Curle and FW-H are compared, never added.** They differ in signs, clocks and traction content. The main independent compact comparison uses **total force**; the signature report's offline compact model uses **pressure force only**. At low frequency in water, geometric distance alone does not establish acoustic far-field conditions.
 
-The later force record has a lift-spectrum candidate around 1.45 Hz (St ≈ 0.145), but the Welch bin spacing is about 0.72 Hz. It is an oscillatory developing-flow example, not a precise stationary shedding benchmark. At a 1 m water receiver, kr is approximately 0.006 at that candidate frequency: distance from the body alone does not establish acoustic far-field conditions.
-
-Native Curle and FW-H are **compared, not added**. Their signs, time conventions and traction content differ in the inspected implementation; the comparison preserves those differences rather than fitting agreement. Surface-only FW-H does not compute the omitted volume quadrupoles.
-
-**Reading the native files:** the FW-H object's inherited force/moment files are unused zero diagnostics; Curle's inherited load files lag by one timestep. The website uses the separate, correctly timestamped `forces.csv`. Both methods produced nonzero acoustic pressure. See [output diagnosis, accuracy limits and sample viewing](docs/OUTPUTS_AND_LIMITS.md). The vorticity figure now displays the full circular domain, not a rectangular crop.
-
-## Use and reproduce
+## Use
 
 ```sh
 uv sync --locked --extra dev
 .venv/bin/python -m pytest tests -q
-python3 -m http.server 8513 --directory site
+python3 -m http.server 8513 --bind 127.0.0.1 --directory site
 ```
 
-Python tests require Python 3.12, and browser tests additionally require an installed Chromium browser and Node with built-in WebSocket support. Sample-converter tests additionally need ParaView (`/usr/bin/pvpython` in the tested Linux setup) and Poppler's `pdfimages`/`pdftotext`. Native OpenFOAM is not launched by the tests or the website.
+Python 3.12 is required. Browser tests need Chromium and Node with built-in WebSocket support; sample/figure tests also use ParaView and Poppler. Optional historical/native-archive integration tests explicitly skip when their non-public inputs are absent. Tests and the website do not launch CFD. See [reproduction and test prerequisites](docs/REPRODUCE.md).
 
-See [reproduction instructions](docs/REPRODUCE.md), [acoustic definitions](docs/CYLINDER_ACOUSTICS.md), and [site model documentation](docs/CYLINDER_SITE.md).
+## Layout
 
-### Layout
+- `site/`: static field guide, display data and compact downloadable evidence.
+- `cfd/cylinder_circular_60s/`: **current 10 s inputs**; the old directory identifier is retained, not a 60 s result.
+- `cfd/cylinder_circular/`: historical, coarser approximately 6 s inputs; not the current result.
+- `scripts/`, `src/`, `tests/`: mesh/run helpers, analyses, renderers and regression tests.
+- [Output interpretation](docs/OUTPUTS_AND_LIMITS.md), [signature guide](docs/SIGNATURE_ANALYSIS.md), [site contract](docs/CYLINDER_SITE.md).
+- [Editable project workflow](docs/structure/flowacoustics-map.svg), with its [reading guide](docs/structure/README.md).
+- `third_party/libAcoustics-v2212/`: selective pinned upstream source and original GPL notices; the directory label is not the solver version. See [provenance](third_party/libAcoustics-v2212/PROVENANCE.md).
 
-- `site/`: dependency-free GitHub Pages site and compact display data.
-- `site/downloads/`: actual recorded CSVs, a public run summary, and gzip-compressed full analysis/aligned CSVs.
-- `cfd/cylinder_circular/`: accepted case inputs, with explicit pilot and main control dictionaries. Generated mesh and large raw flow fields are omitted.
-- `scripts/`, `src/`, `tests/`: mesh/native helpers, independent acoustic analysis and exercised tests.
-- `third_party/libAcoustics-v2212/`: selective pinned upstream source, original notices and GPL text.
-
-The public copy excludes credentials, local configuration, downloaded papers, personal browser data, compiled binaries, large raw CFD fields and unrelated historical workflows. See [third-party provenance](third_party/libAcoustics-v2212/PROVENANCE.md).
+No downloaded papers, credentials, personal configuration, compiled libraries, generated volume mesh/fields or converted raw archives are included. Re-running a solver is a new resource-consuming computation, not part of viewing or replaying the analysis.

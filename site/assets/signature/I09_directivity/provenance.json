@@ -1,0 +1,141 @@
+{
+  "figure_id": "I09_directivity",
+  "title": "Sparse native support versus an offline angular model",
+  "caption": "Absolute linear Pa RMS; separate radiating scale, not normalized; native markers unconnected.\nOffline curves at 2° sampling are force-model consequences, not additional CFD receivers.",
+  "evidence_label": "NATIVE COMPLETED SHORT RECORD",
+  "native_run_sha256": "6340ad86ade01d00752b884419b0e207d678e0253aaa4ab13ef9ff597a38bb2f",
+  "equations": [
+    "F_fluid=-F_pressure_on_body; tau=t-r/c; p_near=n.F_fluid(tau)/(4*pi*r²); p_far=n.dF_fluid/dt(tau)/(4*pi*c*r); derivative on native timestamps before interpolation",
+    "RMS(theta)=sqrt(n(theta).Cov(p_vector).n(theta)); population AC covariance, common retarded support, z=0 and r=1 m"
+  ],
+  "limitations": [
+    "Short single realization; stationarity not established; no formal confidence interval.",
+    "Unvalidated loading-analogy predictions; no measured sensor or detection-range claim.",
+    "Native Curle and FW-H are alternatives, not additive contributions.",
+    "No mesh/time convergence or full volume-quadrupole acoustic validation."
+  ],
+  "window": {
+    "actual_samples_s": [
+      2.0,
+      10.0
+    ],
+    "requested_s": [
+      2.0,
+      10.0
+    ],
+    "exclusions_s": [
+      [
+        0,
+        0.01
+      ]
+    ],
+    "native_selected_samples": 12801,
+    "resample_rule": "linear interpolation; downsampling rejected",
+    "resampled": false,
+    "samples": 12801
+  },
+  "estimator": {
+    "bin_spacing_Hz": 0.5,
+    "dt_s": 0.000625,
+    "hop_s": 1.0,
+    "noverlap": 1600,
+    "nperseg": 3200,
+    "resampled": false,
+    "native_to_uniform": false,
+    "retarded_interpolation": false,
+    "local_spectral": false,
+    "sample_count": 12801,
+    "segment_detrend": "constant",
+    "segment_duration_s": 2.0,
+    "segments": 7,
+    "unused_tail_samples": 1,
+    "window": "hann",
+    "cadence": {
+      "dt_s": 0.000625,
+      "nominal_dt_s": 0.000625,
+      "observed_mean_dt_s": 0.000625,
+      "observed_min_dt_s": 0.0006249999999994316,
+      "observed_max_dt_s": 0.0006250000000012079,
+      "max_interval_jitter_s": 1.2079096403661005e-15,
+      "max_lattice_residual_s": 8.881784197001252e-16,
+      "validation_tolerance_s": 6.25071054273576e-10,
+      "sample_support_s": [
+        2.0,
+        10.0
+      ],
+      "sample_count": 12801,
+      "clock_replaced": false
+    },
+    "frequency_bin_contract": {
+      "frequency_origin_Hz": 0.0,
+      "bin_count": 1601,
+      "bin_spacing_Hz": 0.5,
+      "edge_snap_eps_multiplier": 32,
+      "edge_snap_max_bins": 1e-09,
+      "edge_coordinate": "q=(edge_Hz-frequency_origin_Hz)/bin_spacing_Hz",
+      "edge_snap_rule": "nearest integer only within min(multiplier*eps*max(1,abs(q)),max_bins)",
+      "interior_rule": "half_open_right_owns_boundary",
+      "final_upper_edge_inclusive": true
+    }
+  },
+  "units": [
+    {
+      "xlabel": "",
+      "ylabel": "AC RMS pressure [Pa]"
+    },
+    {
+      "xlabel": "",
+      "ylabel": "AC RMS pressure [Pa]"
+    }
+  ],
+  "numeric_tables": [
+    {
+      "columns": [
+        "observer",
+        "method",
+        "angle_rad",
+        "AC_RMS_Pa"
+      ],
+      "path": "I09_directivity/native_markers.csv",
+      "rows": 8,
+      "sha256": "dcfb3b414d00472a4ba3de8206638d09be7faddb65af24e50ac8ea4193d2f8f3"
+    },
+    {
+      "columns": [
+        "angle_rad",
+        "total_RMS_Pa",
+        "radiating_RMS_Pa"
+      ],
+      "path": "I09_directivity/offline_dense.csv",
+      "rows": 181,
+      "sha256": "e8b0f09e5f15d245c7f7acf30cb55bd1b196db3824e138656f1d4d5def89e9c7"
+    },
+    {
+      "columns": [
+        "component_i",
+        "component_j",
+        "total_Pa2",
+        "radiating_Pa2"
+      ],
+      "path": "I09_directivity/covariance.csv",
+      "rows": 9,
+      "sha256": "4eb7fb42aa4d81e0e94b53a5838962ccdd658447e0d75c322b6d01cf5114b99e"
+    }
+  ],
+  "outputs": {
+    "pdf": {
+      "path": "I09_directivity/figure.pdf",
+      "sha256": "27e6b6bf9c1d7bb5aff0890325d5a0f7050f1181ebf80e7839928d23a75c41f2"
+    },
+    "png": {
+      "path": "I09_directivity/figure.png",
+      "sha256": "cf113ff929668d585b7e1ceda2c86cbce41522552ae10003b3e81f983cceec7c",
+      "width": 1728,
+      "height": 928
+    },
+    "svg": {
+      "path": "I09_directivity/figure.svg",
+      "sha256": "7e27110802dfa7a0af40ca2e55d9bce213cc2f3f6f800567f6451841907250cc"
+    }
+  }
+}

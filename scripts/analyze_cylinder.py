@@ -6,8 +6,8 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import json
-import shutil
 import sys
 from pathlib import Path
 
@@ -16,6 +16,7 @@ import numpy as np
 # Works from a clean source checkout without installation.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from flowacoustics.cylinder_acoustics import build_dataset  # noqa: E402
+from flowacoustics.native_run_adapter import verified_exports  # noqa: E402
 
 
 def digest(path):
@@ -54,7 +55,14 @@ def main(argv=None):
     try:
         if (args.output / "results.json").exists() or (args.output / "manifest.json").exists():
             raise ValueError("Analysis output exists; choose a fresh --output directory")
-        run = json.loads(args.run.read_text())
+        run_bytes = args.run.read_bytes()
+        run = json.loads(run_bytes)
+        if run.get("schema_version") == 2:
+            if args.conventions:
+                raise ValueError("A sidecar cannot override recorded native v2 conventions")
+            run, force_bytes, observer_bytes = verified_exports(run, args.forces, args.observers)
+        else:
+            force_bytes, observer_bytes = args.forces.read_bytes(), args.observers.read_bytes()
         if args.conventions:
             conventions = json.loads(args.conventions.read_text())
             allowed = {
@@ -68,13 +76,13 @@ def main(argv=None):
             if set(conventions) - allowed:
                 raise ValueError("Conventions sidecar contains non-convention keys")
             run = {**run, **conventions}
-        with args.forces.open(newline="") as stream:
+        with io.StringIO(force_bytes.decode(), newline="") as stream:
             reader = csv.DictReader(stream)
             columns = ("time_s", "force_x_N", "force_y_N", "force_z_N")
             if not set(columns) <= set(reader.fieldnames or []):
                 raise ValueError("Missing required force CSV columns")
             forces = np.array([[float(row[key]) for key in columns] for row in reader])
-        with args.observers.open(newline="") as stream:
+        with io.StringIO(observer_bytes.decode(), newline="") as stream:
             reader = csv.DictReader(stream)
             required = {"time_s", "observer", "method", "pressure_Pa"}
             if not required <= set(reader.fieldnames or []):
@@ -90,11 +98,11 @@ def main(argv=None):
             end_time_s=args.end_time_s,
         )
         inputs = [
-            {"role": role, "file": path.name, "sha256": digest(path)}
-            for role, path in (
-                ("run", args.run),
-                ("forces", args.forces),
-                ("observers", args.observers),
+            {"role": role, "file": path.name, "sha256": hashlib.sha256(payload).hexdigest()}
+            for role, path, payload in (
+                ("run", args.run, run_bytes),
+                ("forces", args.forces, force_bytes),
+                ("observers", args.observers, observer_bytes),
             )
         ]
         if args.conventions:
@@ -122,8 +130,8 @@ def main(argv=None):
         if any(path.exists() for path in targets):
             raise ValueError("A download output already exists; choose a fresh output directory")
         downloads.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(args.forces, targets[0])
-        shutil.copyfile(args.observers, targets[1])
+        targets[0].write_bytes(force_bytes)
+        targets[1].write_bytes(observer_bytes)
         with targets[2].open("w", newline="") as stream:
             writer = csv.DictWriter(
                 stream,
@@ -168,6 +176,14 @@ def main(argv=None):
                     Path(__file__),
                     Path(__file__).resolve().parents[1] / "src/flowacoustics/cylinder_acoustics.py",
                     Path(__file__).resolve().parents[1] / "src/flowacoustics/analysis.py",
+                    *(
+                        [
+                            Path(__file__).resolve().parents[1]
+                            / "src/flowacoustics/native_run_adapter.py"
+                        ]
+                        if run.get("source_schema_version") == 2
+                        else []
+                    ),
                 )
             ],
             "analysis_options": {

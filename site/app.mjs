@@ -1,6 +1,7 @@
 import {TAU, directivity, propagation, fieldPressure, loadingSignal, dipoleAmplitudes, distributedGain, coherentPower, aliasFrequency, pressureLevel, welch} from './physics.mjs';
 import {renderPlot, formatNumber as fmt, escapeHTML as esc} from './plots.mjs';
 import {loadResults} from './data.mjs';
+import {loadSignature,showSignature} from './signature.mjs';
 const $ = id => document.getElementById(id);
 const linspace = (a,b,n=181) => Array.from({length:n},(_,i)=>a+(b-a)*i/(n-1));
 const state = {family:'dipole',f:0.4,r:2,angle:30,near:false,t:0,paused:matchMedia('(prefers-reduced-motion: reduce)').matches};
@@ -85,7 +86,7 @@ let results=null;
 const displayValue=value=>value===null?'null':typeof value==='object'?JSON.stringify(value):String(value);
 function drawResults(){
   if(!results)return;
-  $('run-status').textContent=`RUN STATUS · ${results.status}`;
+  $('run-status').textContent=`ANALYSIS STATUS · ${results.status}`;
   $('run-status').className=`badge ${['pending','unavailable','failed'].includes(results.status)?'pending':'computed'}`;
   const computed=results.charts.filter(c=>c.origin==='computed').length;
   $('run-title').textContent=computed?`${computed} computed chart${computed===1?'':'s'} supplied · inspect limitations below`:'No computed history displayed';
@@ -104,7 +105,9 @@ function drawResults(){
 }
 async function refreshResults(){
   $('retry-results').disabled=true;
+  showSignature($('signature-content'),{status:'pending',summary:'Checking for a matching verified acoustic-signature bundle…'});
   results=await loadResults();drawResults();
+  showSignature($('signature-content'),await loadSignature(results));
   $('retry-results').disabled=false;
 }
 function updateAll(){updateSource();updatePropagation();updateSummation();updateSpectra();}

@@ -567,13 +567,15 @@ def _observer_charts(data, run, t, force, rows, origin, nperseg, resample_dt_s):
                 [],
                 samples,
                 kind="heatmap",
-                description="Linear one-sided pressure density; z rows are frequencies.",
+                description="Linear one-sided pressure density; z rows are frequencies. "
+                "Shared zero-based color scale across observer spectrograms (Pa²/Hz).",
                 x_label="Observer time (s)",
                 y_label="Frequency (Hz)",
                 x=spec["spectrogram_time_s"].tolist(),
                 y=spec["frequency_Hz"].tolist(),
                 z=spec["spectrogram_psd"].tolist(),
-                z_label="PSD (Pa²/Hz)",
+                color_label="PSD (Pa²/Hz)",
+                diverging=False,
             )
         )
         crosses = {
@@ -602,6 +604,7 @@ def _observer_charts(data, run, t, force, rows, origin, nperseg, resample_dt_s):
                 description=cross_description,
                 x_label="Frequency (Hz)",
                 y_label="Coherence (0–1)",
+                y_domain=[0, 1],
             )
         )
         charts.append(
@@ -624,6 +627,7 @@ def _observer_charts(data, run, t, force, rows, origin, nperseg, resample_dt_s):
                 description=cross_description,
                 x_label="Frequency (Hz)",
                 y_label="Phase (rad)",
+                phase_wrap_period=2 * np.pi,
             )
         )
         checks.append(
@@ -635,6 +639,12 @@ def _observer_charts(data, run, t, force, rows, origin, nperseg, resample_dt_s):
                 ),
             }
         )
+    spectrograms = [chart for chart in charts if chart["id"].startswith("spectrogram_")]
+    if spectrograms:
+        # Display metadata only: retain every linear density, including exact zeros.
+        common_limit = max(float(np.max(chart["z"])) for chart in spectrograms)
+        for chart in spectrograms:
+            chart["color_limit"] = common_limit
     checks.extend(
         [
             {
@@ -863,6 +873,18 @@ def _spatial_charts(data, records, c, origin):
     data["metadata"]["distance_pairs"] = pairs
     if pairs:
         methods = sorted({p["method"] for p in pairs})
+        radius_ratios = sorted({p["radius_ratio_far_over_near"] for p in pairs})
+        references = []
+        for label, exponent in (("Reactive 1/r²", 2), ("Radiating 1/r", 1)):
+            values = [ratio**-exponent for ratio in radius_ratios]
+            suffix = f": {values[0]:g}" if len(values) == 1 else ""
+            references.append(_trace(f"{label} reference{suffix}", radius_ratios, values))
+        receiver_pairs = {(p["near_observer"], p["far_observer"]) for p in pairs}
+        pair_note = (
+            "These models compare one actual receiver pair, not independent experiments. "
+            if len(receiver_pairs) == 1
+            else f"Models compare {len(receiver_pairs)} actual same-ray receiver pairs. "
+        )
         traces = [
             _trace(
                 method,
@@ -886,9 +908,37 @@ def _spatial_charts(data, records, c, origin):
                 description="AC RMS at matched emission times t-r/c, "
                 "with interpolation only inside support. "
                 "Native Curle has no delay, so uses its original source clock. "
-                "1/r and 1/r² reference ratios are in metadata; neither is fitted.",
+                + pair_note
+                + "Reactive 1/r² and radiating 1/r references are shown; neither is fitted. "
+                "The table reports signed residuals from the reactive reference. "
+                "Do not apply a radiating 20log10(r) correction to reactive total pressure.",
                 x_label="Far/near radius ratio",
                 y_label="Far/near AC RMS pressure ratio",
+                reference_traces=references,
+                y_domain=[
+                    0,
+                    1.1
+                    * max(
+                        [v for ref in references for v in ref["y"]]
+                        + [
+                            p["rms_ratio_far_over_near"]
+                            for p in pairs
+                            if p["rms_ratio_far_over_near"] is not None
+                        ]
+                    ),
+                ],
+                comparison_rows=[
+                    {
+                        "label": f"{p['method']}: {p['near_observer']} → {p['far_observer']}",
+                        "ratio": p["rms_ratio_far_over_near"],
+                        "delta_reactive": (
+                            p["rms_ratio_far_over_near"] - p["reference_near_1_over_r2"]
+                            if p["rms_ratio_far_over_near"] is not None
+                            else None
+                        ),
+                    }
+                    for p in pairs
+                ],
             )
         )
     else:
