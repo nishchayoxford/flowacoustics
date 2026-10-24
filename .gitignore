@@ -1,6 +1,7 @@
 .venv/
 .uv-cache/
 .cache/
+.verification/
 .pytest_cache/
 .ruff_cache/
 __pycache__/
@@ -10,14 +11,7 @@ __pycache__/
 .env.*
 *.local.toml
 .build/
-results/
-cfd/**/processor*/
-cfd/**/postProcessing/
-cfd/**/acousticData/
-cfd/**/constant/polyMesh/
-cfd/**/log.*
-cfd/**/0.*/
-cfd/**/[1-9]*/
+audit/
 *.so
 *.o
 *.a

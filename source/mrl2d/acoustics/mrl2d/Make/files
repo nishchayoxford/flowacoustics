@@ -1,0 +1,3 @@
+mrl2dRecorder.C
+
+LIB = $(FOAM_USER_LIBBIN)/libmrl2dRecorder

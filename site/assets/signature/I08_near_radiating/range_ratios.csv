@@ -1,4 +1,0 @@
-method,ratio_2m_over_1m,matched_samples,emission_start_s,emission_end_s,alignment
-libacoustics_curle,0.24998434629009222,12801,2,10,unretarded source clock
-libacoustics_fwh,0.24996942394091887,12798,2,9.9981249999999999,centre r/c matched emission; face-delay spread retained
-offline_compact,0.24998227634122072,12798,2,9.9981249999999999,exact common compact emissions

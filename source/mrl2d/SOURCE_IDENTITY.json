@@ -1,0 +1,51 @@
+{
+  "schema": "mrl2d-public-source-identity-v2",
+  "original_release_manifest_sha256": "30120730ca9354dcf7bf3340145c6f855b6335de38226983e8fc632fbdc5bd90",
+  "status": "locally_verified_private_candidate_not_published",
+  "unchanged_source_sha256": {
+    "src/flowacoustics/mrl2d_completion.py": "43f33fb7d2a8e95157df5098a0fe14814a0dcbb623936a2fa634f5cb92198b60",
+    "src/flowacoustics/mrl2d_lifecycle.py": "065c0e4f091af9ad1ed6f19d66d7374783bd614d756ea81182deb69dff818baa",
+    "src/flowacoustics/mrl2d_postprocess.py": "0c95be0114743efc268a4e85dae424ba06d366cab2cc931e2aaca9dd41eb6099",
+    "src/flowacoustics/mrl2d_production.py": "44439cb54574b092a8d8285bca33ad7c8682594d807a4e619beee9183ca199d9",
+    "src/flowacoustics/mrl2d_runtime.py": "3839b3240db9b1ac3e3477cf7b45c9519c5ca954cb6dad1b7141f14405ab2182",
+    "src/flowacoustics/mrl2d_runtime_audit.py": "65e76fab096300424e55a82ef88acd429d273ed110bcd4b5a00cb5c87bc843fe",
+    "src/flowacoustics/__init__.py": "71c905d76e58da33a2f38897e3b26d018fa325aca0befa8e29f090d79aa05256",
+    "src/flowacoustics/acoustics2d.py": "57451ad541f6165762baa1cbfa8b0ef730fa25b9beff950df857633cdcea21a3",
+    "scripts/build_mrl2d_mesh.py": "17fcd96bbc3f64137ff5eee911c0c8393195c9aaf87f2ab54411b646a8e2503c",
+    "scripts/run_mrl2d.py": "8d2e48fdea888ad4e7af667f2640a452f0efc4c396a3ccde3c4aad7bb7bb01a3",
+    "scripts/postprocess_mrl2d.py": "fdc779e49e0fba5350a7954e5ed651fc39581a2b593ab36e3e88f82347824eb5",
+    "acoustics/mrl2d/mrl2dRecorder.C": "9912e96929ac80a6941687dc026b02d93b8c462847ea0b41e5d1bdce6c54c6e4",
+    "acoustics/mrl2d/productionGuard.H": "33815f5c226c0bfaa70d4a97c6092cda23a49e07f55ec134c1de18c4585c95eb",
+    "acoustics/mrl2d/Make/files": "ee493455debac4c614a1bb62e88e508b9963878ca2dcbc09ce502a19c89f20c0",
+    "acoustics/mrl2d/Make/options": "1a7dfc880056cb46b159058aeee0e456df9bc72be1d5c988ce87746dfdccb9f6",
+    "site/mrl2d-model.mjs": "374c28ad06867ee59fa4714a11d5f5cc78cc0a592c253dc186091d4568239aec"
+  },
+  "historical_001_runtime_sha256": {
+    "src/flowacoustics/mrl2d_case.py": "9af6bf39759b7b414cfff379293cf5adb237c1b9bf10591cd5eabb69597e27ff",
+    "src/flowacoustics/mrl2d_mesh.py": "0a5e3b3c172585e47708cb53f8c4226fe585c8c60b8eff51f8849079d8d0a7ca"
+  },
+  "runtime_locator_adapted_sha256": {
+    "src/flowacoustics/mrl2d_case.py": "d58a813be03f87a5ab92abbf64b9b2f1e1dfc03b394c1aeb9b89a3711b6acfb0",
+    "src/flowacoustics/mrl2d_mesh.py": "96c5a980f36c05da0d2b1082700459658be088b3a3da0a0ce3cee0eece6d5efa"
+  },
+  "adaptation_scope": {
+    "src/flowacoustics/mrl2d_case.py": [
+      "native_command: explicit environment locator only"
+    ],
+    "src/flowacoustics/mrl2d_mesh.py": [
+      "_native_stage: explicit locator and fail-closed shell setup only"
+    ]
+  },
+  "new_public_cli_sha256": {
+    "scripts/build_production_mesh.py": "4d17b133da297ef936a6824d6e73b591367b0120b074aaecc8b31c60dfb3ef0d"
+  },
+  "original_001_manifest_sha256": "873b6096b7844b463adbdec4548eff0ede4a5613da3d91fc6b1e67f5f8960e5e",
+  "mesh_policy": {
+    "historical_candidate_sha256": "cfd8737377c69c0b63f7f0db4f7fb7150c7173191f155c80d706a37c2d7112c1",
+    "public_candidate_sha256": "d1ce42c648267ce1015a8ad7880335195144fa6d92735bdf0ef18ccd306a4646",
+    "transformation": "unchanged mrl2d_runtime.candidate_mesh_source: exactly four resolution literals",
+    "sole_candidate_source_exception": "_native_stage: locator and fail-closed setup",
+    "native_mesh_recreated": false
+  },
+  "permissions": "Existing GPL notices retained. No additional reuse permission granted."
+}

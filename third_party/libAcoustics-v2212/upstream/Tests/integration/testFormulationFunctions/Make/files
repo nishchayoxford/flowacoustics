@@ -1,4 +1,0 @@
-../../utils/CatchMain.C
-testFormulationFunction.C
-
-EXE = $(FOAM_USER_APPBIN)/testFormulationFunction

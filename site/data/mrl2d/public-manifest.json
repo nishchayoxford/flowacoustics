@@ -1,0 +1,168 @@
+{
+  "schema": "mrl2d-public-payloads-v1",
+  "manifest_self_excluded": true,
+  "payload_file_count": 31,
+  "main_page_asset_count": 7,
+  "numerical_identity_counts": {
+    "npz": 4,
+    "csv": 16,
+    "chart_traces": 108
+  },
+  "files": {
+    "assets/mrl2d/field-history.csv": {
+      "sha256": "9b3c4f6f82019e49f5c2575d4ab41c5f833019476e051986aec6982c7bd68377",
+      "bytes": 171294,
+      "operation": "copied unchanged"
+    },
+    "assets/mrl2d/field-history.png": {
+      "sha256": "ed2a069c08cf3c5f44577c3bd918f7570207bb54fe4ab4d8298a378f6c4b304a",
+      "bytes": 547164,
+      "operation": "copied unchanged"
+    },
+    "assets/mrl2d/les-flow-poster.png": {
+      "sha256": "80b30bc4cb62698abc82560fcb985dd7dac9966f3db0ae71961732141b5b3370",
+      "bytes": 145516,
+      "operation": "copied unchanged"
+    },
+    "assets/mrl2d/les-flow.mp4": {
+      "sha256": "9ccb8d2ba16f7b1e2087279ea005981aee903f55b18eceb3b31e677dc490beba",
+      "bytes": 1713399,
+      "operation": "copied unchanged"
+    },
+    "assets/mrl2d/native-mesh.png": {
+      "sha256": "b1e359053eea6733afefa879d1ec52476da01e2d9d2824cc0e29ceb9c230a8b9",
+      "bytes": 1612515,
+      "operation": "copied unchanged"
+    },
+    "assets/mrl2d/source-contours.png": {
+      "sha256": "ddf65504dbda59546d5e34b26493f9afb28b70d7d5fad092767d438cf2480baf",
+      "bytes": 174221,
+      "operation": "copied unchanged"
+    },
+    "assets/mrl2d/urans-flow-poster.png": {
+      "sha256": "9fb488b9f7d96079d45929b213ee895243273d99894307154cac0c2c0ba1b56b",
+      "bytes": 143884,
+      "operation": "copied unchanged"
+    },
+    "assets/mrl2d/urans-flow.mp4": {
+      "sha256": "356751cd39f80a7e3df8f9e6f1a4c70dbce11171017c64da3ddab87a4e49ab02",
+      "bytes": 1699340,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/README.md": {
+      "sha256": "68eff4c52709eab2c04d45a4d056c0dc47f509dd17e4633d65dcc6657c736654",
+      "bytes": 2156,
+      "operation": "explicit public view"
+    },
+    "data/mrl2d/mrl2d_les_body-directivity.csv": {
+      "sha256": "81b11396f320af2eda76ca2be711936e751184a5561be30fd557fe0aa4d22261",
+      "bytes": 1250,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_les_body-loading.csv": {
+      "sha256": "f35e053b75a1ebf33eafc4fb51e69d368e9da9853008c9c30ab360d4d1956385",
+      "bytes": 635108,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_les_body-receivers.csv": {
+      "sha256": "1d4b11905403670569d121394d1ae838dcbcd9ac05c1fc5f384815658934ebab",
+      "bytes": 1324171,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_les_body-spectrum.csv": {
+      "sha256": "46711838687bcfc0c51e5867b180df9117e8333922b442b63d39b921401ec7eb",
+      "bytes": 125274,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_les_body.npz": {
+      "sha256": "c558fb58780c8fb536ddb971c044a727af7557f70350c45a19d7dc130ab62dc2",
+      "bytes": 657866,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_les_permeable-directivity.csv": {
+      "sha256": "45630a3a379898835bdb0aecb312b119a5296b117e0de07aa4ec76860f794f83",
+      "bytes": 1250,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_les_permeable-loading.csv": {
+      "sha256": "a9184286ff4ed4f2bf89ed733285f0b724580d27844b7ae492432c634340e382",
+      "bytes": 634943,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_les_permeable-receivers.csv": {
+      "sha256": "41a683b3f51332a557fd06ad897cca772ce37bc95de6124fdc0a57731cf31f58",
+      "bytes": 1322950,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_les_permeable-spectrum.csv": {
+      "sha256": "27f6e5c245fb57dd40c677a938e5535661ec69fb70e0be297ae935987576a29f",
+      "bytes": 125308,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_les_permeable.npz": {
+      "sha256": "4b2e88c84484e0c28ae647b62735ca4efee6e9476612128665d511ba8d3691e4",
+      "bytes": 657866,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_body-directivity.csv": {
+      "sha256": "f9cd5f10b55b5244361e078bb19ad88ce360679f6df1c1952c824b2e8075bd00",
+      "bytes": 1250,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_body-loading.csv": {
+      "sha256": "9de1ad9478e273753abdc1d40da313fb33c3a4662c0185ce1fddca1eb8026bf3",
+      "bytes": 635108,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_body-receivers.csv": {
+      "sha256": "b9562a434a66a6f351f43669ce789a152632db21975139dc3672c831979f75a1",
+      "bytes": 1324337,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_body-spectrum.csv": {
+      "sha256": "e8bccb6fa69668eb71775d1a5a53b4669b92813030eb0087c5ac1549546c699b",
+      "bytes": 125267,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_body.npz": {
+      "sha256": "ad516c403f5fd3662f0a1037bb0c5f05aebe413ae9d4e3799d8614f71a3b5902",
+      "bytes": 657866,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_permeable-directivity.csv": {
+      "sha256": "5db43862030c91680e286f5760e458834fbf5c6167b958cc7529a1b665c4619b",
+      "bytes": 1250,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_permeable-loading.csv": {
+      "sha256": "01e6be1b38c7e45df6d3977936fdfe3c7477bf8ace15e8df24a43e7739b5b4da",
+      "bytes": 635088,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_permeable-receivers.csv": {
+      "sha256": "9a284ab79ccaa9d66f4005acf43787ca3940d3a39f422c018e33b975162812ef",
+      "bytes": 1322669,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_permeable-spectrum.csv": {
+      "sha256": "540d7b43fbc161e515aab31903a1e917c253d70c5c2aff45343cdb229fce8094",
+      "bytes": 125264,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/mrl2d_urans_permeable.npz": {
+      "sha256": "793c71735b5552339627a4c43e154665d0dfd8d15059b2a679b1f0333a94d81a",
+      "bytes": 657866,
+      "operation": "copied unchanged"
+    },
+    "data/mrl2d/verification.json": {
+      "sha256": "756a9452dfe2205feaed74fdf1242064beb0227d40ec7b39ac0fdb603d0e18fe",
+      "bytes": 6038,
+      "operation": "explicit public view"
+    },
+    "data/results.json": {
+      "sha256": "0d577f8e06b2866ead5309db30f0f9afe4696568070aebe5b6c726686bdd484b",
+      "bytes": 14709578,
+      "operation": "explicit public view"
+    }
+  }
+}

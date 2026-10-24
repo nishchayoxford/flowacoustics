@@ -1,0 +1,12 @@
+FoamFile
+{
+ version 2.0; format ascii; class dictionary; object readbackDict;
+}
+
+functions
+{
+ extrema {type fieldMinMax; libs ("libfieldFunctionObjects.so");
+ fields (p U); mode magnitude; log true; location true;
+ executeControl timeStep; executeInterval 1; writeControl timeStep; writeInterval 1;}
+}
+

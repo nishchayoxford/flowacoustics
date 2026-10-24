@@ -1,0 +1,308 @@
+{
+  "schema": "mrl2d-public-implementation-verification-v1",
+  "verdict": "PASS_IMPLEMENTATION_CONSISTENCY_ONLY",
+  "scope": "Independent implementation consistency only; not physical validation or final acceptance.",
+  "case_count": 4,
+  "counts": {
+    "complete_signed_coefficients": 9408,
+    "complete_receiver_values": 192000,
+    "full_pressure_integral_values": 40000,
+    "full_source_loading_values": 40000,
+    "all_npz_array_count": 36,
+    "chart_trace_count": 108,
+    "literal_direct_coefficient_count": 112
+  },
+  "csv_table_count": 16,
+  "stationarity_verified": false,
+  "acoustic_band_claim_valid": false,
+  "implementation_consistency_verified": true,
+  "hashes": {
+    "numerical_manifest": "12b2b6ba31f68fdadcc8e570ce9a18ceb0b57010efa1bfe528babeecc3be37fd",
+    "original_study": "936ed63c3cccc9bcc87148707f6ba19eb0d137cfc0118db9b33b3f95bc15ae2e",
+    "visual_manifest": "b07d3da0daf940ca09bc2445703407f259c1780dbb8acf4a8cc3a4a900d1ca81",
+    "oracle_manifest": "e6d698a108de8ab2a1e71dd2694018d3b5600c541f10a4170807332bebcf751b",
+    "oracle_verification": "73b75be701f4a76be5b86012123ccfff985729b2d235ab49249c7e069a1b639e"
+  },
+  "npz_payload_scan": {
+    "mrl2d_les_body.npz": [
+      {
+        "name": "time_s.npy",
+        "dtype": "<f8",
+        "shape": [
+          4000
+        ]
+      },
+      {
+        "name": "source_time_s.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000
+        ]
+      },
+      {
+        "name": "frequency_hz.npy",
+        "dtype": "<f8",
+        "shape": [
+          196
+        ]
+      },
+      {
+        "name": "coefficients_pa.npy",
+        "dtype": "<c16",
+        "shape": [
+          196,
+          12
+        ]
+      },
+      {
+        "name": "receivers_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          12,
+          2
+        ]
+      },
+      {
+        "name": "pressure_pa.npy",
+        "dtype": "<f8",
+        "shape": [
+          4000,
+          12
+        ]
+      },
+      {
+        "name": "band_rms_pa.npy",
+        "dtype": "<f8",
+        "shape": [
+          12
+        ]
+      },
+      {
+        "name": "pressure_force_n_per_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000,
+          2
+        ]
+      },
+      {
+        "name": "integrated_source_loading_n_per_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000,
+          2
+        ]
+      }
+    ],
+    "mrl2d_les_permeable.npz": [
+      {
+        "name": "time_s.npy",
+        "dtype": "<f8",
+        "shape": [
+          4000
+        ]
+      },
+      {
+        "name": "source_time_s.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000
+        ]
+      },
+      {
+        "name": "frequency_hz.npy",
+        "dtype": "<f8",
+        "shape": [
+          196
+        ]
+      },
+      {
+        "name": "coefficients_pa.npy",
+        "dtype": "<c16",
+        "shape": [
+          196,
+          12
+        ]
+      },
+      {
+        "name": "receivers_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          12,
+          2
+        ]
+      },
+      {
+        "name": "pressure_pa.npy",
+        "dtype": "<f8",
+        "shape": [
+          4000,
+          12
+        ]
+      },
+      {
+        "name": "band_rms_pa.npy",
+        "dtype": "<f8",
+        "shape": [
+          12
+        ]
+      },
+      {
+        "name": "pressure_force_n_per_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000,
+          2
+        ]
+      },
+      {
+        "name": "integrated_source_loading_n_per_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000,
+          2
+        ]
+      }
+    ],
+    "mrl2d_urans_body.npz": [
+      {
+        "name": "time_s.npy",
+        "dtype": "<f8",
+        "shape": [
+          4000
+        ]
+      },
+      {
+        "name": "source_time_s.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000
+        ]
+      },
+      {
+        "name": "frequency_hz.npy",
+        "dtype": "<f8",
+        "shape": [
+          196
+        ]
+      },
+      {
+        "name": "coefficients_pa.npy",
+        "dtype": "<c16",
+        "shape": [
+          196,
+          12
+        ]
+      },
+      {
+        "name": "receivers_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          12,
+          2
+        ]
+      },
+      {
+        "name": "pressure_pa.npy",
+        "dtype": "<f8",
+        "shape": [
+          4000,
+          12
+        ]
+      },
+      {
+        "name": "band_rms_pa.npy",
+        "dtype": "<f8",
+        "shape": [
+          12
+        ]
+      },
+      {
+        "name": "pressure_force_n_per_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000,
+          2
+        ]
+      },
+      {
+        "name": "integrated_source_loading_n_per_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000,
+          2
+        ]
+      }
+    ],
+    "mrl2d_urans_permeable.npz": [
+      {
+        "name": "time_s.npy",
+        "dtype": "<f8",
+        "shape": [
+          4000
+        ]
+      },
+      {
+        "name": "source_time_s.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000
+        ]
+      },
+      {
+        "name": "frequency_hz.npy",
+        "dtype": "<f8",
+        "shape": [
+          196
+        ]
+      },
+      {
+        "name": "coefficients_pa.npy",
+        "dtype": "<c16",
+        "shape": [
+          196,
+          12
+        ]
+      },
+      {
+        "name": "receivers_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          12,
+          2
+        ]
+      },
+      {
+        "name": "pressure_pa.npy",
+        "dtype": "<f8",
+        "shape": [
+          4000,
+          12
+        ]
+      },
+      {
+        "name": "band_rms_pa.npy",
+        "dtype": "<f8",
+        "shape": [
+          12
+        ]
+      },
+      {
+        "name": "pressure_force_n_per_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000,
+          2
+        ]
+      },
+      {
+        "name": "integrated_source_loading_n_per_m.npy",
+        "dtype": "<f8",
+        "shape": [
+          5000,
+          2
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+FoamFile
+{
+ version 2.0; format ascii; class volScalarField; object omega;
+}
+dimensions [0 0 -1 0 0 0 0];
+internalField uniform 3.194;
+boundaryField
+{
+ "blade[0-2]" {type omegaWallFunction; value uniform 3.194;}
+farfield {type inletOutlet; inletValue uniform 3.194; value uniform 3.194;}
+ frontAndBack {type empty;}
+
+ "(carrier|blade[0-2])AMI_(master|slave)" {type cyclicAMI;}
+}

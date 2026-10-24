@@ -1,9 +1,0 @@
-observer,method,angle_rad,AC_RMS_Pa
-cross_plus,libacoustics_curle,1.5707963267948966,5.0135642928532238e-05
-cross_minus,libacoustics_curle,-1.5707963267948966,5.0135642928532252e-05
-downstream,libacoustics_curle,0,5.93883148681883e-05
-oblique,libacoustics_curle,0.9272952180016123,4.9216441836787187e-05
-cross_plus,libacoustics_fwh,1.5707963267948966,4.9261173637795645e-05
-cross_minus,libacoustics_fwh,-1.5707963267948966,4.9262130582499421e-05
-downstream,libacoustics_fwh,0,5.6746397687839537e-05
-oblique,libacoustics_fwh,0.9272952180016123,4.7626956503449803e-05

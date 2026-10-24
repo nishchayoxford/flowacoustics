@@ -1,0 +1,20 @@
+FoamFile
+{
+ version 2.0; format ascii; class dictionary; object dynamicMeshDict;
+}
+dynamicFvMesh dynamicMotionSolverFvMesh;
+motionSolverLibs ("libfvMotionSolvers.so");
+solver multiSolidBodyMotionSolver;
+multiSolidBodyMotionSolverCoeffs {
+carrierZone {solidBodyMotionFunction rotatingMotion; rotatingMotionCoeffs {origin (0 0 0); axis (0 0 1); omega -10.472;}}
+blade0Zone {solidBodyMotionFunction multiMotion; multiMotionCoeffs {
+orbit {solidBodyMotionFunction rotatingMotion; rotatingMotionCoeffs {origin (0 0 0); axis (0 0 1); omega -10.472;}}
+relativePitch {solidBodyMotionFunction rotatingMotion; rotatingMotionCoeffs {origin (0 0.055 0); axis (0 0 1); omega 5.236;}}}}
+blade1Zone {solidBodyMotionFunction multiMotion; multiMotionCoeffs {
+orbit {solidBodyMotionFunction rotatingMotion; rotatingMotionCoeffs {origin (0 0 0); axis (0 0 1); omega -10.472;}}
+relativePitch {solidBodyMotionFunction rotatingMotion; rotatingMotionCoeffs {origin (0.047631397208144126 -0.0275 0); axis (0 0 1); omega 5.236;}}}}
+blade2Zone {solidBodyMotionFunction multiMotion; multiMotionCoeffs {
+orbit {solidBodyMotionFunction rotatingMotion; rotatingMotionCoeffs {origin (0 0 0); axis (0 0 1); omega -10.472;}}
+relativePitch {solidBodyMotionFunction rotatingMotion; rotatingMotionCoeffs {origin (-0.047631397208144126 -0.0275 0); axis (0 0 1); omega 5.236;}}}}
+}
+
