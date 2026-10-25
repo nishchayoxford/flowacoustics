@@ -37,7 +37,35 @@ The webpage includes all four numerical NPZ files and sixteen acoustic/source
 CSVs, plus field-history data. The receiver selector changes the display, not
 the downloadable arrays. Its source bundle retains all 108 chart traces.
 
-## Verification and limits
+## Separate cavitating-flow lesson
+
+**[Open the cavitation lesson](https://nishchayoxford.github.io/flowacoustics/cavitation.html)** · **[Download the exact case inputs](https://nishchayoxford.github.io/flowacoustics/data/cavitation/flowacoustics-cavitation-case.tar.gz)** · **[Archive checksum](https://nishchayoxford.github.io/flowacoustics/data/cavitation/flowacoustics-cavitation-case.sha256)**
+
+An additional **10 s, 26,751-cell** calculation uses `interPhaseChangeDyMFoam`,
+Schnerr–Sauer phase change and strict-2D WALE. It assumes water at **20 °C** and
+a **3500 Pa absolute** farfield reference: a reduced-pressure demonstration,
+not ocean operating conditions. The original four cases are unchanged.
+
+Inspect three genuine **500-frame** movies: pressure and speed comparisons,
+then vapour fraction with a labelled rotor close-up. Native volume integrals
+supply the vapour-area history; plane extrema supply the other displayed
+diagnostics. All history rows and movie frames were independently checked.
+Desktop/narrow-browser playback, navigation and all seven downloads passed.
+
+New-case pressure is already absolute Pa; its gauge value is `p - 3500`, not
+`1000*p`. The phase-change-suppressed reference uses a different solver and
+numerical treatment, so the comparison does not isolate cavitation causality.
+This is **flow, not cavitation sound or individual-bubble-collapse prediction**.
+Mesh/time convergence, source-aware mass conservation and physical validation
+remain unverified. Detailed film labels are best read full-size or in landscape.
+
+The archive contains **18 exact initial field, mesh and dictionary files** plus
+its guide/checksums. OpenCFD OpenFOAM v2206 is an external prerequisite; no solved
+fields, solver binaries or cavitation postprocessing application are included.
+Unlike the original runs, this case uses adaptive stepping: the configured
+`maxDeltaT` is nominal, not a guaranteed realized ceiling. See the packaged guide.
+
+## Original four-case verification and limits
 
 - All four native calculations completed, with source and field readback.
 - Independent acoustic implementation checks covered every signed complex

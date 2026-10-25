@@ -1,7 +1,7 @@
 {
   "schema": "flowacoustics-public-release-v1",
   "study": "mrl2d",
-  "scope": "educational strict-2D turbine demonstration",
+  "scope": "educational strict-2D turbine/acoustics study plus separate reduced-pressure cavitating-flow lesson",
   "owner_authorized_distribution": true,
   "source_package": {
     "directory": "source/mrl2d",
@@ -11,13 +11,15 @@
     "sealed_snapshot_notices_are_historical": true
   },
   "verification": {
-    "original_site_files_unchanged": 38,
+    "original_site_files_unchanged": 37,
     "source_snapshot_files_unchanged": 100,
     "source_tests_passed": 173,
     "source_tests_skipped_archive_absence": 7,
     "integrated_web_tests_passed": 14,
     "native_replay_performed_for_package": false,
-    "new_dependency_install_tested": false
+    "new_dependency_install_tested": false,
+    "original_homepage_change": "One additive link to the separate flow-only lesson; original four-case selector unchanged.",
+    "original_web_test_count_scope": "14 tests refer to the original four-case release, not the new cavitation browser suite."
   },
   "scientific_limits": {
     "stationarity_verified": false,
@@ -25,7 +27,7 @@
     "physical_validation_claimed": false,
     "finite_turbine_noise_prediction": false
   },
-  "file_count_excluding_manifest": 144,
+  "file_count_excluding_manifest": 159,
   "manifest_self_excluded": true,
   "files": {
     ".gitattributes": {
@@ -41,8 +43,32 @@
       "bytes": 157
     },
     "README.md": {
-      "sha256": "f8ff8e4479535fefc697c81c536fd6e0700f1e37a7977b1913319cde575dfb1a",
-      "bytes": 6327
+      "sha256": "b587e8e4e77d765da1f67033364d837c14ddf455fb8ea60f50a8f44a6507a121",
+      "bytes": 8312
+    },
+    "site/assets/cavitation/pressure-poster.png": {
+      "sha256": "db6a4325fde3a372a763e1ed365db41bbfd0236a0baa222b38c3dba6a1c8a305",
+      "bytes": 128614
+    },
+    "site/assets/cavitation/pressure.mp4": {
+      "sha256": "4c0356066d5eec93993c536a4be4fd004a46f8803f1f0ad9b682e1a776e35103",
+      "bytes": 1334606
+    },
+    "site/assets/cavitation/vapour-poster.png": {
+      "sha256": "296cebff09760444c49fddb36fc494150b95963072d6585c2a21abda6dbeedff",
+      "bytes": 134465
+    },
+    "site/assets/cavitation/vapour.mp4": {
+      "sha256": "7b406a5459df514018a9770a2b027888d155519f7a95323c1c88fd1975d71407",
+      "bytes": 1622822
+    },
+    "site/assets/cavitation/velocity-poster.png": {
+      "sha256": "4e961ec1b0235ae8243caf02469b5f56013034e613ac2342c6d29c51ca42f6ce",
+      "bytes": 148008
+    },
+    "site/assets/cavitation/velocity.mp4": {
+      "sha256": "3f4193c0dddd2b1c8fbf6dbc97083f0a7bd75fbecd6849212d0151f5d2a7f4bf",
+      "bytes": 1392555
     },
     "site/assets/mrl2d/field-history.csv": {
       "sha256": "9b3c4f6f82019e49f5c2575d4ab41c5f833019476e051986aec6982c7bd68377",
@@ -75,6 +101,42 @@
     "site/assets/mrl2d/urans-flow.mp4": {
       "sha256": "356751cd39f80a7e3df8f9e6f1a4c70dbce11171017c64da3ddab87a4e49ab02",
       "bytes": 1699340
+    },
+    "site/cavitation.css": {
+      "sha256": "a8deeecfc7bca03c67b203b360e7e07f1cfd9c3ba6c9994eefb779301d5387b1",
+      "bytes": 3334
+    },
+    "site/cavitation.html": {
+      "sha256": "0dbd54dc80df6291e40b617b709fca6374e139d907d16e0f29257712439da474",
+      "bytes": 4962
+    },
+    "site/cavitation.mjs": {
+      "sha256": "bab86022db760029c88085c45b87719c9290ad738ca1bf7c46eeaf7d2e72c9a7",
+      "bytes": 19530
+    },
+    "site/data/cavitation/flowacoustics-cavitation-case.sha256": {
+      "sha256": "21a159e3055f7201b20074717041003f4043bb59476f11b8ea61ccfcb8d7cce8",
+      "bytes": 103
+    },
+    "site/data/cavitation/flowacoustics-cavitation-case.tar.gz": {
+      "sha256": "1683d69bdd554f888359c39f4c4cb9811a3880faa1966dd7c2595d2a0c868b42",
+      "bytes": 1339182
+    },
+    "site/data/cavitation/history.csv": {
+      "sha256": "af3caf7db82568946e20b84a3d709738f1ed675b5d2981536826b952db89d181",
+      "bytes": 61573
+    },
+    "site/data/cavitation/postprocessing-support.json": {
+      "sha256": "0ffe7ac3ad6c9b2ec369aec09314e4d425f89f6351c9a923d059ba385aa5b1e8",
+      "bytes": 1236
+    },
+    "site/data/cavitation/results.json": {
+      "sha256": "4e2ff0339404eb16c57ed0a75a63f20021398f0eea6593013fe4240442013c4c",
+      "bytes": 64183
+    },
+    "site/data/cavitation/volume-history.dat": {
+      "sha256": "82bde23ec11849edccd0ec51dece7b853f1461135e5c3e3b45b3ef9d12825ba5",
+      "bytes": 37202
     },
     "site/data/mrl2d/README.md": {
       "sha256": "68eff4c52709eab2c04d45a4d056c0dc47f509dd17e4633d65dcc6657c736654",
@@ -181,8 +243,8 @@
       "bytes": 100
     },
     "site/index.html": {
-      "sha256": "04f27aeaa2ef4ff2689bd2ae417da9b1ec210e555e089057890c52a892c39268",
-      "bytes": 11860
+      "sha256": "aec9c2d9581fc9d71ca9f835e307900b2903a472be4bb02d8339ee077909db78",
+      "bytes": 12016
     },
     "site/mrl2d-model.mjs": {
       "sha256": "374c28ad06867ee59fa4714a11d5f5cc78cc0a592c253dc186091d4568239aec",
@@ -604,5 +666,40 @@
       "sha256": "a07f223182293077f7938baff5674e43917faa7265803d383592cd1f9a96ffd3",
       "bytes": 52410
     }
+  },
+  "cavitation": {
+    "case": "mrl2d_les_cavitation",
+    "solver": "interPhaseChangeDyMFoam (OpenCFD v2206)",
+    "flow_model": "strict-2D WALE",
+    "phase_change_model": "Schnerr-Sauer",
+    "cells": 26751,
+    "end_time_s": 10,
+    "temperature_c": 20,
+    "farfield_absolute_pressure_pa": 3500,
+    "saturation_pressure_pa": 2339.3,
+    "case_input_archive": "site/data/cavitation/flowacoustics-cavitation-case.tar.gz",
+    "case_input_archive_sha256": "1683d69bdd554f888359c39f4c4cb9811a3880faa1966dd7c2595d2a0c868b42",
+    "initial_input_files": 18,
+    "archive_contains_solved_fields": false,
+    "archive_contains_postprocessing_application": false,
+    "independent_history_rows_verified": 500,
+    "independent_frame_records_verified": 1500,
+    "movies": 3,
+    "frames_per_movie": 500,
+    "movie_fps": 50,
+    "movie_duration_s": 10,
+    "movie_resolution": [
+      1920,
+      1080
+    ],
+    "actual_browser_checks_passed": true,
+    "local_public_files_verified": 55,
+    "actual_downloads_verified": 7,
+    "browser_scope": "Chrome155 on Linux at1440px and390px; not cross-browser or physical-device certification",
+    "adaptive_step_nominal_cap_is_not_hard_realized_ceiling": true,
+    "physical_validation": false,
+    "source_aware_conservation_verified": false,
+    "cavitation_acoustics_predicted": false,
+    "comparison_is_matched_solver_causality": false
   }
 }

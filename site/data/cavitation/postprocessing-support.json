@@ -1,0 +1,27 @@
+{
+  "evidence_kind": "native_cfd",
+  "history_support": "Vapour area (m\u00b2) = native vapour volume / 0.01 m numerical depth; per-row sum of native water and vapour integrals. No point averaging or pixel area. Vapour maximum, absolute-pressure minimum (Pa) and speed maximum (m/s) are sampled native z=0 plane point extrema, not whole-volume cell extrema. Alpha bound tolerance 1e-7; raw values retained without clipping. All output times retained; no resampling, causal-lag or steady-state inference.",
+  "scales": {
+    "pressure": [
+      -5569.080078125,
+      5569.080078125
+    ],
+    "velocity": [
+      0.0,
+      2.673161035764044
+    ],
+    "vapour": [
+      0.0,
+      1.0
+    ]
+  },
+  "phase_bound_tolerance": 1e-07,
+  "pressure_modes": {
+    "reference": "1000*p_native kinematic gauge",
+    "cavitation": "p_native absolute Pa; gauge=p-3500"
+  },
+  "input_manifest_sha256": "1b15aa940fe42b1d1f6c56e16b50bc1a003644f543f96c0b03851cf8a69becaf",
+  "parent_completion_sha256": "50410f1d181712d42580785f7bcebf6af57d9cdaa20680f98f14aaebf0b31455",
+  "native_history_sha256": "82bde23ec11849edccd0ec51dece7b853f1461135e5c3e3b45b3ef9d12825ba5",
+  "limitations": "Strict 2D WALE flow only; not acoustics or physical validation."
+}
