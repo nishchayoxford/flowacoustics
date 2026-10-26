@@ -37,7 +37,7 @@ The webpage includes all four numerical NPZ files and sixteen acoustic/source
 CSVs, plus field-history data. The receiver selector changes the display, not
 the downloadable arrays. Its source bundle retains all 108 chart traces.
 
-## Separate cavitating-flow lesson
+## Original cavitating-flow movies
 
 **[Open the cavitation lesson](https://nishchayoxford.github.io/flowacoustics/cavitation.html)** · **[Download the exact case inputs](https://nishchayoxford.github.io/flowacoustics/data/cavitation/flowacoustics-cavitation-case.tar.gz)** · **[Archive checksum](https://nishchayoxford.github.io/flowacoustics/data/cavitation/flowacoustics-cavitation-case.sha256)**
 
@@ -65,6 +65,47 @@ fields, solver binaries or cavitation postprocessing application are included.
 Unlike the original runs, this case uses adaptive stepping: the configured
 `maxDeltaT` is nominal, not a guaranteed realized ceiling. See the packaged guide.
 
+## Matched phase-change ON/OFF pressure-loading comparison
+
+The [same lesson](https://nishchayoxford.github.io/flowacoustics/cavitation.html#loading-comparison)
+now includes a separate matched pair: **two completed 10 s, 26,751-cell runs**,
+both using OpenCFD OpenFOAM v2206 `interPhaseChangeDyMFoam`, strict-2D WALE,
+the same mesh, motion, numerics and fixed timestep. Only the Schnerr–Sauer
+phase-change coefficients differ: `Cc=Cv=1` (ON) versus `Cc=Cv=0` (OFF).
+OFF is a numerical counterfactual, not proof of physically stable liquid below
+saturation pressure. The original movies above are not movies of this new pair.
+
+Explore twelve receiver directions and two analysis windows. Phase change ON
+has a **0.543–1.517 dB lower predicted pressure-loading contribution** over the
+primary selected band, **0.625–25 Hz**. The late-window reduction is
+**0.764–2.034 dB**, over its actual selected band of **1.25–25 Hz**.
+These are coherent Hann-conditioned, periodic, band-limited estimates for an
+ideal infinite-span two-dimensional source. The approximately 1 m receivers
+are acoustically near-field, not a far-field-only measurement.
+
+**This does not establish that a cavitating turbine is quieter.** The solver
+is incompressible/isothermal. The offline custom 2D FW-H-derived calculation
+retains pressure loading only, not cavity-volume radiation, bubble-collapse
+shocks, total cavitation noise, erosion or perceived loudness. It is not
+libAcoustics or validated finite-turbine radiation. Physical validation,
+stationarity, mesh/time sensitivity and useful bandwidth remain unestablished.
+
+Independent numerical verification covered **240 comparisons and 1,167,862
+values** for each of two exports; the repeated export reproduced all **25
+files byte for byte**. Download the exact arrays and evidence through the
+window controls, or start with the
+[comparison JSON](https://nishchayoxford.github.io/flowacoustics/data/cavitation-loading/comparison.json)
+and [artifact manifest](https://nishchayoxford.github.io/flowacoustics/data/cavitation-loading/manifest.json).
+These are derived results and audit sidecars, not the raw CFD fields or a
+replay package for the new matched pair.
+
+The [MRL photograph](https://nishchayoxford.github.io/flowacoustics/cavitation.html#mrl-turbine)
+shows a real **Momentum Reversal and Lift** prototype, separately identified
+from the simplified three-blade CFD geometry. It is reproduced from
+Gebreslassie et al. (2016), Fig. 5, under **CC BY 4.0**, with attribution and
+a [licensing record](https://nishchayoxford.github.io/flowacoustics/assets/mrl2d/mrl-photo-credit.json).
+That licence applies to the photograph, not the project as a whole.
+
 ## Original four-case verification and limits
 
 - All four native calculations completed, with source and field readback.
@@ -91,8 +132,9 @@ an isolated quadrupole measurement.
 
 ## Source and reproducibility
 
-The browsable [source snapshot](source/mrl2d/) and downloadable tarball contain
-identical, manifest-pinned package bytes. Start with its
+For the original four cases, the browsable [source snapshot](source/mrl2d/)
+and downloadable tarball contain identical, manifest-pinned package bytes.
+They do not include the new matched ON/OFF reduction pipeline. Start with its
 [setup and safe test commands](source/mrl2d/README.md),
 [verification scope](source/mrl2d/docs/mrl2d/acoustics/VERIFICATION.md),
 [method](source/mrl2d/docs/mrl2d/acoustics/METHOD.md) and

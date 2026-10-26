@@ -2,22 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A separate strict-2D WALE cavitating-flow lesson. Reduced-pressure tunnel assumptions; not a cavitation-noise prediction.">
-<meta name="theme-color" content="#f5f3ed"><title>Turbine / cavitating flow</title>
+<meta name="description" content="Incompressible cavitating CFD and offline 2D pressure-loading acoustics. Geometry, original flow movies and a separate matched ON/OFF loading comparison; not total cavitation noise.">
+<meta name="theme-color" content="#f5f3ed"><title>Turbine / flow to pressure loading</title>
 <link rel="icon" href="data:,"><link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="./cavitation.css">
 <script type="module" src="./cavitation.mjs"></script>
+<link rel="stylesheet" href="./cavitation-loading.css">
+<script type="module" src="./cavitation-loading.mjs"></script>
 </head>
 <body class="cavitation">
 <a class="skip" href="#main">Skip to the lesson</a>
 <header class="masthead"><a class="wordmark" href="./index.html">TURBINE <span>/ cavitating flow</span></a><a href="./index.html">← Four-case acoustic study</a></header>
 <main id="main">
-<section class="intro" aria-labelledby="title"><p class="eyebrow">A SEPARATE FLOW LESSON / STRICT-2D WALE</p>
-<h1 id="title">When pressure falls,<br>water can change phase.</h1>
-<p class="standfirst">Follow liquid and vapour around the same orbiting, pitching blades. This is a reduced-pressure tunnel demonstration—not an ocean condition, and not a fifth acoustic case.</p>
-<nav class="lesson-nav" aria-label="Cavitation lesson"><a href="#flow">01 Inspect the flow</a><a href="#histories">02 Read the histories</a><a href="#evidence">03 Check the assumptions</a></nav></section>
+<section class="intro" aria-labelledby="title"><p class="eyebrow">GEOMETRY → FLOW → PRESSURE LOADING / STRICT 2D</p>
+<h1 id="title">Incompressible flow.<br>Offline loading acoustics.</h1>
+<p class="standfirst">Follow orbiting, pitching blades from the turbine geometry to recorded liquid–vapour flow, then to a separate acoustic calculation. The CFD models unsteady hydrodynamic loading; acoustic pressure is calculated offline—not a compressible-wave or bubble-collapse simulation. This is a reduced-pressure tunnel demonstration, not an ocean condition or a fifth case in the original acoustic study.</p>
+<nav class="lesson-nav" aria-label="Cavitation lesson"><a href="#mrl-turbine">01 Meet the geometry</a><a href="#flow">02 Inspect the original flow</a><a href="#loading-comparison">03 Compare pressure loading</a><a href="#evidence">Flow evidence &amp; assumptions</a></nav></section>
+<section id="mrl-turbine" class="lesson" aria-labelledby="mrl-turbine-title">
+  <div class="section-heading">
+    <p class="eyebrow">THE DEVICE / THE IDEALISED MODEL</p>
+    <h2 id="mrl-turbine-title">The turbine behind the model.</h2>
+  </div>
+  <div class="split">
+    <div class="lesson-copy">
+      <p><strong>MRL means Momentum Reversal and Lift.</strong> Its three blades orbit a common axis while pitching about their own axes. The rotor axis is perpendicular to the flow: this is a cross-flow turbine, not a propeller.</p>
+      <p>The photograph shows a laboratory prototype. This study instead uses three elliptical, strictly two-dimensional blade sections, with prescribed orbit and half-speed absolute pitch. It omits the prototype’s shaft, plates, supports and gearing.</p>
+      <dl class="parameters">
+        <div><dt>Photographed prototype · blade chord</dt><dd>0.095 m</dd></div>
+        <div><dt>This model · chord × thickness</dt><dd>0.070 × 0.007 m</dd></div>
+        <div><dt>This model · blade-centre orbit radius</dt><dd>0.055 m</dd></div>
+      </dl>
+      <p class="figure-note">The photograph identifies the turbine concept; it is not the simulated geometry or evidence of this study’s flow or acoustic results.</p>
+    </div>
+    <figure class="geometry-figure" aria-labelledby="mrl-photo-caption">
+      <div class="figure-bar"><span class="tag">LABORATORY PROTOTYPE / PHOTOGRAPH</span></div>
+      <img src="./assets/mrl2d/mrl-laboratory-turbine-gebreslassie-2016-fig5.jpg"
+           alt="MRL laboratory turbine in its support frame; the original photograph labels the damper, sided plates and encoder."
+           width="532" height="580" loading="lazy" decoding="async"
+           style="display:block;width:100%;max-width:532px;height:auto;margin:14px auto 0">
+      <figcaption id="mrl-photo-caption">MRL laboratory turbine, distinct from this study’s 2D surrogate. From <a href="https://strathprints.strath.ac.uk/57540/" title="Experimental and CFD analysis of the wake characteristics of tidal turbines">Gebreslassie et al. (2016), Fig. 5</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Crown Copyright © 2016, published by Elsevier. Extracted without image changes.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <section id="flow" class="lesson" aria-labelledby="flow-title">
 <div class="section-bar"><h2 id="flow-title">Look for phase change, not sound.</h2><button id="reload" type="button" disabled>Reload results</button></div>
-<p class="scope-note"><strong>FLOW, NOT ACOUSTIC WAVES.</strong> Strict-2D WALE is not resolved 3D LES. No cavitation-noise or individual-bubble-collapse prediction is made. Mesh/time convergence and physical accuracy are unverified.</p>
+<p class="scope-note"><strong>ORIGINAL FLOW MOVIES, NOT ACOUSTIC WAVES.</strong> Strict-2D WALE is not resolved 3D LES. These preserved movies do not predict cavitation noise or individual-bubble collapse. The separate <a href="#loading-comparison">loading lesson below</a> computes one offline acoustic contribution, not total noise. Mesh/time convergence and physical accuracy are unverified.</p>
+<p>The pressure/speed movies pair the original cavitating calculation with an older <code>pimpleFoam</code> liquid-only reference using a different solver. That reference is <strong>not the new same-solver OFF control</strong>. Read these unchanged field movies and <a href="#histories">flow histories</a> as hydrodynamics, not sound.</p>
 <p id="result-status" class="bundle-status" role="status" data-state="pending">No completed native cavitation results are supplied. The 10 s target is not a completion claim. No substitute animation or values are shown.</p>
 <noscript><p class="no-script">JavaScript is required to validate results and use these controls. No computed results are displayed. The teaching text and limitations remain available; there is no running solver on this page.</p></noscript>
 <div id="conditions"></div>
@@ -26,6 +56,22 @@
 <div id="player" class="media-panel"><p class="empty-state">Native movies are pending. No replacement animation is shown.</p></div>
 </section>
 <section id="histories" class="lesson" aria-labelledby="history-title"><p class="eyebrow">02 / QUANTIFY, WITHOUT INFERRING CAUSE</p><h2 id="history-title">How much vapour? How low a pressure?</h2><p>Vapour area is the native vapour-volume integral divided by the numerical depth: m² per unit span, not a count of coloured pixels. Minimum absolute pressure is measured in Pa; saturation pressure is a constant reference, not another measured trace.</p><div id="history-plots"><p class="empty-state">No verified histories are available.</p></div><p id="history-support" class="figure-note"></p><p class="figure-note">These histories alone establish neither a causal lag nor a steady state. Seek the movie to inspect spatial support; do not read a pressure dip as an acoustic pulse.</p></section>
-<section id="evidence" class="evidence-section" aria-labelledby="evidence-title"><p class="eyebrow">03 / ASSUMPTIONS &amp; EXACT DATA</p><h2 id="evidence-title">A flow comparison, not a validation.</h2><p>The reference suppresses phase change. Adding an absolute pressure datum to that liquid-only run does not create a new CFD calculation or prove it noncavitating. Solver and numerical differences prevent an isolated, validated cavitation-effect comparison.</p><details id="source-details"><summary>Read source metadata, verification and limitations</summary><div id="source-metadata"><p>Source metadata await a verified completed bundle.</p></div></details><div id="downloads"><p>No verified downloads are supplied.</p></div><p id="download-status" role="status"></p><div id="sources"></div></section>
+<section id="evidence" class="evidence-section" aria-labelledby="evidence-title"><p class="eyebrow">ORIGINAL FLOW / ASSUMPTIONS &amp; EXACT DATA</p><h2 id="evidence-title">A flow comparison, not a validation.</h2><p><strong>For the original flow movies only:</strong> the reference suppresses phase change. Adding an absolute pressure datum to that liquid-only run does not create a new CFD calculation or prove it noncavitating. Solver and numerical differences prevent an isolated, validated cavitation-effect comparison. The new matched loading pair below is a separate calculation, not a relabelling of these movies.</p><details id="source-details"><summary>Read source metadata, verification and limitations</summary><div id="source-metadata"><p>Source metadata await a verified completed bundle.</p></div></details><div id="downloads"><p>No verified downloads are supplied.</p></div><p id="download-status" role="status"></p><div id="sources"></div></section>
+<!-- Additive loading lesson. No fixture path, option or native-completion claim. -->
+<section id="loading-comparison" class="lesson loading-comparison" aria-labelledby="loading-title">
+  <p class="eyebrow">A SEPARATE MATCHED COMPARISON / PRESSURE LOADING ONLY</p>
+  <h2 id="loading-title">Change phase. Compare the blade loading.</h2>
+  <p>What changes at a receiver when phase change is enabled? Both new runs use the same <code>interPhaseChangeDyMFoam</code> solver (OpenCFD v2206): <strong>incompressible, isothermal two-phase VOF</strong>, with strict-2D WALE—not RANS or resolved 3D LES. Mesh, motion, numerics and fully liquid initial conditions are identical; only the phase-change coefficients change: ON (Cc = Cv = 1) versus OFF (Cc = Cv = 0). OFF is a <strong>counterfactual control</strong>, not proof that liquid remains physically stable at every computed pressure.</p>
+  <p>Recorded absolute wall pressure feeds a <strong>custom 2D pressure-loading model</strong> offline: Q = 0; L = (p<sub>abs</sub> − 3500 Pa)n, with homogeneous-water c₀ = 1480 m/s. Flow pressure is the source input; the plotted receiver pressure is a calculated loading contribution, not a compressible CFD wave field.</p>
+  <p class="scope-note"><strong>Solid-wall pressure loading only · strict 2D / ideal infinite-span.</strong> This is one modeled acoustic contribution, not total cavitation noise, finite-turbine sound, perceived loudness or resolved 3D LES. Bubble-collapse and cavity-volume radiation are omitted, as are thickness, advective loading, viscous traction and exterior quadrupoles. No physical-accuracy or causal-source claim follows from the ON/OFF contrast.</p>
+  <p class="loading-distinction"><strong>Keep the two controls separate.</strong> The old flow movies above use a <code>pimpleFoam</code> liquid-only reference. That is <em>not</em> the new same-solver acoustic OFF control. Those movies, their original U/pressure fields and their flow histories are not sound; they are preserved unchanged. Only a separately admitted, completed native pair can populate this lesson.</p>
+  <p>Start at 0° in the primary 2–10 s source window. Change among twelve receivers at 1 m, compare paired pressure histories, then inspect coherent frequency bins and unconnected directional samples. There is no smoothing, resampling or joining of receiver angles. The useful acoustic band and stationarity remain unverified; these exploratory windows do not establish either.</p>
+  <p class="figure-note">ON below OFF means this selected pressure-loading contribution is lower, not that a cavitating turbine is quieter; collapse and cavity-volume noise are omitted.</p>
+  <p class="figure-note">At these frequencies the 1 m receivers are acoustically near-field, not far-field-only radiation measurements.</p>
+  <details id="loading-clock-guide"><summary>How the raw clock and analysis windows are used</summary><p>All 5000 raw source timestamps and untapered forces are retained. The primary and late windows retain the last 4000 and 2000 samples respectively. Analysis cadence, period, Δf and ENBW use the full-record endpoint fit; the actual FFT frequency bins use each selected window’s endpoint fit. These index-clock approximations do not replace or resample the native timestamps. Exact values and timing bounds belong in the downloadable JSON and clock audit; rounded labels are not substituted data. The late window changes the band as well as the duration.</p></details>
+  <div data-loading-app><p class="bundle-status" role="status">Native loading results are withheld pending verified adapter and completed matched data. No substitute values are shown.</p></div>
+  <noscript><p>JavaScript is needed to validate this separate comparison and enable its controls. No loading results are displayed without validation.</p></noscript>
+</section>
+
 <footer><span>TURBINE / cavitating flow</span><p>Isothermal liquid–vapour model · strict 2D.<br>This page reads results; it does not run a solver.</p></footer>
 </main></body></html>

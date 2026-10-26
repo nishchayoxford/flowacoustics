@@ -1,0 +1,40 @@
+{
+  "artifacts_sha256": {
+    "clock-audit.json": "f32c8577931d4789691bf147a80625fac12063423588f46b78707ba6a6688eca",
+    "comparison.json": "cc6f27fc9df607076b665a7e4001842163fb09213d121ff0c281977b8debee84",
+    "comparison.schema.json": "99af26077c1ae5f315e7af6417c4410fabf6c1ab22cc02ed7849e09a10688494",
+    "late-band-comparison.csv": "2ab6fe5c0ca8b8f97de29fb01b3f53c5a1cba8f0f3c815e83e5c4d2dcb3cefe3",
+    "late-delta-receivers.csv": "35c32d2081048bfce8b3a57eeb19400c5ddd0ddac0dc71f42397574b535ee5aa",
+    "late-delta.npz": "3ef56ec0101852c297bae199d6392b240c16518e2813eccb7a5f129e24bb9c09",
+    "late-off-receivers.csv": "d482c1913fde406901531d9a45aaee06ac9d0fe45ad2c53197337194d16efef5",
+    "late-off-spectrum.csv": "b7a592e7889735c1c3c0cae4006c770a005547103f36c60c1a75f3f38ce19b8d",
+    "late-off.npz": "610258360286278abea294e0b203e3e5f7a9e7b71029096206187a7cfbbd60d6",
+    "late-on-receivers.csv": "c40d532f91bbe870b78424969318184524e2fef9ed7bf2ace7d1751042d5e504",
+    "late-on-spectrum.csv": "d3a7035921a7b0f4e6e9b7c1b817b4d583d9cbad0100da66386e7f9803604abe",
+    "late-on.npz": "4be99d169d3b2c8df838a807408a658343158e375db3c2baa80cd5384bb94e55",
+    "native-evidence.json": "a6b5f71e9c3de4dbfb57d6761398dc235e544847af09f1f40911853d2ca05e3e",
+    "off-loading.csv": "a5f844fafd96468a2ed8d107650c5517be40c9bc35a2394ee8e87bd6bb0c9159",
+    "on-loading.csv": "21db6368b48fd5f875f9111f9359afabe5157656ca94f45282ed22f47721e447",
+    "primary-band-comparison.csv": "6839a9cd0a4fec2ab803efd1d251c5203777d3a46cd51606b586e5705252ab1c",
+    "primary-delta-receivers.csv": "955118f4808573f6f8f6d32aaf78436ac41c2f561c68ee74f061e4601aa4a49a",
+    "primary-delta.npz": "513c76b99a234004167f5d9d93221cb679912f82e4528818d618883468906f53",
+    "primary-off-receivers.csv": "e037509f4ba4e9e741bc942f96c7d20d4346d43a6d9d9c6a40a24dbcc102850b",
+    "primary-off-spectrum.csv": "1f9c28a77c45f375e870e2b25cfa03f8032fc594a6352ff73a433924e01f838c",
+    "primary-off.npz": "6cc1477053116c167c58273c3180ef5a0c47909bcda1265190f6449e00906df2",
+    "primary-on-receivers.csv": "7134a00334f1d93afd37f9095c2caf6dd0c339bd901bb417990abedd1fa35e27",
+    "primary-on-spectrum.csv": "843041aa049fa0e36a0e39ae13a4583abc584e4157f9655323c96f134d94e443",
+    "primary-on.npz": "4ad673cba40c390f7810f284af7e2485e38b4bf3ddddcdc8eafe2c6a58c0e8c8"
+  },
+  "implementation_sha256": {
+    "acoustics2d.py": "57451ad541f6165762baa1cbfa8b0ef730fa25b9beff950df857633cdcea21a3",
+    "mrl2d_cavitation_clock.py": "cdb949ffa440347f539701f91c0ff68b972306a5be2008db9d44df1e74950f72",
+    "mrl2d_cavitation_loading.py": "720341a4c58680ce4ec1b2567bde35849a19023480c86dac3952419c15b5644d",
+    "mrl2d_cavitation_native_loading.py": "ae62397f636fd35f456a7311a1cd84be16639ae10b3006d5977e780329a4ff13",
+    "mrl2d_postprocess.py": "0c95be0114743efc268a4e85dae424ba06d366cab2cc931e2aaca9dd41eb6099",
+    "postprocess_mrl2d_cavitation_loading.py": "b054459a8469e46422cdcbc0401f1562b437806893b9e1ffbfcfb293d8274b30"
+  },
+  "input_manifest_sha256": "c46321773e3725f7dadbafddb4d827ba957f383df8f8433c26696ed043f8ab53",
+  "native_coupling_verified": true,
+  "schema": "mrl2d-cavitation-loading-artifacts-v1",
+  "status": "completed_native_pressure_loading_comparison"
+}

@@ -1,0 +1,63 @@
+{
+  "kind": "published photograph, with original embedded annotations",
+  "selected_asset": "mrl-laboratory-turbine-gebreslassie-2016-fig5.jpg",
+  "alternative_lossless_png": "mrl-laboratory-turbine-gebreslassie-2016-fig5.png",
+  "width_px": 532,
+  "height_px": 580,
+  "source_url": "https://strathprints.strath.ac.uk/57540/8/Gebreslassie_etal_IJME2016_Experimental_and_CFD_analysis_of_the_wake_characteristics.pdf",
+  "source_doi": "10.1016/j.ijome.2016.07.001",
+  "figure": "5",
+  "pdf_page": 6,
+  "printed_page": 214,
+  "extraction": "pdfimages -f 6 -l 6 -j; second raster on PDF page 6, PDF object 21 0; native JPEG stream",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "copyright": "Crown Copyright © 2016 Published by Elsevier Ltd.",
+  "authors": [
+    "Mulualem G. Gebreslassie",
+    "Stephanie O. Sanchez",
+    "Gavin R. Tabor",
+    "Michael R. Belmont",
+    "Tom Bruce",
+    "Grégory S. Payne",
+    "Ian Moon"
+  ],
+  "article_title": "Experimental and CFD analysis of the wake characteristics of tidal turbines",
+  "modifications": "Extracted from article. JPEG pixels, original annotations, orientation and full frame unchanged. PNG is a lossless decode of the JPEG; it does not add detail.",
+  "original_labels": [
+    "Damper",
+    "Sided Plates",
+    "Encoder"
+  ],
+  "physical_prototype": {
+    "diameter_m": 0.164,
+    "blade_span_m": 0.3,
+    "blade_chord_m": 0.095,
+    "source_location": "Section 2.2, printed page 213 / PDF page 5"
+  },
+  "local_model": {
+    "blade_count": 3,
+    "blade_names": [
+      "blade0",
+      "blade1",
+      "blade2"
+    ],
+    "chord_m": 0.07,
+    "full_section_thickness_m": 0.007,
+    "orbit_radius_m": 0.055,
+    "orbit_angular_velocity_rad_s": -10.472,
+    "absolute_pitch_angular_velocity_rad_s": -5.236,
+    "profile": "elliptical surrogate",
+    "model": "strict 2D; not the photographed prototype"
+  },
+  "identity": "Momentum Reversal and Lift; not Marine Research Ltd",
+  "source_pdf_sha256": "7ac641c0dc2588f82674ff034551ec4e1180a0c146adf0eb6893f967973f37b3",
+  "image_sha256": "8f022b0327c38d43c1857912dba9988db1898aa966f2bc332ead18cc9567ee4a",
+  "png_sha256": "6bbf4ecdb196a499a4caf6c347e97a2fd2176af2e4f19ef15c11307c98d086a5",
+  "native_jpeg_bytes": 87521,
+  "png_bytes": 334550,
+  "verified": {
+    "source_image_equals_asset_bytes": true,
+    "png_equals_jpeg_decoded_pixels": true
+  }
+}

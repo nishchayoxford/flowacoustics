@@ -1,7 +1,7 @@
 {
   "schema": "flowacoustics-public-release-v1",
   "study": "mrl2d",
-  "scope": "educational strict-2D turbine/acoustics study plus separate reduced-pressure cavitating-flow lesson",
+  "scope": "educational strict-2D turbine/acoustics study, original cavitating-flow lesson and separate matched pressure-loading comparison",
   "owner_authorized_distribution": true,
   "source_package": {
     "directory": "source/mrl2d",
@@ -27,7 +27,7 @@
     "physical_validation_claimed": false,
     "finite_turbine_noise_prediction": false
   },
-  "file_count_excluding_manifest": 159,
+  "file_count_excluding_manifest": 188,
   "manifest_self_excluded": true,
   "files": {
     ".gitattributes": {
@@ -43,8 +43,8 @@
       "bytes": 157
     },
     "README.md": {
-      "sha256": "b587e8e4e77d765da1f67033364d837c14ddf455fb8ea60f50a8f44a6507a121",
-      "bytes": 8312
+      "sha256": "2669d279880da5ac36527a2d59217064676acaca18bc12c7d1e594e906820963",
+      "bytes": 11093
     },
     "site/assets/cavitation/pressure-poster.png": {
       "sha256": "db6a4325fde3a372a763e1ed365db41bbfd0236a0baa222b38c3dba6a1c8a305",
@@ -86,6 +86,14 @@
       "sha256": "9ccb8d2ba16f7b1e2087279ea005981aee903f55b18eceb3b31e677dc490beba",
       "bytes": 1713399
     },
+    "site/assets/mrl2d/mrl-laboratory-turbine-gebreslassie-2016-fig5.jpg": {
+      "sha256": "8f022b0327c38d43c1857912dba9988db1898aa966f2bc332ead18cc9567ee4a",
+      "bytes": 87521
+    },
+    "site/assets/mrl2d/mrl-photo-credit.json": {
+      "sha256": "0d5ec90f456bd875c009f4d3cd2df7fd69337cd89dcd639c19a4ab001dd90fe5",
+      "bytes": 2403
+    },
     "site/assets/mrl2d/native-mesh.png": {
       "sha256": "b1e359053eea6733afefa879d1ec52476da01e2d9d2824cc0e29ceb9c230a8b9",
       "bytes": 1612515
@@ -102,17 +110,125 @@
       "sha256": "356751cd39f80a7e3df8f9e6f1a4c70dbce11171017c64da3ddab87a4e49ab02",
       "bytes": 1699340
     },
+    "site/cavitation-loading.css": {
+      "sha256": "37a349c62cb62364bb937f86c4e5148206c190caaf014634115cf138f7cff6a8",
+      "bytes": 3546
+    },
+    "site/cavitation-loading.mjs": {
+      "sha256": "62d9de1bc63d266ab35b6bbeded78a0deb2128dde9ef37c14bab4755cfa56588",
+      "bytes": 28797
+    },
     "site/cavitation.css": {
       "sha256": "a8deeecfc7bca03c67b203b360e7e07f1cfd9c3ba6c9994eefb779301d5387b1",
       "bytes": 3334
     },
     "site/cavitation.html": {
-      "sha256": "0dbd54dc80df6291e40b617b709fca6374e139d907d16e0f29257712439da474",
-      "bytes": 4962
+      "sha256": "264f807a357110a2fa1d0bc01e5c4a97e7bd2ee1d9467343870bab08c604131d",
+      "bytes": 12275
     },
     "site/cavitation.mjs": {
       "sha256": "bab86022db760029c88085c45b87719c9290ad738ca1bf7c46eeaf7d2e72c9a7",
       "bytes": 19530
+    },
+    "site/data/cavitation-loading/clock-audit.json": {
+      "sha256": "f32c8577931d4789691bf147a80625fac12063423588f46b78707ba6a6688eca",
+      "bytes": 7538
+    },
+    "site/data/cavitation-loading/comparison.json": {
+      "sha256": "cc6f27fc9df607076b665a7e4001842163fb09213d121ff0c281977b8debee84",
+      "bytes": 6343950
+    },
+    "site/data/cavitation-loading/comparison.schema.json": {
+      "sha256": "99af26077c1ae5f315e7af6417c4410fabf6c1ab22cc02ed7849e09a10688494",
+      "bytes": 19481
+    },
+    "site/data/cavitation-loading/late-band-comparison.csv": {
+      "sha256": "2ab6fe5c0ca8b8f97de29fb01b3f53c5a1cba8f0f3c815e83e5c4d2dcb3cefe3",
+      "bytes": 2068
+    },
+    "site/data/cavitation-loading/late-delta-receivers.csv": {
+      "sha256": "35c32d2081048bfce8b3a57eeb19400c5ddd0ddac0dc71f42397574b535ee5aa",
+      "bytes": 712316
+    },
+    "site/data/cavitation-loading/late-delta.npz": {
+      "sha256": "3ef56ec0101852c297bae199d6392b240c16518e2813eccb7a5f129e24bb9c09",
+      "bytes": 496630
+    },
+    "site/data/cavitation-loading/late-off-receivers.csv": {
+      "sha256": "d482c1913fde406901531d9a45aaee06ac9d0fe45ad2c53197337194d16efef5",
+      "bytes": 662360
+    },
+    "site/data/cavitation-loading/late-off-spectrum.csv": {
+      "sha256": "b7a592e7889735c1c3c0cae4006c770a005547103f36c60c1a75f3f38ce19b8d",
+      "bytes": 90805
+    },
+    "site/data/cavitation-loading/late-off.npz": {
+      "sha256": "610258360286278abea294e0b203e3e5f7a9e7b71029096206187a7cfbbd60d6",
+      "bytes": 439334
+    },
+    "site/data/cavitation-loading/late-on-receivers.csv": {
+      "sha256": "c40d532f91bbe870b78424969318184524e2fef9ed7bf2ace7d1751042d5e504",
+      "bytes": 662301
+    },
+    "site/data/cavitation-loading/late-on-spectrum.csv": {
+      "sha256": "d3a7035921a7b0f4e6e9b7c1b817b4d583d9cbad0100da66386e7f9803604abe",
+      "bytes": 90799
+    },
+    "site/data/cavitation-loading/late-on.npz": {
+      "sha256": "4be99d169d3b2c8df838a807408a658343158e375db3c2baa80cd5384bb94e55",
+      "bytes": 439334
+    },
+    "site/data/cavitation-loading/manifest.json": {
+      "sha256": "19e11f477823cd7e663786db8dc83aa442830af6fc2ebf2d5f56711899e98ce3",
+      "bytes": 3214
+    },
+    "site/data/cavitation-loading/native-evidence.json": {
+      "sha256": "a6b5f71e9c3de4dbfb57d6761398dc235e544847af09f1f40911853d2ca05e3e",
+      "bytes": 104466
+    },
+    "site/data/cavitation-loading/off-loading.csv": {
+      "sha256": "a5f844fafd96468a2ed8d107650c5517be40c9bc35a2394ee8e87bd6bb0c9159",
+      "bytes": 635066
+    },
+    "site/data/cavitation-loading/on-loading.csv": {
+      "sha256": "21db6368b48fd5f875f9111f9359afabe5157656ca94f45282ed22f47721e447",
+      "bytes": 635066
+    },
+    "site/data/cavitation-loading/primary-band-comparison.csv": {
+      "sha256": "6839a9cd0a4fec2ab803efd1d251c5203777d3a46cd51606b586e5705252ab1c",
+      "bytes": 2084
+    },
+    "site/data/cavitation-loading/primary-delta-receivers.csv": {
+      "sha256": "955118f4808573f6f8f6d32aaf78436ac41c2f561c68ee74f061e4601aa4a49a",
+      "bytes": 1424297
+    },
+    "site/data/cavitation-loading/primary-delta.npz": {
+      "sha256": "513c76b99a234004167f5d9d93221cb679912f82e4528818d618883468906f53",
+      "bytes": 751030
+    },
+    "site/data/cavitation-loading/primary-off-receivers.csv": {
+      "sha256": "e037509f4ba4e9e741bc942f96c7d20d4346d43a6d9d9c6a40a24dbcc102850b",
+      "bytes": 1324597
+    },
+    "site/data/cavitation-loading/primary-off-spectrum.csv": {
+      "sha256": "1f9c28a77c45f375e870e2b25cfa03f8032fc594a6352ff73a433924e01f838c",
+      "bytes": 184517
+    },
+    "site/data/cavitation-loading/primary-off.npz": {
+      "sha256": "6cc1477053116c167c58273c3180ef5a0c47909bcda1265190f6449e00906df2",
+      "bytes": 676934
+    },
+    "site/data/cavitation-loading/primary-on-receivers.csv": {
+      "sha256": "7134a00334f1d93afd37f9095c2caf6dd0c339bd901bb417990abedd1fa35e27",
+      "bytes": 1324358
+    },
+    "site/data/cavitation-loading/primary-on-spectrum.csv": {
+      "sha256": "843041aa049fa0e36a0e39ae13a4583abc584e4157f9655323c96f134d94e443",
+      "bytes": 184507
+    },
+    "site/data/cavitation-loading/primary-on.npz": {
+      "sha256": "4ad673cba40c390f7810f284af7e2485e38b4bf3ddddcdc8eafe2c6a58c0e8c8",
+      "bytes": 676934
     },
     "site/data/cavitation/flowacoustics-cavitation-case.sha256": {
       "sha256": "21a159e3055f7201b20074717041003f4043bb59476f11b8ea61ccfcb8d7cce8",
@@ -243,8 +359,8 @@
       "bytes": 100
     },
     "site/index.html": {
-      "sha256": "aec9c2d9581fc9d71ca9f835e307900b2903a472be4bb02d8339ee077909db78",
-      "bytes": 12016
+      "sha256": "480b66e0cd544f1314a71558ed58292c8b91a41d6c16aed7e8fe3e622559efa3",
+      "bytes": 14411
     },
     "site/mrl2d-model.mjs": {
       "sha256": "374c28ad06867ee59fa4714a11d5f5cc78cc0a592c253dc186091d4568239aec",
@@ -701,5 +817,23 @@
     "source_aware_conservation_verified": false,
     "cavitation_acoustics_predicted": false,
     "comparison_is_matched_solver_causality": false
+  },
+  "matched_pressure_loading": {
+    "scope": "custom infinite-span 2D pressure-loading-only contribution; not total cavitation noise or physical validation",
+    "native_export_manifest_sha256": "19e11f477823cd7e663786db8dc83aa442830af6fc2ebf2d5f56711899e98ce3",
+    "numerical_comparisons_per_export": 240,
+    "numerical_values_per_export": 1167862,
+    "exact_replay_files": 25,
+    "browser_viewports_px": [
+      1440,
+      390
+    ],
+    "browser_control_combinations": 96,
+    "native_browser_downloads": 50,
+    "preserved_original_browser_downloads": 7,
+    "browser_report_sha256": "853ef82b93323cc3a0227c459dd934649372866c714ecf2d35f3c85dbeed5500",
+    "original_release_files_unchanged": 156,
+    "previous_verification_fields_are_historical": true,
+    "native_replay_package_distributed": false
   }
 }

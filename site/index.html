@@ -35,7 +35,35 @@
     <div class="scope-note"><p><strong>The model boundary.</strong> WALE here is a <strong>2D LES-model calculation, not resolved 3D LES</strong>. All acoustics describe an idealized 2D infinite-span source, not a finite-turbine noise prediction. Solver completion alone does not establish physical accuracy.</p></div>
   </section>
 
-  <section id="geometry" class="lesson" aria-labelledby="geometry-heading">
+  <!-- Proposed standalone section; not installed. Put the image in site/assets/mrl2d/ when approved. -->
+<section id="mrl-turbine" class="lesson" aria-labelledby="mrl-turbine-title">
+  <div class="section-heading">
+    <p class="eyebrow">THE DEVICE / THE IDEALISED MODEL</p>
+    <h2 id="mrl-turbine-title">The turbine behind the model.</h2>
+  </div>
+  <div class="split">
+    <div class="lesson-copy">
+      <p><strong>MRL means Momentum Reversal and Lift.</strong> Its three blades orbit a common axis while pitching about their own axes. The rotor axis is perpendicular to the flow: this is a cross-flow turbine, not a propeller.</p>
+      <p>The photograph shows a laboratory prototype. This study instead uses three elliptical, strictly two-dimensional blade sections, with prescribed orbit and half-speed absolute pitch. It omits the prototype’s shaft, plates, supports and gearing.</p>
+      <dl class="parameters">
+        <div><dt>Photographed prototype · blade chord</dt><dd>0.095 m</dd></div>
+        <div><dt>This model · chord × thickness</dt><dd>0.070 × 0.007 m</dd></div>
+        <div><dt>This model · blade-centre orbit radius</dt><dd>0.055 m</dd></div>
+      </dl>
+      <p class="figure-note">The photograph identifies the turbine concept; it is not the simulated geometry or evidence of this study’s flow or acoustic results.</p>
+    </div>
+    <figure class="geometry-figure" aria-labelledby="mrl-photo-caption">
+      <div class="figure-bar"><span class="tag">LABORATORY PROTOTYPE / PHOTOGRAPH</span></div>
+      <img src="./assets/mrl2d/mrl-laboratory-turbine-gebreslassie-2016-fig5.jpg"
+           alt="MRL laboratory turbine in its support frame; the original photograph labels the damper, sided plates and encoder."
+           width="532" height="580" loading="lazy" decoding="async"
+           style="display:block;width:100%;max-width:532px;height:auto;margin:14px auto 0">
+      <figcaption id="mrl-photo-caption">MRL laboratory turbine, distinct from this study’s 2D surrogate. From <a href="https://strathprints.strath.ac.uk/57540/" title="Experimental and CFD analysis of the wake characteristics of tidal turbines">Gebreslassie et al. (2016), Fig. 5</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Crown Copyright © 2016, published by Elsevier. Extracted without image changes.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="geometry" class="lesson" aria-labelledby="geometry-heading">
     <div class="section-heading"><p class="eyebrow">01 / GEOMETRY &amp; DUAL MOTION</p><h2 id="geometry-heading">An orbit is not the same as a pitch.</h2></div>
     <div class="split">
       <div class="lesson-copy"><p>The centre of each elliptical blade travels clockwise around the rotor. At the same time, its chord turns at <strong>half that angular speed in the fixed frame</strong>. This is not one rigid rotating shape.</p><dl class="parameters"><div><dt>Blade chord × thickness</dt><dd>0.070 × 0.007 m</dd></div><div><dt>Orbit radius</dt><dd>0.055 m</dd></div><div><dt>Orbit / absolute pitch speed</dt><dd>−10.472 / −5.236 rad/s</dd></div><div><dt>Inflow / circular farfield radius</dt><dd>1 m/s / 0.6 m</dd></div></dl><p class="figure-note">Prescribed geometry and motion, not a mesh or CFD result. The drawing is a local view; the outer farfield lies beyond it.</p></div>

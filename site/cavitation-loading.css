@@ -1,0 +1,42 @@
+/* Additive loading lesson only; old flow/movie styles remain untouched. */
+.loading-comparison { border-top: 2px solid var(--teal); }
+.loading-comparison .loading-distinction { border-left: 3px solid var(--rust); padding-left: 18px; }
+.loading-comparison .loading-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; margin: 24px 0; }
+.loading-comparison label { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.loading-comparison select { max-width: 100%; }
+.loading-comparison .loading-metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 22px 0; }
+.loading-comparison .loading-metrics article { background: var(--surface); border-top: 3px solid var(--teal); padding: 16px; min-width: 0; }
+.loading-comparison .loading-metrics article:nth-child(2) { border-color: var(--rust); }
+.loading-comparison .loading-metrics article:nth-child(3) { border-color: var(--muted); }
+.loading-comparison .loading-metrics h3 { margin: 0; font-size: 16px; }
+.loading-comparison .loading-metrics p { margin: 8px 0 0; }
+.loading-comparison .loading-value { font: 24px/1.4 var(--serif); }
+.loading-comparison .loading-value span { display: block; font: 13px/1.5 var(--sans); }
+.loading-comparison .loading-origin { font-weight: 700; }
+.loading-comparison .loading-test-only { border: 2px solid var(--rust); padding: 12px; background: #fff3e8; }
+.loading-comparison .loading-paired-plots { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.loading-comparison .computed-chart { margin: 22px 0; min-width: 0; padding: 18px; }
+.loading-comparison .computed-chart > svg { display: block; max-width: 100%; height: auto; }
+.loading-comparison .computed-chart > svg text { font: 14px var(--sans); }
+.loading-comparison .computed-chart h3 { margin-top: 0; font-size: 19px; }
+.loading-comparison .computed-chart .plot-legend { flex-wrap: wrap; }
+.loading-comparison [data-loading-details] { margin-top: 24px; }
+.loading-comparison summary { cursor: pointer; min-height: 44px; padding: 10px 0; font-weight: 600; }
+.loading-comparison .loading-force-control { max-width: 240px; }
+.loading-comparison .loading-method { display: grid; grid-template-columns: 130px minmax(0,1fr); gap: 12px 18px; }
+.loading-comparison .loading-method dt { font-weight: 600; }
+.loading-comparison .loading-method dd { margin: 0; }
+.loading-comparison .loading-table-wrap { max-width: 100%; overflow-x: auto; }
+.loading-comparison table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.loading-comparison th, .loading-comparison td { text-align: left; padding: 9px; border-bottom: 1px solid var(--line); min-width: 90px; }
+.loading-comparison tr[aria-current] { background: var(--pale); }
+.loading-comparison pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
+.loading-comparison .loading-downloads { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-left: 20px; }
+.loading-comparison a, .loading-comparison p, .loading-comparison li { overflow-wrap: anywhere; }
+.loading-comparison :focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+@media (max-width: 700px) {
+  .loading-comparison .loading-paired-plots, .loading-comparison .loading-metrics { grid-template-columns: minmax(0,1fr); }
+  .loading-comparison .loading-controls { align-items: stretch; flex-direction: column; }
+  .loading-comparison .loading-method { grid-template-columns: minmax(0,1fr); gap: 4px; }
+  .loading-comparison .loading-method dd { margin-bottom: 12px; }
+}
