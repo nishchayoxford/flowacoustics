@@ -1,7 +1,7 @@
 {
   "schema": "flowacoustics-public-release-v1",
   "study": "mrl2d",
-  "scope": "educational strict-2D turbine/acoustics study, original cavitating-flow lesson and separate matched pressure-loading comparison",
+  "scope": "educational strict-2D turbine/acoustics study, original cavitating-flow lesson and separate matched pressure-loading comparison; technical methods reference with CFD/acoustic equations and editable solver/workflow diagrams",
   "owner_authorized_distribution": true,
   "source_package": {
     "directory": "source/mrl2d",
@@ -27,7 +27,7 @@
     "physical_validation_claimed": false,
     "finite_turbine_noise_prediction": false
   },
-  "file_count_excluding_manifest": 188,
+  "file_count_excluding_manifest": 192,
   "manifest_self_excluded": true,
   "files": {
     ".gitattributes": {
@@ -123,8 +123,8 @@
       "bytes": 3334
     },
     "site/cavitation.html": {
-      "sha256": "264f807a357110a2fa1d0bc01e5c4a97e7bd2ee1d9467343870bab08c604131d",
-      "bytes": 12275
+      "sha256": "5d30028353e0e02475b9378073deb41bcaac389fb58747ec1243e358e7f5497c",
+      "bytes": 12340
     },
     "site/cavitation.mjs": {
       "sha256": "bab86022db760029c88085c45b87719c9290ad738ca1bf7c46eeaf7d2e72c9a7",
@@ -359,8 +359,8 @@
       "bytes": 100
     },
     "site/index.html": {
-      "sha256": "480b66e0cd544f1314a71558ed58292c8b91a41d6c16aed7e8fe3e622559efa3",
-      "bytes": 14411
+      "sha256": "34280fc7974a86c7944aac96378a0f9840fd98b9ce2ced7d067089f6e8affe02",
+      "bytes": 14426
     },
     "site/mrl2d-model.mjs": {
       "sha256": "374c28ad06867ee59fa4714a11d5f5cc78cc0a592c253dc186091d4568239aec",
@@ -781,6 +781,22 @@
     "source/mrl2d/uv.lock": {
       "sha256": "a07f223182293077f7938baff5674e43917faa7265803d383592cd1f9a96ffd3",
       "bytes": 52410
+    },
+    "site/methods.html": {
+      "sha256": "5fca7eaed808115e622b9aeb6f37e4178dc264034f3bb9d5ee67ea03a6a5aec0",
+      "bytes": 44891
+    },
+    "site/methods.css": {
+      "sha256": "f41ba02d865789fa1c61262eef88c9c0d4043043d2328abdeb38475c7c9595c3",
+      "bytes": 3464
+    },
+    "site/assets/mrl2d/methods-flow.svg": {
+      "sha256": "22aa259ec52af26b22e88e960fb1a62ad0bf46ac7f8226aecdf1d757b0e2a30c",
+      "bytes": 5885
+    },
+    "site/assets/mrl2d/methods-acoustics.svg": {
+      "sha256": "9a24c4616cb1f6008fd22388155a0b1a187dea7c78a01782be0b508c5fbf4f6a",
+      "bytes": 4740
     }
   },
   "cavitation": {
@@ -835,5 +851,29 @@
     "original_release_files_unchanged": 156,
     "previous_verification_fields_are_historical": true,
     "native_replay_package_distributed": false
+  },
+  "technical_methods": {
+    "entrypoint": "site/methods.html",
+    "change_scope": "Documentation and navigation only; existing numerical source, results and movies unchanged.",
+    "new_simulation_run": false,
+    "new_acoustic_physics": false,
+    "math_rendering": "Native MathML; no browser script, external renderer or remote font dependency.",
+    "mathml_blocks": 29,
+    "editable_diagrams": [
+      "site/assets/mrl2d/methods-flow.svg",
+      "site/assets/mrl2d/methods-acoustics.svg"
+    ],
+    "verification": {
+      "integrated_site_tests_passed": 140,
+      "test_collection_execution_identities_match": true,
+      "independent_technical_review": "PASS: actual MathML, installed solver/acoustic source and flowchart semantics inspected.",
+      "browser_viewports_px": [
+        1440,
+        390
+      ],
+      "same_origin_link_bodies_verified": 7,
+      "actual_svg_downloads_verified": 2,
+      "computed_result_controls_rechecked": true
+    }
   }
 }

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="990" viewBox="0 0 360 990" role="img" aria-labelledby="acoustics-title acoustics-desc">
+  <title id="acoustics-title">The implemented 2D FW-H-derived acoustic pipeline</title>
+  <desc id="acoustics-desc">Two alternative source definitions feed the same two-dimensional kernel. Original body or permeable cases use thickness and pressure plus relative advective loading. The matched phase-change ON/OFF pair uses zero thickness source and pressure loading only. These alternatives are not added. The common path retains actual geometry and applies projected-mean removal and periodic Hann conditioning, using a fixed-contour FFT or bounded six-term moving series, then forms signed complex coefficients and periodic receiver pressure. Independent verification starts separately from native primitives; it is described in the methods text, not drawn as feedback to the solver.</desc>
+  <defs><marker id="acoustics-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#006d70"/></marker></defs>
+  <style>
+    text{font-family:'Segoe UI',Arial,sans-serif;fill:#20353d;font-size:16.5px}
+    .heading{font-size:18px;font-weight:700}.small{font-size:14px;fill:#52636a}
+    .box{fill:#fffefa;stroke:#9bafaa;stroke-width:1.5;rx:6}
+    .accent{fill:#e6eeea;stroke:#006d70;stroke-width:1.5;rx:6}
+    .edge{fill:none;stroke:#006d70;stroke-width:1.8;marker-end:url(#acoustics-arrow)}
+  </style>
+  <path id="acoustics-original-kernel" class="edge" data-from="original" data-to="kernel" d="M324 99H342V434H326"/>
+  <path id="acoustics-matched-kernel" class="edge" data-from="matched" data-to="kernel" d="M180 332V380"/>
+  <path id="acoustics-kernel-transform" class="edge" data-from="kernel" data-to="transform" d="M180 486V532"/>
+  <path id="acoustics-transform-coefficients" class="edge" data-from="transform" data-to="coefficients" d="M180 650V696"/>
+  <path id="acoustics-coefficients-receivers" class="edge" data-from="coefficients" data-to="receivers" d="M180 786V832"/>
+  <g id="original" data-node="true" data-x="36" data-y="30" data-width="288" data-height="134">
+    <rect class="box" x="36" y="30" width="288" height="134"/>
+    <text x="52" y="59" class="heading">Original four cases</text>
+    <text x="52" y="87">Body / stationary envelope</text>
+    <text x="52" y="113">Q = ρ₀Uₙ</text>
+    <text x="52" y="139">L = p<tspan baseline-shift="sub" font-size="12">g</tspan>n + relative momentum flux</text>
+  </g>
+  <text class="small" x="36" y="188">Alternative source models — never added</text>
+  <g id="matched" data-node="true" data-x="36" data-y="198" data-width="288" data-height="134">
+    <rect class="accent" x="36" y="198" width="288" height="134"/>
+    <text x="52" y="227" class="heading">Matched phase ON / OFF</text>
+    <text x="52" y="255">Native absolute-Pa wall inputs</text>
+    <text x="52" y="281">Q = 0</text>
+    <text x="52" y="307">L = (p<tspan baseline-shift="sub" font-size="12">abs</tspan> − 3500 Pa)n</text>
+  </g>
+  <g id="kernel" data-node="true" data-x="36" data-y="382" data-width="288" data-height="104">
+    <rect class="box" x="36" y="382" width="288" height="104"/>
+    <text x="52" y="411" class="heading">Moving 2D contour integral</text>
+    <text x="52" y="439">iωQG + L · ∇<tspan baseline-shift="sub" font-size="12">y</tspan>G</text>
+    <text x="52" y="465">Actual positions, normals and ds</text>
+  </g>
+  <g id="transform" data-node="true" data-x="36" data-y="534" data-width="288" data-height="116">
+    <rect class="box" x="36" y="534" width="288" height="116"/>
+    <text x="52" y="563" class="heading">Condition &amp; transform</text>
+    <text x="52" y="591">Projected mean → periodic Hann</text>
+    <text x="52" y="615">Fixed FFT / moving series</text>
+    <text x="52" y="639">Full time; spatial panel chunks</text>
+  </g>
+  <g id="coefficients" data-node="true" data-x="36" data-y="698" data-width="288" data-height="88">
+    <rect class="box" x="36" y="698" width="288" height="88"/>
+    <text x="52" y="729" class="heading">Complex coefficients</text>
+    <text x="52" y="759">Signed amplitude and phase</text>
+  </g>
+  <g id="receivers" data-node="true" data-x="36" data-y="834" data-width="288" data-height="122">
+    <rect class="accent" x="36" y="834" width="288" height="122"/>
+    <text x="52" y="863" class="heading">Receiver quantities</text>
+    <text x="52" y="891">Periodic band-limited pressure</text>
+    <text x="52" y="917">Bin RMS · band RMS · dB</text>
+    <text x="52" y="943">Twelve positions at 1 m</text>
+  </g>
+  <text class="small" x="36" y="980">Offline acoustics, not a CFD wave field.</text>
+</svg>

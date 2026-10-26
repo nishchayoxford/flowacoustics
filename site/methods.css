@@ -1,0 +1,50 @@
+.methods .intro { max-width: 100%; }
+.methods h1 { font-size: clamp(38px, 4.8vw, 62px); }
+.methods .lesson { scroll-margin-top: 20px; }
+.methods .method-note { margin: 24px 0; padding: 18px 22px; border-left: 3px solid var(--teal); background: var(--pale); max-width: 90ch; }
+.methods .table-scroll { overflow-x: auto; margin: 24px 0; }
+.methods .method-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 15px; }
+.methods .method-table th, .methods .method-table td { padding: 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.methods .method-table thead { background: var(--pale); }
+.methods .method-table th[scope="row"] { min-width: 180px; }
+.methods .method-table td { min-width: 240px; }
+.methods .equation { margin: 26px 0; padding: 20px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; }
+.methods .math-scroll { overflow-x: auto; max-width: 100%; overscroll-behavior-x: contain; padding: 8px 2px 14px; }
+.methods math + math { margin-top: 20px; }
+.methods .equation, .methods .lesson { min-width: 0; }
+.methods .scroll-hint { color: var(--muted); font-size: 14px; }
+.methods .math-scroll:focus-visible, .methods .table-scroll:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+.methods math { font-family: "STIX Two Math", "Cambria Math", "Latin Modern Math", math; font-size: 22px; text-align: left; min-width: max-content; margin: 0; }
+.methods .equation figcaption { margin-top: 12px; color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 90ch; }
+.methods .symbols { margin: 22px 0; display: grid; grid-template-columns: max-content 1fr; column-gap: 20px; row-gap: 8px; }
+.methods .symbols dt { font-family: var(--serif); font-weight: 700; }
+.methods .symbols dd { margin: 0; }
+.methods .workflow-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+.methods .workflow { margin: 0; min-width: 0; }
+.methods .workflow svg { display: block; width: 100%; height: auto; max-width: 440px; }
+.methods .workflow object { display: block; width: 100%; max-width: 440px; height: auto; border: 0; }
+.methods .workflow-flow object { aspect-ratio: 360 / 1280; }
+.methods .workflow-acoustics object { aspect-ratio: 360 / 990; }
+.methods .workflow figcaption { margin-top: 18px; font-size: 14px; color: var(--muted); }
+.methods .technical-links { display: flex; gap: 12px 24px; flex-wrap: wrap; }
+.methods .technical-links a { min-height: 44px; display: inline-flex; align-items: center; }
+.methods .reference-list li { margin-bottom: 16px; overflow-wrap: anywhere; }
+.methods details { margin: 18px 0; }
+.methods details summary { cursor: pointer; padding: 12px 0; font-weight: 600; }
+.methods details[open] summary { margin-bottom: 12px; }
+@media (max-width: 800px) {
+  .methods .workflow-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .methods .equation { padding: 14px 12px; }
+  .methods math { font-size: 20px; }
+  .methods .method-note { padding: 14px 16px; }
+  .methods .symbols { column-gap: 12px; font-size: 14px; }
+  .methods .method-table th, .methods .method-table td { padding: 12px; }
+}
+@media print {
+  .methods .masthead, .methods .skip, .methods .lesson-nav { display: none; }
+  .methods main { max-width: none; padding: 0; }
+  .methods .equation, .methods .workflow { break-inside: avoid; }
+  .methods .math-scroll, .methods .table-scroll { overflow: visible; }
+}

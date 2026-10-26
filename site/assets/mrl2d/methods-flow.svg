@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="1280" viewBox="0 0 360 1280" role="img" aria-labelledby="flow-title flow-desc">
+  <title id="flow-title">Matched phase-change CFD: the executed time-step loop</title>
+  <desc id="flow-desc">A compact map of interPhaseChangeDyMFoam v2206. With case inputs loaded, advance the fixed time step. Move the mesh and update AMI on the first PIMPLE outer iteration. Solve liquid fraction, momentum and pressure. Repeat from liquid fraction for the second outer iteration, update WALE only on that final iteration, and record. Repeat time steps until completion, then hand the records one way to offline acoustics. The pressure box contains two correctors, each with two non-orthogonal passes. This is a curated solver map, not a full call graph.</desc>
+  <defs><marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#006d70"/></marker></defs>
+  <style>
+    text{font-family:'Segoe UI',Arial,sans-serif;fill:#20353d;font-size:16.5px}
+    .heading{font-size:18px;font-weight:700}.small{font-size:14px;fill:#52636a}
+    .box{fill:#fffefa;stroke:#9bafaa;stroke-width:1.5;rx:6}
+    .accent{fill:#e6eeea;stroke:#006d70;stroke-width:1.5;rx:6}
+    .edge{fill:none;stroke:#006d70;stroke-width:1.8;marker-end:url(#flow-arrow)}
+    .repeat{stroke-dasharray:5 4}
+  </style>
+  <path id="flow-advance-mesh" class="edge" data-from="advance" data-to="mesh" d="M180 142V188"/>
+  <path id="flow-mesh-alpha" class="edge" data-from="mesh" data-to="alpha" d="M180 292V338"/>
+  <path id="flow-alpha-momentum" class="edge" data-from="alpha" data-to="momentum" d="M180 456V502"/>
+  <path id="flow-momentum-pressure" class="edge" data-from="momentum" data-to="pressure" d="M180 604V650"/>
+  <path id="flow-pressure-outer" class="edge" data-from="pressure" data-to="outer-end" d="M180 762V808"/>
+  <path id="flow-repeat-outer" class="edge repeat" data-from="outer-end" data-to="alpha" data-condition="outer iteration 1 to 2" d="M44 862H26V398H42"/>
+  <path id="flow-outer-record" class="edge" data-from="outer-end" data-to="record" data-condition="after outer iteration 2" d="M180 914V970"/>
+  <path id="flow-repeat-time" class="edge repeat" data-from="record" data-to="advance" data-condition="more time steps" d="M316 1023H334V89H318"/>
+  <path id="flow-record-offline" class="edge" data-from="record" data-to="offline" data-condition="completed source records" d="M180 1074V1138"/>
+  <text class="small" x="16" y="766" transform="rotate(-90 16 766)">outer iteration 1 → 2</text>
+  <text class="small" x="344" y="520" transform="rotate(90 344 520)">next time step, until 10 s</text>
+  <text class="small" x="195" y="948">after outer 2</text>
+  <text class="small" x="195" y="1114">completed</text>
+  <g id="advance" data-node="true" data-x="44" data-y="36" data-width="272" data-height="106">
+    <rect class="accent" x="44" y="36" width="272" height="106"/>
+    <text x="60" y="65" class="heading">Advance fixed step</text>
+    <text x="60" y="93">Δt = 6.25 × 10⁻⁵ s</text>
+    <text x="60" y="119">Start PIMPLE outer loop</text>
+  </g>
+  <g id="mesh" data-node="true" data-x="44" data-y="190" data-width="272" data-height="102">
+    <rect class="box" x="44" y="190" width="272" height="102"/>
+    <text x="60" y="219" class="heading">First outer iteration only</text>
+    <text x="60" y="247">Move mesh · update AMI</text>
+    <text x="60" y="273">Correct flux; make relative</text>
+  </g>
+  <g id="alpha" data-node="true" data-x="44" data-y="340" data-width="272" data-height="116">
+    <rect class="box" x="44" y="340" width="272" height="116"/>
+    <text x="60" y="369" class="heading">Liquid fraction α</text>
+    <text x="60" y="397">Euler predictor + MULES</text>
+    <text x="60" y="421">2 corrections; no subcycling</text>
+    <text x="60" y="445">Update density and mass flux</text>
+  </g>
+  <g id="momentum" data-node="true" data-x="44" data-y="504" data-width="272" data-height="100">
+    <rect class="box" x="44" y="504" width="272" height="100"/>
+    <text x="60" y="533" class="heading">Momentum predictor</text>
+    <text x="60" y="560">Assemble and solve ρU</text>
+    <text x="60" y="586">Include residual correction</text>
+  </g>
+  <g id="pressure" data-node="true" data-x="44" data-y="652" data-width="272" data-height="110">
+    <rect class="box" x="44" y="652" width="272" height="110"/>
+    <text x="60" y="681" class="heading">Pressure–velocity loop</text>
+    <text x="60" y="709">2 correctors × 2 passes</text>
+    <text x="60" y="733">Correct flux and velocity</text>
+    <text x="60" y="751" class="small">passes: non-orthogonal pressure</text>
+  </g>
+  <g id="outer-end" data-node="true" data-x="44" data-y="810" data-width="272" data-height="104">
+    <rect class="box" x="44" y="810" width="272" height="104"/>
+    <text x="60" y="839" class="heading">Finish outer iteration</text>
+    <text x="60" y="867">Repeat α → U → p once</text>
+    <text x="60" y="893">Update WALE on final only</text>
+  </g>
+  <g id="record" data-node="true" data-x="44" data-y="972" data-width="272" data-height="102">
+    <rect class="box" x="44" y="972" width="272" height="102"/>
+    <text x="60" y="1001" class="heading">Record &amp; advance</text>
+    <text x="60" y="1029">Wall sources every 32 steps</text>
+    <text x="60" y="1055">Fields at their own cadence</text>
+  </g>
+  <g id="offline" data-node="true" data-x="44" data-y="1140" data-width="272" data-height="102">
+    <rect class="accent" x="44" y="1140" width="272" height="102"/>
+    <text x="60" y="1169" class="heading">Offline acoustics</text>
+    <text x="60" y="1197">Read completed recordings</text>
+    <text x="60" y="1223">No feedback to the CFD</text>
+  </g>
+  <text class="small" x="44" y="1270">Dashed arrows: conditional repeat loops.</text>
+</svg>
