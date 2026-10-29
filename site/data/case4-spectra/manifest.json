@@ -1,0 +1,70 @@
+{
+  "schema": "mrl2d-case4-spectral-manifest-v1",
+  "case_id": "mrl2d_les_permeable",
+  "manifest_self_excluded": true,
+  "counts": {
+    "observers": 12,
+    "frequencies": 196,
+    "spectra_rows": 2352,
+    "peaks_rows": 12,
+    "directivity_rows": 12,
+    "pdf_pages": 3
+  },
+  "pdf_page_order": [
+    "Pa/dB directivity",
+    "12 coherent bin-RMS spectra",
+    "12 Hann PSD spectra"
+  ],
+  "sources": [
+    {
+      "path": "site/data/mrl2d/mrl2d_les_permeable.npz",
+      "sha256": "4b2e88c84484e0c28ae647b62735ca4efee6e9476612128665d511ba8d3691e4"
+    },
+    {
+      "path": "site/data/results.json",
+      "sha256": "0d577f8e06b2866ead5309db30f0f9afe4696568070aebe5b6c726686bdd484b"
+    },
+    {
+      "path": "site/data/mrl2d/public-manifest.json",
+      "sha256": "33c8a8b0b863e33e62eb0541732cc39f65e5fd3ba1b7ec38611212e762e5129c"
+    },
+    {
+      "path": "src/flowacoustics/acoustics2d.py",
+      "sha256": "57451ad541f6165762baa1cbfa8b0ef730fa25b9beff950df857633cdcea21a3"
+    }
+  ],
+  "outputs": {
+    "bin-rms.png": {
+      "sha256": "4cfb2fb94b0e205b4edceced095c09d17f11941f4243b625a85485931fd76305",
+      "bytes": 681530
+    },
+    "directivity.csv": {
+      "sha256": "db44b4a586d434bddc3f53f31af96147bee4d3a1ac4d9acd4c3602e847671a42",
+      "bytes": 622
+    },
+    "directivity.png": {
+      "sha256": "bc755b126c8b9be27c67dd22199f16b98e80633b4d6b5ccd8edb32a7a5b082d5",
+      "bytes": 391062
+    },
+    "peaks.csv": {
+      "sha256": "7943af57ab4fbaaf26c6b3884f4233c48e7d1b323491c3182dfb5820cfea320f",
+      "bytes": 844
+    },
+    "plots.pdf": {
+      "sha256": "407a6693764d67585d11145c997cf1351ee0684b2c24c77878ce7e0f5ca98af3",
+      "bytes": 144572
+    },
+    "psd.png": {
+      "sha256": "439482edd66342465739c9642648f0f778cfb7807ba610c763c32e7c3e3e1989",
+      "bytes": 541943
+    },
+    "spectra.csv": {
+      "sha256": "42c0362b2ff182649a8d89cc85591cb98745cda019847f05b3977eaa89c20524",
+      "bytes": 128238
+    },
+    "summary.json": {
+      "sha256": "bedccf4ea076bbc4cf9cdfe5e3fabb1702ed4145f681e6db0bda3d0dfd8570f0",
+      "bytes": 134542
+    }
+  }
+}

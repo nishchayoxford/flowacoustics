@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Original Case 4: selected-band dB directivity and all 12 observer bin-RMS and PSD spectra for strict-2D WALE with a stationary permeable contour.">
+  <meta name="theme-color" content="#f5f3ed">
+  <title>Turbine / Case 4 observer spectra</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./case4-spectra.css">
+</head>
+<body class="case4-spectra">
+<a class="skip" href="#main">Skip to Case 4 spectra</a>
+<header class="masthead"><a class="wordmark" href="./index.html">TURBINE <span>/ Case 4 spectra</span></a><a href="./methods.html#spectral">Spectral methods →</a></header>
+<main id="main">
+  <section class="intro" aria-labelledby="title">
+    <p class="eyebrow">ORIGINAL CASE 4 / RECEIVER SPECTRA</p>
+    <h1 id="title">Twelve directions.<br>One retained frequency band.</h1>
+    <p class="standfirst">The original single-phase, strict-2D WALE calculation with a stationary permeable contour. Compare the band level around the turbine, then inspect every observer’s sampled spectrum.</p>
+    <p class="scope-note"><strong>Fixed case:</strong> <code>mrl2d_les_permeable</code> — not the matched cavitation loading comparison. These are derived views of the existing receiver coefficients, not a new flow or acoustic simulation.</p>
+    <dl class="spectra-facts"><div><dt>Selected band</dt><dd>0.625–25 Hz</dd></div><div><dt>Sample window</dt><dd>2.002–10 s</dd></div><div><dt>Observer radius</dt><dd>1 m</dd></div><div><dt>Sampling</dt><dd>12 angles · 196 bins</dd></div></dl>
+    <nav class="lesson-nav" aria-label="Case 4 sections"><a href="#directivity">Directivity</a><a href="#spectra">All observer spectra</a><a href="#peaks">Peak table</a><a href="#definitions">Definitions &amp; limits</a><a href="#downloads">Downloads</a></nav>
+  </section>
+  <div class="load-bar"><p id="spectra-status" role="status" aria-live="polite" data-state="loading">Loading the original Case 4 spectral summary…</p><button type="button" id="reload-spectra">Reload data</button></div>
+  <noscript><p>JavaScript is needed to validate the summary and show the interactive plots. No replacement data are displayed.</p></noscript>
+  <div id="spectra-results" hidden>
+    <section id="directivity" class="lesson" aria-labelledby="directivity-title">
+      <p class="eyebrow">01 / SELECTED-BAND DIRECTIVITY</p>
+      <h2 id="directivity-title">The same band RMS, in dB and pascals.</h2>
+      <p>Each marker is one observer. The dB view uses <strong>20 log₁₀(band RMS / 1 µPa)</strong>, with radial ticks labelled in dB—not percentages of a dB value. Points are not joined or interpolated. Zero degrees is +x; angles increase counterclockwise.</p>
+      <div class="polar-grid"><figure><figcaption>Band level · dB re 1 µPa</figcaption><div id="polar-db"></div></figure><figure><figcaption>Band RMS · Pa</figcaption><div id="polar-pa"></div></figure></div>
+    </section>
+    <section id="spectra" class="lesson" aria-labelledby="spectra-title">
+      <p class="eyebrow">02 / ALL 12 OBSERVERS</p>
+      <h2 id="spectra-title">Inspect the retained bins.</h2>
+      <p>Switch the metric for every card together. Axes are common across observers; the open rust marker identifies the largest sampled bin. Lines only join the retained bins as a visual guide—there is no added frequency resolution.</p>
+      <div id="metric-controls" class="metric-controls" role="group" aria-label="Spectrum metric"><button type="button" id="metric-rms" data-metric="rms" aria-pressed="true" disabled>Bin RMS · Pa</button><button type="button" id="metric-psd" data-metric="psd" aria-pressed="false" disabled>PSD · Pa²/Hz</button></div>
+      <p id="metric-note" class="metric-note" role="status" aria-live="polite">Showing coherent bin RMS (Pa).</p>
+      <div id="observer-spectra" class="spectra-grid"></div>
+    </section>
+    <section id="peaks" class="lesson" aria-labelledby="peaks-title">
+      <p class="eyebrow">03 / LARGEST SAMPLED BINS</p>
+      <h2 id="peaks-title">Peak frequency, without a mechanism claim.</h2>
+      <p>Maxima are selected only within 0.625–25 Hz, at the original 0.125 Hz bin spacing. RMS and PSD have the same peak frequency because ENBW is common. A 5 Hz peak, if present, is not proof of a blade-passing mechanism. Band-edge candidates and tied maxima are identified explicitly.</p>
+      <p class="figure-note">The full table scrolls horizontally on a narrow screen. Focus it and use the arrow keys.</p>
+      <div id="peak-table" class="table-scroll" tabindex="0" role="region" aria-label="All 12 observer peaks and band levels"></div>
+    </section>
+    <section id="downloads" class="lesson" aria-labelledby="downloads-title">
+      <p class="eyebrow">04 / REUSE THE NUMERICAL VALUES</p>
+      <h2 id="downloads-title">Data and figure downloads.</h2>
+      <p>CSV values retain the original bins. The three-page PDF contains the Pa/dB polar comparison, all bin-RMS panels and all PSD panels. The manifest pins outputs and immutable sources with SHA256 hashes.</p>
+      <ul class="spectra-downloads">
+        <li><a download href="./data/case4-spectra/spectra.csv">All spectra · CSV</a></li>
+        <li><a download href="./data/case4-spectra/peaks.csv">Observer peaks · CSV</a></li>
+        <li><a download href="./data/case4-spectra/directivity.csv">Band directivity · CSV</a></li>
+        <li><a download href="./data/case4-spectra/plots.pdf">All figures · PDF</a></li>
+        <li><a download href="./data/case4-spectra/directivity.png">Directivity · PNG</a></li>
+        <li><a download href="./data/case4-spectra/bin-rms.png">Bin-RMS panels · PNG</a></li>
+        <li><a download href="./data/case4-spectra/psd.png">PSD panels · PNG</a></li>
+        <li><a download href="./data/case4-spectra/summary.json">Spectral summary · JSON</a></li>
+        <li><a download href="./data/case4-spectra/manifest.json">Hashes &amp; provenance · JSON</a></li>
+      </ul>
+    </section>
+  </div>
+  <section id="definitions" class="lesson" aria-labelledby="definitions-title">
+    <p class="eyebrow">READING THESE RESULTS</p>
+    <h2 id="definitions-title">Two normalizations. One explicit scope.</h2>
+    <dl class="spectral-definitions">
+      <div><dt>Coherent bin RMS · Pa</dt><dd>For the retained complex coefficient c, bin RMS = √2 |c|. The original periodic Hann transform was already divided by the sum of its weights. No second window is applied and no receiver trace is reconstructed here.</dd></div>
+      <div><dt>One-sided PSD · Pa²/Hz</dt><dd>PSD = 2 |c|² / ENBW = bin RMS² / ENBW. For these 4000 samples at 0.002 s cadence, ENBW = 0.1875 Hz, distinct from bin spacing Δf = 0.125 Hz. This is a propagated, single-record spectral-density estimate over the retained band, not a Welch average or a newly validated broadband stationary-noise estimate.</dd></div>
+      <div><dt>Band RMS and band level</dt><dd>The polar plots retain the original coherent band RMS. Its level is dB re 1 µPa, not a per-Hz level. The selected-band PSD sum × Δf equals coherent band mean square × (Δf / ENBW) = 2/3 of coherent band mean square. These two integrations must not be equated.</dd></div>
+      <div><dt>What this cannot establish</dt><dd>The observers are at 1 m, in the near-field for this low-frequency band. The strict-2D, span-invariant model represents ideal infinite-span geometry, not a finite turbine or resolved three-dimensional LES. Do not interpret these results as validated far-field sound levels, complete broadband noise, or evidence for a unique tonal source mechanism.</dd></div>
+    </dl>
+    <p><a href="./methods.html#spectral">Read the implemented spectral method →</a> · <a href="./index.html">Return to the original four cases →</a></p>
+  </section>
+  <footer><p>Original Case 4 · read-only spectral extension</p><a href="#main">Back to top ↑</a></footer>
+</main>
+<script type="module" src="./case4-spectra.mjs"></script>
+</body>
+</html>

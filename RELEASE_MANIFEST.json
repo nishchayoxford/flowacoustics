@@ -1,7 +1,7 @@
 {
   "schema": "flowacoustics-public-release-v1",
   "study": "mrl2d",
-  "scope": "educational strict-2D turbine/acoustics study, original cavitating-flow lesson and separate matched pressure-loading comparison; technical methods reference with CFD/acoustic equations and editable solver/workflow diagrams",
+  "scope": "educational strict-2D turbine/acoustics study, original cavitating-flow lesson and separate matched pressure-loading comparison; technical methods reference with CFD/acoustic equations and editable solver/workflow diagrams; additive original Case 4 dB directivity and twelve-receiver bin-RMS/PSD spectral detail",
   "owner_authorized_distribution": true,
   "source_package": {
     "directory": "source/mrl2d",
@@ -27,7 +27,7 @@
     "physical_validation_claimed": false,
     "finite_turbine_noise_prediction": false
   },
-  "file_count_excluding_manifest": 192,
+  "file_count_excluding_manifest": 210,
   "manifest_self_excluded": true,
   "files": {
     ".gitattributes": {
@@ -86,6 +86,14 @@
       "sha256": "9ccb8d2ba16f7b1e2087279ea005981aee903f55b18eceb3b31e677dc490beba",
       "bytes": 1713399
     },
+    "site/assets/mrl2d/methods-acoustics.svg": {
+      "sha256": "9a24c4616cb1f6008fd22388155a0b1a187dea7c78a01782be0b508c5fbf4f6a",
+      "bytes": 4740
+    },
+    "site/assets/mrl2d/methods-flow.svg": {
+      "sha256": "22aa259ec52af26b22e88e960fb1a62ad0bf46ac7f8226aecdf1d757b0e2a30c",
+      "bytes": 5885
+    },
     "site/assets/mrl2d/mrl-laboratory-turbine-gebreslassie-2016-fig5.jpg": {
       "sha256": "8f022b0327c38d43c1857912dba9988db1898aa966f2bc332ead18cc9567ee4a",
       "bytes": 87521
@@ -110,6 +118,18 @@
       "sha256": "356751cd39f80a7e3df8f9e6f1a4c70dbce11171017c64da3ddab87a4e49ab02",
       "bytes": 1699340
     },
+    "site/case4-spectra.css": {
+      "sha256": "fdf030d04f26bd02d3b3eb121aef4f953ffa6209a9578ad0e247ce5d297ede49",
+      "bytes": 4493
+    },
+    "site/case4-spectra.html": {
+      "sha256": "154818efb71fbe15b060d9f1e8e17a6999086792fe36677d86ef314a29fac1ca",
+      "bytes": 8154
+    },
+    "site/case4-spectra.mjs": {
+      "sha256": "91c62ceaeef7443ce3e990723e6f74f7f2142d6c79a859ddd6f26280811712fa",
+      "bytes": 15072
+    },
     "site/cavitation-loading.css": {
       "sha256": "37a349c62cb62364bb937f86c4e5148206c190caaf014634115cf138f7cff6a8",
       "bytes": 3546
@@ -129,6 +149,42 @@
     "site/cavitation.mjs": {
       "sha256": "bab86022db760029c88085c45b87719c9290ad738ca1bf7c46eeaf7d2e72c9a7",
       "bytes": 19530
+    },
+    "site/data/case4-spectra/bin-rms.png": {
+      "sha256": "4cfb2fb94b0e205b4edceced095c09d17f11941f4243b625a85485931fd76305",
+      "bytes": 681530
+    },
+    "site/data/case4-spectra/directivity.csv": {
+      "sha256": "db44b4a586d434bddc3f53f31af96147bee4d3a1ac4d9acd4c3602e847671a42",
+      "bytes": 622
+    },
+    "site/data/case4-spectra/directivity.png": {
+      "sha256": "bc755b126c8b9be27c67dd22199f16b98e80633b4d6b5ccd8edb32a7a5b082d5",
+      "bytes": 391062
+    },
+    "site/data/case4-spectra/manifest.json": {
+      "sha256": "b46d1bdfbe02dfe63a0c219c19c898d428c023b2519765bc4236ae2e932ad2ab",
+      "bytes": 2083
+    },
+    "site/data/case4-spectra/peaks.csv": {
+      "sha256": "7943af57ab4fbaaf26c6b3884f4233c48e7d1b323491c3182dfb5820cfea320f",
+      "bytes": 844
+    },
+    "site/data/case4-spectra/plots.pdf": {
+      "sha256": "407a6693764d67585d11145c997cf1351ee0684b2c24c77878ce7e0f5ca98af3",
+      "bytes": 144572
+    },
+    "site/data/case4-spectra/psd.png": {
+      "sha256": "439482edd66342465739c9642648f0f778cfb7807ba610c763c32e7c3e3e1989",
+      "bytes": 541943
+    },
+    "site/data/case4-spectra/spectra.csv": {
+      "sha256": "42c0362b2ff182649a8d89cc85591cb98745cda019847f05b3977eaa89c20524",
+      "bytes": 128238
+    },
+    "site/data/case4-spectra/summary.json": {
+      "sha256": "bedccf4ea076bbc4cf9cdfe5e3fabb1702ed4145f681e6db0bda3d0dfd8570f0",
+      "bytes": 134542
     },
     "site/data/cavitation-loading/clock-audit.json": {
       "sha256": "f32c8577931d4789691bf147a80625fac12063423588f46b78707ba6a6688eca",
@@ -359,8 +415,16 @@
       "bytes": 100
     },
     "site/index.html": {
-      "sha256": "34280fc7974a86c7944aac96378a0f9840fd98b9ce2ced7d067089f6e8affe02",
-      "bytes": 14426
+      "sha256": "1c111c5d371f6e76150862139fb8e05092066455391d319ebebfce3ff49bfbcc",
+      "bytes": 14762
+    },
+    "site/methods.css": {
+      "sha256": "f41ba02d865789fa1c61262eef88c9c0d4043043d2328abdeb38475c7c9595c3",
+      "bytes": 3464
+    },
+    "site/methods.html": {
+      "sha256": "5fca7eaed808115e622b9aeb6f37e4178dc264034f3bb9d5ee67ea03a6a5aec0",
+      "bytes": 44891
     },
     "site/mrl2d-model.mjs": {
       "sha256": "374c28ad06867ee59fa4714a11d5f5cc78cc0a592c253dc186091d4568239aec",
@@ -381,6 +445,30 @@
     "site/styles.css": {
       "sha256": "f8491ab086c0c62fd80e27e65401bf58226a33f33cc6c19ea8bcdd7bdeba5ae0",
       "bytes": 9278
+    },
+    "source/case4-spectra/README.md": {
+      "sha256": "6f0ed055acfdb51f8c7c0fe16e04bcd429f37b1f8d9cd287d13f3a55332dd713",
+      "bytes": 3206
+    },
+    "source/case4-spectra/pytest.ini": {
+      "sha256": "9f309ec4b3e4ae626f051b4f5ca52d64a8e48fab8c92c9b9fefcfd4ba45cf76e",
+      "bytes": 32
+    },
+    "source/case4-spectra/scripts/prepare_case4_spectra.py": {
+      "sha256": "506c7573a86f7742cea235da1bc1909634a4e4b643496b4fea40e91cc252c0c6",
+      "bytes": 19754
+    },
+    "source/case4-spectra/tests/test_case4_navigation.py": {
+      "sha256": "47ce0da9f7ffa8d2bc8f905e304718aa9a0bb6f7f92a42ff7b12e5d236483d70",
+      "bytes": 599
+    },
+    "source/case4-spectra/tests/test_case4_spectra.py": {
+      "sha256": "fd887eb4988bdeac1bcc31d71f2d03947bb3216ecfad6bb304725a08e8f3dc4f",
+      "bytes": 18333
+    },
+    "source/case4-spectra/tests/test_case4_spectra_site.py": {
+      "sha256": "26e4baa702870c14dfe5c1f8b0aa70bfbd101d5a7993fd60770cdebd29903892",
+      "bytes": 23645
     },
     "source/mrl2d/FILE_MANIFEST.json": {
       "sha256": "fa2140aff0c09a74d44f06e77884a57d4d02c44e896f2ba36cb9397935946fca",
@@ -781,22 +869,6 @@
     "source/mrl2d/uv.lock": {
       "sha256": "a07f223182293077f7938baff5674e43917faa7265803d383592cd1f9a96ffd3",
       "bytes": 52410
-    },
-    "site/methods.html": {
-      "sha256": "5fca7eaed808115e622b9aeb6f37e4178dc264034f3bb9d5ee67ea03a6a5aec0",
-      "bytes": 44891
-    },
-    "site/methods.css": {
-      "sha256": "f41ba02d865789fa1c61262eef88c9c0d4043043d2328abdeb38475c7c9595c3",
-      "bytes": 3464
-    },
-    "site/assets/mrl2d/methods-flow.svg": {
-      "sha256": "22aa259ec52af26b22e88e960fb1a62ad0bf46ac7f8226aecdf1d757b0e2a30c",
-      "bytes": 5885
-    },
-    "site/assets/mrl2d/methods-acoustics.svg": {
-      "sha256": "9a24c4616cb1f6008fd22388155a0b1a187dea7c78a01782be0b508c5fbf4f6a",
-      "bytes": 4740
     }
   },
   "cavitation": {
@@ -874,6 +946,53 @@
       "same_origin_link_bodies_verified": 7,
       "actual_svg_downloads_verified": 2,
       "computed_result_controls_rechecked": true
+    }
+  },
+  "case4_spectral_extension": {
+    "entrypoint": "site/case4-spectra.html",
+    "case_id": "mrl2d_les_permeable",
+    "source_supplement": "source/case4-spectra",
+    "new_CFD_run": false,
+    "new_source_reduction": false,
+    "original_coefficients_changed": false,
+    "counts": {
+      "observers": 12,
+      "frequencies": 196,
+      "spectra_rows": 2352,
+      "pdf_pages": 3
+    },
+    "band_hz": [
+      0.625,
+      25
+    ],
+    "window_s": [
+      2.002,
+      10
+    ],
+    "frequency_spacing_hz": 0.125,
+    "enbw_hz": 0.1875,
+    "level_reference_pa": 1e-06,
+    "density_definition": "2 abs(c)^2 / ENBW; single-record propagated periodic-Hann density",
+    "band_definition": "Original coherent band RMS preserved; PSD integral is its square times df/ENBW",
+    "peaks_are_largest_retained_sampled_bins_not_mechanism_identification": true,
+    "verification": {
+      "integrated_tests_passed": 204,
+      "public_supplement_tests_passed": 21,
+      "independent_all_bin_and_CSV_readback": true,
+      "public_reproduction_files_byte_identical": 9,
+      "local_browser_checks": 349,
+      "local_browser_viewports_px": [
+        1440,
+        390
+      ],
+      "inverse_mapped_svg_points": 9408,
+      "actual_browser_downloads": 18,
+      "browser_report_sha256": "5dc0186d11a02e46188781c075b59aec8188bc310a1eb7db9be4d1ee4fdadce0",
+      "unchanged_previous_files": 191,
+      "previous_verification_fields_are_historical": true,
+      "whole_repository_suite_passed": false,
+      "whole_repository_suite_note": "Timed out at tool 420s; contained unrelated failures. First-failure run: retired cylinder browser test requests absent site/plots.mjs; 127 passed, 1 skipped before failure.",
+      "live_deployment_verification": "Recorded separately after publication, not implied by local checks"
     }
   }
 }

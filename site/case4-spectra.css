@@ -1,0 +1,52 @@
+/* Scoped to the additive Case 4 page; original result assets are unchanged. */
+.case4-spectra [hidden] { display: none !important; }
+.case4-spectra .intro { max-width: none; }
+.case4-spectra code { overflow-wrap: anywhere; }
+.case4-spectra .spectra-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin: 30px 0 0; border-block: 1px solid var(--line); padding: 20px 0; }
+.case4-spectra dt { color: var(--muted); font-size: 13px; }
+.case4-spectra dd { margin: 4px 0 0; }
+.case4-spectra .load-bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px; background: var(--pale); border: 1px solid var(--line); }
+.case4-spectra .load-bar p { margin: 0; font-size: 14px; }
+.case4-spectra .load-bar button { flex-shrink: 0; }
+.case4-spectra [data-state="error"], .case4-spectra [data-state="unavailable"] { color: #81371f; }
+.case4-spectra .polar-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.case4-spectra figure { margin: 8px 0 0; padding: 20px; background: var(--surface); border: 1px solid var(--line); min-width: 0; }
+.case4-spectra figcaption { font-size: 17px; font-weight: 600; }
+.case4-spectra svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.case4-spectra svg text { font: 12px var(--sans); fill: var(--muted); }
+.case4-spectra .radial-label { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+.case4-spectra .grid { fill: none; stroke: var(--line); stroke-width: .7; }
+.case4-spectra .receiver-marker { fill: var(--surface); stroke: var(--teal); stroke-width: 2; }
+.case4-spectra .spectrum-line { fill: none; stroke: var(--teal); stroke-width: 1.5; }
+.case4-spectra .peak-marker { fill: var(--surface); stroke: var(--rust); stroke-width: 2; }
+.case4-spectra .metric-controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 12px; }
+.case4-spectra .metric-controls button[aria-pressed="true"] { color: var(--surface); background: var(--teal); border-color: var(--teal); }
+.case4-spectra .metric-note { font-size: 14px; color: var(--muted); }
+.case4-spectra .spectra-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.case4-spectra .observer-card { min-width: 0; background: var(--surface); border: 1px solid var(--line); padding: 16px 10px; }
+.case4-spectra .observer-card h3 { margin: 0 8px 14px; font-size: 23px; }
+.case4-spectra .axis-heading { padding: 0 8px; font: 13px var(--sans); color: var(--muted); }
+.case4-spectra .axis-bottom { text-align: center; font: 13px var(--sans); color: var(--muted); }
+.case4-spectra .peak-caption { margin: 14px 8px 0; font-size: 13px; }
+.case4-spectra .figure-note { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+.case4-spectra .table-scroll { max-width: 100%; overflow-x: auto; margin-top: 20px; }
+.case4-spectra table { border-collapse: collapse; min-width: 910px; width: 100%; font-size: 13px; }
+.case4-spectra caption { text-align: left; padding: 10px 0; color: var(--muted); }
+.case4-spectra th, .case4-spectra td { padding: 12px; text-align: left; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.case4-spectra thead { background: var(--pale); }
+.case4-spectra .spectra-downloads { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 24px; list-style: none; padding: 0; }
+.case4-spectra .spectra-downloads a { display: inline-flex; align-items: center; min-height: 44px; }
+.case4-spectra .spectral-definitions { margin: 28px 0; }
+.case4-spectra .spectral-definitions > div { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; border-top: 1px solid var(--line); padding: 20px 0; }
+.case4-spectra .spectral-definitions dt { font-weight: 600; font-size: 16px; color: var(--ink); }
+.case4-spectra .spectral-definitions dd { margin: 0; }
+@media (max-width: 1000px) {
+  .case4-spectra .spectra-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  .case4-spectra .spectra-facts, .case4-spectra .spectra-downloads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .case4-spectra .polar-grid, .case4-spectra .spectra-grid { grid-template-columns: minmax(0, 1fr); }
+  .case4-spectra .load-bar { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .case4-spectra .spectral-definitions > div { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .case4-spectra figure { padding: 14px; }
+}
